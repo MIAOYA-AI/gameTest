@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://l4ubb3vfa50e"]
+
+[ext_resource type="Script" uid="uid://b8ubmqotrehue" path="res://Scripts/enemy.gd" id="1_1f0kj"]
+[ext_resource type="PackedScene" uid="uid://bvlo8i8gt5p6s" path="res://Assets/Enemy/Barbarian.glb" id="1_hghv2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ne65n"]
+height = 2.536377
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hghv2"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hghv2"]
+graph_offset = Vector2(-520.65857, 0)
+nodes/output/position = Vector2(304, 112)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_hghv2")
+nodes/StateMachine/position = Vector2(-48, 96)
+node_connections = [&"output", 0, &"StateMachine"]
+
+[node name="Enemy" type="CharacterBody3D" unique_id=1998240172]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_1f0kj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=685938271]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1544433, 0)
+shape = SubResource("CapsuleShape3D_ne65n")
+
+[node name="model" type="Node3D" parent="." unique_id=1601691895]
+
+[node name="Barbarian" parent="model" unique_id=686761255 instance=ExtResource("1_hghv2")]
+
+[node name="1H_Axe_Offhand" parent="model/Barbarian/Rig/Skeleton3D" parent_id_path=PackedInt32Array(686761255, 512401004) index="0" unique_id=1727295331]
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="model" unique_id=1221099054]
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=461434702]
+root_node = NodePath("../model/Barbarian")
+tree_root = SubResource("AnimationNodeBlendTree_hghv2")
+anim_player = NodePath("../model/Barbarian/AnimationPlayer")
+
+[editable path="model/Barbarian"]

@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://celec7q8jl626"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6t5aa"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vgqql"]
+animation = &"Jump_Idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6t5aa"]
+graph_offset = Vector2(-363.5497, 0)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fkybt"]
+animation = &"Running_A"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x3wgy"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6t5aa"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"IsRun"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vgqql"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"IsIdle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fkybt"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"IsOnGround"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3smsa"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"IsJump"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8erm5"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"IsOnGround"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f1ek2"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"IsJump"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3smsa"]
+states/End/position = Vector2(722.4, 95.238396)
+states/Idle/node = SubResource("AnimationNodeAnimation_6t5aa")
+states/Idle/position = Vector2(266.00003, 96.3411)
+states/Jump_Idle/node = SubResource("AnimationNodeAnimation_vgqql")
+states/Jump_Idle/position = Vector2(355.6, 225.20001)
+states/RunAndIdle/node = SubResource("AnimationNodeStateMachine_6t5aa")
+states/RunAndIdle/position = Vector2(108.4, 325.2)
+states/Running_A/node = SubResource("AnimationNodeAnimation_fkybt")
+states/Running_A/position = Vector2(449.19998, 93.548416)
+states/Start/position = Vector2(84, 100.159996)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_x3wgy"), "Idle", "Running_A", SubResource("AnimationNodeStateMachineTransition_6t5aa"), "Running_A", "Idle", SubResource("AnimationNodeStateMachineTransition_vgqql"), "Jump_Idle", "Idle", SubResource("AnimationNodeStateMachineTransition_fkybt"), "Idle", "Jump_Idle", SubResource("AnimationNodeStateMachineTransition_3smsa"), "Jump_Idle", "Running_A", SubResource("AnimationNodeStateMachineTransition_8erm5"), "Running_A", "Jump_Idle", SubResource("AnimationNodeStateMachineTransition_f1ek2")]
+graph_offset = Vector2(-44, 2)
+
+[node name="AnimationTree" type="AnimationTree" unique_id=1815268932]
+tree_root = SubResource("AnimationNodeStateMachine_3smsa")
+advance_expression_base_node = NodePath("../..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/IsIdle = false
+parameters/conditions/IsJump = false
+parameters/conditions/IsOnGround = false
+parameters/conditions/IsRun = false

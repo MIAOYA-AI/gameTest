@@ -1,0 +1,160 @@
+using Godot;
+using System;
+
+[GlobalClass]
+public partial class Player : CharacterBody3D
+{
+    [Export] public float Speed = 5.0f;
+    [Export] public float JumpVelocity = 4.5f;
+    [Export] public Camera3D Camera;
+    [Export] public Node3D Model;
+    [Export] public AnimationTree AnimationTree;
+    [Export] public Vector3 Direction;
+
+    [Export] public bool IsAttacking;
+
+    public Vector3 SpawnPosition;
+    private float TargetAngle = Single.Pi;
+    public static Player Instance { get; private set; }
+    private AnimationNodeStateMachinePlayback _playback;
+
+
+    public override void _Ready()
+    {
+        SpawnPosition = Position;
+        if (Instance != null)
+        {
+            QueueFree(); // 如果已存在实例，销毁当前对象  
+            return;
+        }
+
+        Instance = this;
+
+        if (AnimationTree != null)
+        {
+            _playback = (AnimationNodeStateMachinePlayback)AnimationTree.Get("parameters/StateMachine/playback");
+        }
+
+        // Debug: verify HitBox collision settings
+        var hitBox = GetNode<Area3D>("Player/Rig/Skeleton3D/handslot_r/HitBox_RightHand");
+        GD.Print($"HitBox monitoring={hitBox.Monitoring}, mask={hitBox.CollisionMask}, layer={hitBox.CollisionLayer}");
+    }
+
+    public override void _Process(double delta)
+    {
+        var cameraAngle = Camera.GlobalRotation.Y;
+        Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
+        var inputAngle = Godot.Mathf.Atan2(inputDir.X, inputDir.Y);
+        if (inputDir != Vector2.Zero && !GameManager.Instance.GameOver)
+            TargetAngle = cameraAngle + inputAngle;
+        Model.GlobalRotation = Model.GlobalRotation with { Y = Mathf.LerpAngle(Model.GlobalRotation.Y, TargetAngle, (float)delta * 10f) };
+    }
+
+    public override void _ExitTree()
+    {
+        if (Instance == this)
+            Instance = null;
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        Move(delta);
+        //AnimationTreeConditionHandler();
+    }
+
+    private void AnimationTreeConditionHandler()
+    {
+        // if (AnimationTree == null)
+        //     return;
+        //
+        // //使用condition控制角色动画 方案暂时废弃
+        // Vector3 velocity = Velocity;
+        //
+        // if (velocity.Length() > 0)
+        // {
+        //     AnimationTree.Set("parameters/conditions/IsRun", true);
+        //     AnimationTree.Set("parameters/conditions/IsIdle", false);
+        // }
+        // else
+        // {
+        //     AnimationTree.Set("parameters/conditions/IsRun", false);
+        //     AnimationTree.Set("parameters/conditions/IsIdle", true);
+        // }
+        //
+        // if (!IsOnFloor())
+        // {
+        //     AnimationTree.Set("parameters/conditions/IsJump", true);
+        //     AnimationTree.Set("parameters/conditions/IsOnGround", false);
+        // }
+        // else
+        // {
+        //     AnimationTree.Set("parameters/conditions/IsJump", false);
+        //     AnimationTree.Set("parameters/conditions/IsOnGround", true);
+        // }
+    }
+
+    private void Move(double delta)
+    {
+        Vector3 velocity = Velocity;
+
+        // Add the gravity.
+        if (!IsOnFloor())
+        {
+            velocity += GetGravity() * (float)delta;
+        }
+
+        // Handle Jump.
+        if (Input.IsActionJustPressed("jump") && IsOnFloor())
+        {
+            velocity.Y = JumpVelocity;
+        }
+
+        if (Input.IsActionJustPressed("attack") && IsOnFloor())
+        {
+            IsAttacking = true;
+        }
+
+        // Get the input direction and handle the movement/deceleration.
+        // As good practice, you should replace UI actions with custom gameplay actions.
+        Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
+        Direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+        Direction = Direction.Rotated(Vector3.Up, Camera.GlobalRotation.Y);//Camera.Rotation是与上一级节点的旋转角度，这里因为有旋转臂，所以为0
+        if (Direction != Vector3.Zero && !GameManager.Instance.GameOver)
+        {
+            velocity.X = Direction.X * Speed;
+            velocity.Z = Direction.Z * Speed;
+        }
+        else
+        {
+            velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+            velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
+        }
+
+        Velocity = velocity;
+        MoveAndSlide();
+    }
+
+    public void PlayAnimation(string animationName, bool blend = true)
+    {
+        if (_playback == null)
+            return;
+
+        if (blend)
+            _playback.Travel(animationName);  // ✅ 带过渡
+        else
+            _playback.Start(animationName);   // ✅ 直接切换
+    }
+
+    public void PlayAttackOneShot()
+    {
+        AnimationTree.Set("parameters/Attack/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);
+    }
+
+    public void HitSomething(Node3D body)
+    {
+        if (body is CharacterBody3D bodyNode)
+        {
+            GD.Print($"Hit: {bodyNode.Name}");
+        }
+    }
+}

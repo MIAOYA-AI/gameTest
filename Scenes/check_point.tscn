@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://3ett5l38jt0m"]
+
+[ext_resource type="Script" uid="uid://e5xpp3j8jof1" path="res://Scripts/CheckPoint.cs" id="1_mcmgj"]
+[ext_resource type="PackedScene" uid="uid://cabxla1k0yhah" path="res://Assets/Models/checkpoint.glb" id="2_cdwub"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8jfd"]
+resource_local_to_scene = true
+albedo_color = Color(1, 0.015686275, 0.03529412, 1)
+
+[sub_resource type="Animation" id="Animation_w8jfd"]
+resource_name = "Activate"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("checkpoint/Flag:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.1634278, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("checkpoint/Flag:surface_material_override/0:albedo_color")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0009999999, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.015686275, 0.03529412, 1), Color(0.03529412, 0.95686275, 0.03529412, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_a7fet"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("checkpoint/Flag:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("checkpoint/Flag:surface_material_override/0:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.015686275, 0.03529412, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8m72m"]
+_data = {
+&"Activate": SubResource("Animation_w8jfd"),
+&"RESET": SubResource("Animation_a7fet")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w8jfd"]
+size = Vector3(3.5253296, 5.1810303, 3.0509033)
+
+[node name="CheckPoint" type="Area3D" unique_id=1155975017 node_paths=PackedStringArray("AnimationPlayer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12246561, 0)
+script = ExtResource("1_mcmgj")
+AnimationPlayer = NodePath("AnimationPlayer")
+
+[node name="checkpoint" parent="." unique_id=1458752667 instance=ExtResource("2_cdwub")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01140213, 0)
+
+[node name="Flag" parent="checkpoint" index="0" unique_id=806190898]
+surface_material_override/0 = SubResource("StandardMaterial3D_w8jfd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1624710416]
+libraries/ = SubResource("AnimationLibrary_8m72m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1981925552]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040130615, 3.681497, 1.0254517)
+shape = SubResource("BoxShape3D_w8jfd")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+
+[editable path="checkpoint"]

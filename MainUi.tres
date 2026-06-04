@@ -1,0 +1,32 @@
+[gd_resource type="Theme" format=3 uid="uid://bajww3yal50be"]
+
+[ext_resource type="FontFile" uid="uid://intl12uskpvp" path="res://Assets/Fonts/ZCOOL-Wenyi.ttf" id="1_pubex"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pubex"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pubex"]
+bg_color = Color(0.6, 0.6, 0.6, 0.25882354)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 10
+
+[resource]
+Button/font_sizes/font_size = 60
+Button/styles/focus = SubResource("StyleBoxEmpty_pubex")
+CherryLabel/base_type = &"Label"
+CherryLabel/colors/font_outline_color = Color(0.89411765, 0.21960784, 0, 1)
+CoinLabel/base_type = &"Label"
+CoinLabel/colors/font_outline_color = Color(0.9137255, 0.6627451, 0, 1)
+Label/colors/font_outline_color = Color(0.29717845, 0.4870332, 0.8414792, 1)
+Label/constants/outline_size = 5
+Label/font_sizes/font_size = 34
+Label/fonts/font = ExtResource("1_pubex")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_pubex")
