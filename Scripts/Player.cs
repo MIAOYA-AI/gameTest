@@ -42,12 +42,20 @@ public partial class Player : CharacterBody3D
 
     public override void _Process(double delta)
     {
-        var cameraAngle = Camera.GlobalRotation.Y;
-        Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
-        var inputAngle = Godot.Mathf.Atan2(inputDir.X, inputDir.Y);
-        if (inputDir != Vector2.Zero && !GameManager.Instance.GameOver)
-            TargetAngle = cameraAngle + inputAngle;
-        Model.GlobalRotation = Model.GlobalRotation with { Y = Mathf.LerpAngle(Model.GlobalRotation.Y, TargetAngle, (float)delta * 10f) };
+        //将模型相对相机方向移动并插值 暂时停用
+        // var cameraAngle = Camera.GlobalRotation.Y;
+        // Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
+        // var inputAngle = Godot.Mathf.Atan2(inputDir.X, inputDir.Y);
+        // if (inputDir != Vector2.Zero && !GameManager.Instance.GameOver)
+        //     TargetAngle = cameraAngle + inputAngle;
+        // Model.GlobalRotation = Model.GlobalRotation with { Y = Mathf.LerpAngle(Model.GlobalRotation.Y, TargetAngle, (float)delta * 10f) };
+    }
+
+    public void LookTowardDirection(Vector3 dir, double delta)
+    {
+        Transform3D targetTranform=Model.GlobalTransform.LookingAt(Model.GlobalPosition+dir,Vector3.Up,true);
+        //Model.GlobalTransform = Model.GlobalTransform with{Basis = targetTranform.Basis};
+        Model.GlobalTransform=Model.GlobalTransform.InterpolateWith(targetTranform,(float)delta * 10f);
     }
 
     public override void _ExitTree()
@@ -59,38 +67,6 @@ public partial class Player : CharacterBody3D
     public override void _PhysicsProcess(double delta)
     {
         Move(delta);
-        //AnimationTreeConditionHandler();
-    }
-
-    private void AnimationTreeConditionHandler()
-    {
-        // if (AnimationTree == null)
-        //     return;
-        //
-        // //使用condition控制角色动画 方案暂时废弃
-        // Vector3 velocity = Velocity;
-        //
-        // if (velocity.Length() > 0)
-        // {
-        //     AnimationTree.Set("parameters/conditions/IsRun", true);
-        //     AnimationTree.Set("parameters/conditions/IsIdle", false);
-        // }
-        // else
-        // {
-        //     AnimationTree.Set("parameters/conditions/IsRun", false);
-        //     AnimationTree.Set("parameters/conditions/IsIdle", true);
-        // }
-        //
-        // if (!IsOnFloor())
-        // {
-        //     AnimationTree.Set("parameters/conditions/IsJump", true);
-        //     AnimationTree.Set("parameters/conditions/IsOnGround", false);
-        // }
-        // else
-        // {
-        //     AnimationTree.Set("parameters/conditions/IsJump", false);
-        //     AnimationTree.Set("parameters/conditions/IsOnGround", true);
-        // }
     }
 
     private void Move(double delta)
@@ -123,6 +99,7 @@ public partial class Player : CharacterBody3D
         {
             velocity.X = Direction.X * Speed;
             velocity.Z = Direction.Z * Speed;
+            LookTowardDirection(Direction, delta);
         }
         else
         {

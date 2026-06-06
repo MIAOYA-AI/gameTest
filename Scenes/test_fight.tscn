@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://ba6wvkbntd13f" path="res://Assets/Enviroment/tree_pine_orange_small.gltf" id="5_1nbm7"]
 [ext_resource type="PackedScene" uid="uid://b7ubgx5e6mcvq" path="res://Assets/Enviroment/path_A.gltf" id="6_g2fty"]
 [ext_resource type="PackedScene" uid="uid://l4ubb3vfa50e" path="res://Scenes/enemy.tscn" id="8_1o2uf"]
+[ext_resource type="PackedScene" uid="uid://igeybulm0vr6" path="res://Assets/3D_Assets/Character/CharacterRig.glb" id="9_g2fty"]
+[ext_resource type="PackedScene" uid="uid://cq231tvimjcie" path="res://Assets/AiAssetTest/错金铜盖.glb" id="10_2iayn"]
 
 [node name="TestFight" type="Node3D" unique_id=254098919]
 
@@ -268,3 +270,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 
 [node name="Enemy" parent="." unique_id=1998240172 instance=ExtResource("8_1o2uf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17761612, 2.6527046e-05, -4.292882)
+
+[node name="Player_2" parent="." unique_id=1991572303 instance=ExtResource("9_g2fty")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4229584, 0.0016843952, -3.1127934)
+
+[node name="convert" parent="." unique_id=1965464620 instance=ExtResource("10_2iayn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.367608, 2.3841858e-07, -2.8192174)
+
+[editable path="Player_2"]
