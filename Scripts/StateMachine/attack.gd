@@ -14,7 +14,7 @@ func enter() -> void:
 	print("攻击")
 	## 攻击状态减慢玩家速度
 	player_speed=player.Speed
-	player.Speed*=0.5
+	player.Speed*=0.005
 	player.PlayAttackOneShot()
 	attack_animation.play("attack")
 

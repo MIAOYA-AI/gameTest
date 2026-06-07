@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+//TODO：解决玩家攻击过程中按移动键会反复攻击的问题
 [GlobalClass]
 public partial class Player : CharacterBody3D
 {
@@ -10,6 +11,7 @@ public partial class Player : CharacterBody3D
     [Export] public Node3D Model;
     [Export] public AnimationTree AnimationTree;
     [Export] public Vector3 Direction;
+    public Vector3 CurDirection=Vector3.Zero;
 
     [Export] public bool IsAttacking;
 
@@ -34,9 +36,12 @@ public partial class Player : CharacterBody3D
         {
             _playback = (AnimationNodeStateMachinePlayback)AnimationTree.Get("parameters/StateMachine/playback");
         }
+        
+        if(CurDirection == Vector3.Zero)
+            CurDirection = Model.GlobalTransform.Basis.Z;
 
         // Debug: verify HitBox collision settings
-        var hitBox = GetNode<Area3D>("Player/Rig/Skeleton3D/handslot_r/HitBox_RightHand");
+        var hitBox = GetNode<Area3D>("PlayerModel/Rig/Skeleton3D/handslot_r/HitBox_RightHand");
         GD.Print($"HitBox monitoring={hitBox.Monitoring}, mask={hitBox.CollisionMask}, layer={hitBox.CollisionLayer}");
     }
 
@@ -85,20 +90,22 @@ public partial class Player : CharacterBody3D
             velocity.Y = JumpVelocity;
         }
 
-        if (Input.IsActionJustPressed("attack") && IsOnFloor())
-        {
-            IsAttacking = true;
-        }
-
         // Get the input direction and handle the movement/deceleration.
         // As good practice, you should replace UI actions with custom gameplay actions.
         Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
         Direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
         Direction = Direction.Rotated(Vector3.Up, Camera.GlobalRotation.Y);//Camera.Rotation是与上一级节点的旋转角度，这里因为有旋转臂，所以为0
-        if (Direction != Vector3.Zero && !GameManager.Instance.GameOver)
+        
+        if (Input.IsActionJustPressed("attack") && IsOnFloor())
+        {
+            IsAttacking = true;
+        }
+        
+        if (Direction != Vector3.Zero && !GameManager.Instance.GameOver&&!IsAttacking)
         {
             velocity.X = Direction.X * Speed;
             velocity.Z = Direction.Z * Speed;
+            CurDirection = Direction;
             LookTowardDirection(Direction, delta);
         }
         else
