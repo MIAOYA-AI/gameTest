@@ -471,10 +471,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17761612, 2.6527046e-05, -4
 [node name="Enemy2" parent="Enemys" unique_id=1848801732 instance=ExtResource("8_1o2uf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.932626, 2.6527046e-05, -4.292882)
 
+[node name="Enemy5" parent="Enemys" unique_id=1779269103 instance=ExtResource("8_1o2uf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.932626, 2.6527046e-05, -2.292882)
+
+[node name="Enemy6" parent="Enemys" unique_id=974819299 instance=ExtResource("8_1o2uf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.932626, 2.6527046e-05, -0.29288197)
+
 [node name="Enemy3" parent="Enemys" unique_id=1468061288 instance=ExtResource("8_1o2uf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.073607, 2.6527046e-05, -4.292882)
 
 [node name="Enemy4" parent="Enemys" unique_id=481852250 instance=ExtResource("8_1o2uf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.081023, 2.6527046e-05, -4.292882)
+
+[node name="Enemy7" parent="Enemys" unique_id=1905648038 instance=ExtResource("8_1o2uf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.081023, 2.6527046e-05, -2.292882)
+
+[node name="Enemy8" parent="Enemys" unique_id=1233419478 instance=ExtResource("8_1o2uf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.081023, 2.6527046e-05, -0.29288197)
 
 [editable path="Player_2"]

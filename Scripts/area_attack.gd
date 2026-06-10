@@ -1,4 +1,5 @@
 extends ShapeCast3D
+class_name area_attack
 
 func deal_damage(damage:float) -> void:
 	for collider_idx in get_collision_count():
