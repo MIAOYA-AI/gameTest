@@ -2,29 +2,104 @@
 
 [ext_resource type="Script" uid="uid://b8ubmqotrehue" path="res://Scripts/enemy.gd" id="1_1f0kj"]
 [ext_resource type="PackedScene" uid="uid://igeybulm0vr6" path="res://Assets/3D_Assets/Character/CharacterRig.glb" id="2_1f0kj"]
+[ext_resource type="PackedScene" uid="uid://demvc6hd8lp6d" path="res://Assets/3D_Assets/Character/Gear/Battleaxe.glb" id="3_afpow"]
+[ext_resource type="PackedScene" uid="uid://bxkiv6xodxnff" path="res://Scenes/health_component.tscn" id="4_287tu"]
+[ext_resource type="PackedScene" uid="uid://bvtdk8e8fc3a2" path="res://Scenes/area_attack.tscn" id="5_0830c"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ne65n"]
-height = 2.536377
+height = 1.9605713
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1f0kj"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h4iuc"]
+animation = &"Slash"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = false
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0830c"]
+animation = &"Defeat"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_afpow"]
+animation = &"Idle"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_287tu"]
 animation = &"Run"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_afpow"]
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_h4iuc"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_afpow")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_287tu")
+blend_point_1/pos = 1.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ghaa6"]
+animation = &"Overhead"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1dp5w"]
+animation = &"OverheadRecover"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2ijsl"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1f0kj"]
-states/Run/node = SubResource("AnimationNodeAnimation_1f0kj")
-states/Run/position = Vector2(460.4, 94.240005)
-states/Start/position = Vector2(221.6, 94.4)
-transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_afpow")]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p1odr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0gysh"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1dp5w"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_auwsv"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8uf12"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0830c"]
+states/Attack/node = SubResource("AnimationNodeAnimation_h4iuc")
+states/Attack/position = Vector2(375.60153, 216.79999)
+states/Defeat/node = SubResource("AnimationNodeAnimation_0830c")
+states/Defeat/position = Vector2(919.60004, 205.46562)
+states/MoveSpace/node = SubResource("AnimationNodeBlendSpace1D_h4iuc")
+states/MoveSpace/position = Vector2(375.6, 99.4112)
+states/Overhead/node = SubResource("AnimationNodeAnimation_ghaa6")
+states/Overhead/position = Vector2(586.31995, 99.91268)
+states/OverheadRecover/node = SubResource("AnimationNodeAnimation_1dp5w")
+states/OverheadRecover/position = Vector2(585.45593, 193.17696)
+states/Start/position = Vector2(136, 96.864006)
+transitions = ["Start", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_2ijsl"), "MoveSpace", "Attack", SubResource("AnimationNodeStateMachineTransition_p1odr"), "Attack", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_0gysh"), "MoveSpace", "Overhead", SubResource("AnimationNodeStateMachineTransition_1dp5w"), "Overhead", "OverheadRecover", SubResource("AnimationNodeStateMachineTransition_auwsv"), "OverheadRecover", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_8uf12")]
+graph_offset = Vector2(0, -70.003685)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_287tu"]
 
 [node name="Enemy" type="CharacterBody3D" unique_id=1998240172]
 collision_layer = 4
-collision_mask = 0
+collision_mask = 3
 script = ExtResource("1_1f0kj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=685938271]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1544433, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.970294, 0)
 shape = SubResource("CapsuleShape3D_ne65n")
 
 [node name="model" type="Node3D" parent="." unique_id=1601691895]
@@ -141,9 +216,47 @@ bones/71/rotation = Quaternion(0.06141229, 0.5391296, 0.8387796, 0.04490815)
 bones/72/position = Vector3(-0.119247556, 1.3412063, 0.061574396)
 bones/72/rotation = Quaternion(0.06141229, 0.5391296, 0.8387796, 0.04490815)
 
-[node name="AnimationTree" type="AnimationTree" parent="." unique_id=461434702]
-root_node = NodePath("../model/CharacterRig")
-tree_root = SubResource("AnimationNodeStateMachine_1f0kj")
-anim_player = NodePath("../model/CharacterRig/AnimationPlayer")
+[node name="Knight_01" parent="model/CharacterRig/GameRig/Skeleton3D" index="0" unique_id=2068219326]
+visible = false
+
+[node name="Knight_02" parent="model/CharacterRig/GameRig/Skeleton3D" index="1" unique_id=362478658]
+visible = false
+
+[node name="Villager_02" parent="model/CharacterRig/GameRig/Skeleton3D" index="3" unique_id=1889895895]
+visible = false
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="model/CharacterRig/GameRig" parent_id_path=PackedInt32Array(1991572303, 1112818293) index="1" unique_id=784151737]
+transform = Transform3D(-0.7715713, 0.5181614, -0.36903474, -0.38687927, -0.84271485, -0.37437463, -0.50497764, -0.14608504, 0.85068, -0.25347888, 1.1105465, -0.20038697)
+bone_name = "DEF-hand.R"
+bone_idx = 51
+use_external_skeleton = true
+external_skeleton = NodePath("../Skeleton3D")
+
+[node name="RightHandSlot" type="Node3D" parent="model/CharacterRig/GameRig/BoneAttachment3D" unique_id=1626807991]
+transform = Transform3D(0.4504791, -0.44077107, -0.7763954, -0.8512614, 0.050076902, -0.52234733, 0.2691151, 0.8962217, -0.35265228, -0.027532876, 0.098449826, -0.0069161057)
+
+[node name="Battleaxe" parent="model/CharacterRig/GameRig/BoneAttachment3D/RightHandSlot" unique_id=337426781 instance=ExtResource("3_afpow")]
+transform = Transform3D(0.99978286, 0.0054543912, -0.020114481, -0.004268378, 0.99827564, 0.05854425, 0.020399146, -0.058445692, 0.99808204, 0, 0, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="model/CharacterRig" unique_id=1704544919]
+tree_root = SubResource("AnimationNodeStateMachine_0830c")
+anim_player = NodePath("../AnimationPlayer")
+parameters/MoveSpace/blend_position = -0.95146275
+
+[node name="PlayerDetector" type="ShapeCast3D" parent="model" unique_id=1434082440]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9590912, 0)
+shape = SubResource("CapsuleShape3D_287tu")
+target_position = Vector3(0, 0, 1)
+collision_mask = 2
+
+[node name="HealthComponent" parent="." unique_id=2081030793 instance=ExtResource("4_287tu")]
+
+[node name="AreaAttack" parent="." unique_id=173931790 instance=ExtResource("5_0830c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+target_position = Vector3(0, 1, 0)
+collision_mask = 2
+
+[connection signal="animation_finished" from="model/CharacterRig/AnimationTree" to="." method="_on_animation_tree_animation_finished"]
+[connection signal="defeat" from="HealthComponent" to="." method="_on_health_component_defeat"]
 
 [editable path="model/CharacterRig"]

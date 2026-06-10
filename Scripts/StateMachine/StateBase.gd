@@ -14,9 +14,9 @@ func exit() -> void:
 	pass
 	
 ## 渲染帧触发
-func process_update(delta:float) -> void:
+func process_update(_delta:float) -> void:
 	pass
 	
 ## 物理帧触发
-func physics_process_update(delta: float) -> void:
+func physics_process_update(_delta: float) -> void:
 	pass

@@ -3,9 +3,11 @@ extends Node3D
 @onready var animation_tree: AnimationTree = $"../BlendAnimationTree"
 @onready var play_back:AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
 @export var player:Player
+@onready var health_component: HealthComponent = $"../../HealthComponent"
+@onready var collision_shape_3d: CollisionShape3D = $"../../CollisionShape3D"
 
 @export var animation_speed:float=10.0
-@export var attack_move_distance:float=3.0
+@export var attack_move_distance:float=1.0
 
 var run_path:String = "parameters/MoveSpace/blend_position"
 var run_weight_target:=-1.0
@@ -13,7 +15,7 @@ var _attack_direction:=Vector3.ZERO
 
 
 func _ready() -> void:
-	pass
+	health_component.update_max_health(100)
 
 func _physics_process(delta: float) -> void:
 	# 移动
@@ -28,6 +30,10 @@ func _physics_process(delta: float) -> void:
 		play_back.travel("Attack")
 		_attack_direction=player.CurDirection
 	handle_slashing_physics_frame(delta)
+	
+func _on_health_component_defeat() -> void:
+	play_back.travel("Defeat")
+	set_physics_process(false)
 
 func update_animation_tree(diretion:Vector3) ->void:
 	if diretion.is_zero_approx():

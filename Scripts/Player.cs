@@ -11,6 +11,9 @@ public partial class Player : CharacterBody3D
     [Export] public Node3D Model;
     [Export] public AnimationTree AnimationTree;
     [Export] public Vector3 Direction;
+    //为了方便与enemy的gbscript脚本使用通用组件，这里采用gbscript的命名方式
+    [Export] public Node health_component;
+    
     public Vector3 CurDirection=Vector3.Zero;
 
     [Export] public bool IsAttacking;
@@ -19,7 +22,6 @@ public partial class Player : CharacterBody3D
     private float TargetAngle = Single.Pi;
     public static Player Instance { get; private set; }
     private AnimationNodeStateMachinePlayback _playback;
-
 
     public override void _Ready()
     {
