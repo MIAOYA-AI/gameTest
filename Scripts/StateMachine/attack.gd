@@ -27,6 +27,7 @@ func exit() -> void:
 	## 离开状态时恢复玩家速度
 	player.Speed=player_speed
 	player.IsAttacking=false
+	player.IsHeavyAttacking=false
 	attack_cast.clear_exceptions()
 
 func physics_process_update(delta: float) -> void:
@@ -39,3 +40,8 @@ func hit_box_enable(state:bool) -> void:
 ## 由AttackTime动画通知
 func to_idle() -> void:
 	state_machine.change_state("Idle")
+
+# 重击通过动画结束信号检测
+func _on_blend_animation_tree_animation_finished(anim_name: StringName) -> void:
+	if anim_name=="HeavyAttackOver":
+		exit()

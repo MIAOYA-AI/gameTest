@@ -17,6 +17,7 @@ public partial class Player : CharacterBody3D
     public Vector3 CurDirection=Vector3.Zero;
 
     [Export] public bool IsAttacking;
+    [Export] public bool IsHeavyAttacking;
 
     public Vector3 SpawnPosition;
     private float TargetAngle = Single.Pi;
@@ -101,6 +102,11 @@ public partial class Player : CharacterBody3D
         if (Input.IsActionJustPressed("attack") && IsOnFloor())
         {
             IsAttacking = true;
+        }
+
+        if (Input.IsActionJustPressed("heavy_attack") && IsOnFloor())
+        {
+            IsHeavyAttacking = true;
         }
         
         if (Direction != Vector3.Zero && !GameManager.Instance.GameOver&&!IsAttacking)

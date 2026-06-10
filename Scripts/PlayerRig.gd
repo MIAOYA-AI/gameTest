@@ -31,6 +31,9 @@ func _physics_process(delta: float) -> void:
 		_attack_direction=player.CurDirection
 	handle_slashing_physics_frame(delta)
 	
+	if player.IsHeavyAttacking==true&&!check_state("HeavyAttack")&&!check_state("HeavyAttackOver"):
+		play_back.travel("HeavyAttack")
+	
 func _on_health_component_defeat() -> void:
 	play_back.travel("Defeat")
 	set_physics_process(false)
