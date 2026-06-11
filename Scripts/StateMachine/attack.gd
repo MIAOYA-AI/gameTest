@@ -32,7 +32,6 @@ func exit() -> void:
 
 func physics_process_update(delta: float) -> void:
 	super.physics_process_update(delta)
-	# todo:攻击时冲刺会造成状态反复切换导致栈爆炸
 	if player.IsDash==true:
 		state_machine.change_state("Dash")
 	attack_cast.deal_damage()

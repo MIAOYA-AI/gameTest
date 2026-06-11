@@ -17,5 +17,7 @@ func physics_process_update(delta: float) -> void:
 			state_machine.change_state("Fall")
 	elif player.IsAttacking or player.IsHeavyAttacking:
 		state_machine.change_state("Attack")
+	elif player.IsDash:
+		state_machine.change_state("Dash")
 	elif player.Direction!=Vector3.ZERO:
 		state_machine.change_state("Run")
