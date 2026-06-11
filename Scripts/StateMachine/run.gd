@@ -2,6 +2,7 @@ extends StateBase
 
 ## 玩家节点
 @export var player:Player
+@onready var dash: Dash = $"../Dash"
 
 func enter() -> void:
 	super.enter()
@@ -15,6 +16,10 @@ func physics_process_update(delta: float) -> void:
 			state_machine.change_state("Jump")
 		else:
 			state_machine.change_state("Fall")
-		
+	elif player.IsDash:
+		if dash.is_readly():
+			state_machine.change_state("Dash")
+		else:
+			player.IsDash=false
 	elif player.Direction==Vector3.ZERO:
 		state_machine.change_state("Idle")
