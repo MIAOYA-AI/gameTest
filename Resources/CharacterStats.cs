@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class CharacterStats : Resource
 {
     public class Ability
