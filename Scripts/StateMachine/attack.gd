@@ -5,6 +5,7 @@ extends StateBase
 @export var hit_box_collision_shap:CollisionShape3D
 @export var attack_animation:AnimationPlayer
 @onready var attack_cast: RayCast3D = %AttackCast
+@onready var dash: Dash = $"../Dash"
 
 var player_speed:float
 var _attack_frame_count:int = 0
@@ -32,8 +33,10 @@ func exit() -> void:
 
 func physics_process_update(delta: float) -> void:
 	super.physics_process_update(delta)
-	if player.IsDash==true:
+	if player.IsDash==true&&dash.is_readly():
 		state_machine.change_state("Dash")
+	else:
+		player.IsDash=false
 	attack_cast.deal_damage()
 	
 func hit_box_enable(state:bool) -> void:
@@ -45,5 +48,5 @@ func to_idle() -> void:
 
 # 重击通过动画结束信号检测
 func _on_blend_animation_tree_animation_finished(anim_name: StringName) -> void:
-	if anim_name=="HeavyAttackOver":
-		exit()
+	if anim_name=="2H_Melee_Attack_Stab":
+		state_machine.change_state("Idle")

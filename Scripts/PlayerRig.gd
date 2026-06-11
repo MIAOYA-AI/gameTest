@@ -7,6 +7,7 @@ extends Node3D
 @onready var health_component: HealthComponent = $"../../HealthComponent"
 @onready var collision_shape_3d: CollisionShape3D = $"../../CollisionShape3D"
 @onready var state_machine: StateMachine = $"../../StateMachine"
+@onready var dash: Dash = $"../../StateMachine/Dash"
 
 @export var animation_speed:float=10.0
 @export var attack_move_distance:float=1.5
@@ -33,7 +34,7 @@ func _physics_process(delta: float) -> void:
 	if player.IsHeavyAttacking==true&&!check_state("HeavyAttack")&&!check_state("HeavyAttackOver"):
 		play_back.travel("HeavyAttack")
 		
-	if player.IsDash==true&&!check_state("Dash"):
+	if player.IsDash==true&&!check_state("Dash")&&dash.is_readly():
 		play_back.travel("Dash")
 		
 	handle_slashing_physics_frame(delta)

@@ -2,6 +2,7 @@ extends StateBase
 
 ## 玩家节点
 @export var player:Player
+@onready var dash: Dash = $"../Dash"
 
 func enter() -> void:
 	super.enter()
@@ -18,6 +19,9 @@ func physics_process_update(delta: float) -> void:
 	elif player.IsAttacking or player.IsHeavyAttacking:
 		state_machine.change_state("Attack")
 	elif player.IsDash:
-		state_machine.change_state("Dash")
+		if dash.is_readly():
+			state_machine.change_state("Dash")
+		else:
+			player.IsDash=false
 	elif player.Direction!=Vector3.ZERO:
 		state_machine.change_state("Run")
