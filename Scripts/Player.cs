@@ -22,7 +22,7 @@ public partial class Player : CharacterBody3D
     public bool IsDefeat = false;
     
     [ExportCategory("RPG Stats")]
-    [Export] public CharacterStats myStats;
+    [Export] public CharacterStats MyStats;
 
     public Vector3 SpawnPosition;
     private float TargetAngle = Single.Pi;
