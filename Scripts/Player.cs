@@ -13,14 +13,16 @@ public partial class Player : CharacterBody3D
     [Export] public Vector3 Direction;
     //为了方便与enemy的gbscript脚本使用通用组件，这里采用gbscript的命名方式
     [Export] public Node health_component;
-    
     public Vector3 CurDirection=Vector3.Zero;
 
-    [Export] public bool IsJumping=false;
-    [Export] public bool IsAttacking=false;
-    [Export] public bool IsHeavyAttacking=false;
-    [Export] public bool IsDash=false;
+    public bool IsJumping=false;
+    public bool IsAttacking=false;
+    public bool IsHeavyAttacking=false;
+    public bool IsDash=false;
     public bool IsDefeat = false;
+    
+    [ExportCategory("RPG Stats")]
+    [Export] public CharacterStats myStats;
 
     public Vector3 SpawnPosition;
     private float TargetAngle = Single.Pi;
