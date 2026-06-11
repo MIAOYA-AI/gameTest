@@ -1,5 +1,6 @@
 extends Node3D
 # 与StateMachine功能冲突 用来测试其他的动画控制方式
+# 该类主要控制玩家的行为动画与配合动画的位移
 @onready var animation_tree: AnimationTree = $"../BlendAnimationTree"
 @onready var play_back:AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
 @export var player:Player
@@ -29,10 +30,14 @@ func _physics_process(delta: float) -> void:
 	if player.IsAttacking==true&&!check_state("Attack"):
 		play_back.travel("Attack")
 		_attack_direction=player.CurDirection
-	handle_slashing_physics_frame(delta)
 	
 	if player.IsHeavyAttacking==true&&!check_state("HeavyAttack")&&!check_state("HeavyAttackOver"):
 		play_back.travel("HeavyAttack")
+		
+	if player.IsDash==true&&!check_state("Dash"):
+		play_back.travel("Dash")
+		
+	handle_slashing_physics_frame(delta)
 	
 func _on_health_component_defeat() -> void:
 	play_back.travel("Defeat")

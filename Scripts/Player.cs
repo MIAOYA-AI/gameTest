@@ -16,8 +16,10 @@ public partial class Player : CharacterBody3D
     
     public Vector3 CurDirection=Vector3.Zero;
 
-    [Export] public bool IsAttacking;
-    [Export] public bool IsHeavyAttacking;
+    [Export] public bool IsJumping=false;
+    [Export] public bool IsAttacking=false;
+    [Export] public bool IsHeavyAttacking=false;
+    [Export] public bool IsDash=false;
 
     public Vector3 SpawnPosition;
     private float TargetAngle = Single.Pi;
@@ -74,23 +76,46 @@ public partial class Player : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
+        HandInput();
         Move(delta);
+    }
+
+    private void HandInput()
+    {
+        // Handle input.
+        if (Input.IsActionJustPressed("jump") && IsOnFloor())
+        {
+            IsJumping = true;
+        }
+        if (Input.IsActionJustPressed("attack") && IsOnFloor())
+        {
+            IsAttacking = true;
+        }
+        if (Input.IsActionJustPressed("heavy_attack") && IsOnFloor())
+        {
+            IsHeavyAttacking = true;
+        }
+
+        if (Input.IsActionJustPressed("dash") && IsOnFloor())
+        {
+            IsDash = true;
+        }
     }
 
     private void Move(double delta)
     {
         Vector3 velocity = Velocity;
-
+        if (IsJumping)
+        {
+            velocity.Y = JumpVelocity;
+            //跳完后将状态重置
+            IsJumping = false;
+        }
+            
         // Add the gravity.
         if (!IsOnFloor())
         {
             velocity += GetGravity() * (float)delta;
-        }
-
-        // Handle Jump.
-        if (Input.IsActionJustPressed("jump") && IsOnFloor())
-        {
-            velocity.Y = JumpVelocity;
         }
 
         // Get the input direction and handle the movement/deceleration.
@@ -98,16 +123,6 @@ public partial class Player : CharacterBody3D
         Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
         Direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
         Direction = Direction.Rotated(Vector3.Up, Camera.GlobalRotation.Y);//Camera.Rotation是与上一级节点的旋转角度，这里因为有旋转臂，所以为0
-        
-        if (Input.IsActionJustPressed("attack") && IsOnFloor())
-        {
-            IsAttacking = true;
-        }
-
-        if (Input.IsActionJustPressed("heavy_attack") && IsOnFloor())
-        {
-            IsHeavyAttacking = true;
-        }
         
         if (Direction != Vector3.Zero && !GameManager.Instance.GameOver&&!IsAttacking)
         {
