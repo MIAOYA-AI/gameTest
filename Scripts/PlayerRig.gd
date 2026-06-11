@@ -6,13 +6,13 @@ extends Node3D
 @export var player:Player
 @onready var health_component: HealthComponent = $"../../HealthComponent"
 @onready var collision_shape_3d: CollisionShape3D = $"../../CollisionShape3D"
+@onready var state_machine: StateMachine = $"../../StateMachine"
 
 @export var animation_speed:float=10.0
-@export var attack_move_distance:float=1.0
+@export var attack_move_distance:float=1.5
 
 var run_path:String = "parameters/MoveSpace/blend_position"
 var run_weight_target:=-1.0
-var _attack_direction:=Vector3.ZERO
 
 
 func _ready() -> void:
@@ -29,7 +29,6 @@ func _physics_process(delta: float) -> void:
 	# 攻击
 	if player.IsAttacking==true&&!check_state("Attack"):
 		play_back.travel("Attack")
-		_attack_direction=player.CurDirection
 	
 	if player.IsHeavyAttacking==true&&!check_state("HeavyAttack")&&!check_state("HeavyAttackOver"):
 		play_back.travel("HeavyAttack")
@@ -53,8 +52,11 @@ func check_state(state_name:String) -> bool:
 	return play_back.get_current_node()==state_name
 	
 func handle_slashing_physics_frame(delta:float) -> void:
-	if !check_state("Attack"):
+	if !(check_state("Attack")||check_state("Dash")):
 		return
-	player.velocity.x=_attack_direction.x*attack_move_distance
-	player.velocity.z=_attack_direction.z*attack_move_distance
-	player.LookTowardDirection(_attack_direction,delta)
+	if check_state("Attack"):
+		player.velocity.x=player.CurDirection.x*attack_move_distance
+		player.velocity.z=player.CurDirection.z*attack_move_distance
+	if check_state("Dash"):
+		player.velocity.x=player.CurDirection.x*attack_move_distance*5
+		player.velocity.z=player.CurDirection.z*attack_move_distance*5

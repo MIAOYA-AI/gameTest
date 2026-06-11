@@ -8,6 +8,7 @@ func enter() -> void:
 	
 func exit() -> void:
 	super.exit()
+	player.IsDash=false
 	if player.Direction==Vector3.ZERO:
 		state_machine.change_state("Idle")
 	else:
