@@ -20,6 +20,7 @@ public partial class Player : CharacterBody3D
     [Export] public bool IsAttacking=false;
     [Export] public bool IsHeavyAttacking=false;
     [Export] public bool IsDash=false;
+    public bool IsDefeat = false;
 
     public Vector3 SpawnPosition;
     private float TargetAngle = Single.Pi;
@@ -124,7 +125,7 @@ public partial class Player : CharacterBody3D
         Direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
         Direction = Direction.Rotated(Vector3.Up, Camera.GlobalRotation.Y);//Camera.Rotation是与上一级节点的旋转角度，这里因为有旋转臂，所以为0
         
-        if (Direction != Vector3.Zero && !GameManager.Instance.GameOver&&!IsAttacking)
+        if (Direction != Vector3.Zero && !GameManager.Instance.GameOver&&!IsAttacking&&!IsDefeat)
         {
             velocity.X = Direction.X * Speed;
             velocity.Z = Direction.Z * Speed;

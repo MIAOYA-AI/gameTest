@@ -39,9 +39,9 @@ func _physics_process(delta: float) -> void:
 		
 	handle_slashing_physics_frame(delta)
 	
-	# todo：解决死亡状态还能移动的问题
 func _on_health_component_defeat() -> void:
 	play_back.travel("Defeat")
+	player.IsDefeat=true
 	set_physics_process(false)
 	set_process_input(false)
 	state_machine.change_state("Defeat")
