@@ -2,6 +2,31 @@
 
 [ext_resource type="Script" uid="uid://b8yyfk0fgdqfc" path="res://Scripts/dash.gd" id="1_musxr"]
 
+[sub_resource type="Curve" id="Curve_mh6kn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.9058294, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ipu4b"]
+curve = SubResource("Curve_mh6kn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ve7w8"]
+emission_shape_scale = Vector3(1, 0.25, 1)
+emission_shape = 1
+emission_sphere_radius = 0.5
+gravity = Vector3(0, 1, 0)
+damping_max = 1.0
+scale_min = 0.19999999
+scale_max = 0.39999998
+scale_curve = SubResource("CurveTexture_ipu4b")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7qrvy"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_bp8pr"]
+material = SubResource("StandardMaterial3D_7qrvy")
+
 [node name="Dash" type="Node3D" unique_id=1836159236]
 script = ExtResource("1_musxr")
 
@@ -10,3 +35,9 @@ wait_time = 2.0
 one_shot = true
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1973634283]
+cast_shadow = 0
+emitting = false
+amount = 32
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_ve7w8")
+draw_pass_1 = SubResource("SphereMesh_bp8pr")

@@ -2,17 +2,20 @@ extends StateBase
 class_name Dash
 @export var player:Player
 @onready var timer: Timer = $Timer
+@onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
 
 var dath_duration=0.2
 var time_remaining
 
 func enter() -> void:
 	timer.start()
+	gpu_particles_3d.emitting=true
 	time_remaining=dath_duration
 	super.enter()
 	print("冲刺")
 	
 func exit() -> void:
+	gpu_particles_3d.emitting=false
 	super.exit()
 	
 func physics_process_update(delta: float) -> void:
