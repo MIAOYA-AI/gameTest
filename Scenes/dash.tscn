@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://eybevdefjkis"]
+
+[ext_resource type="Script" uid="uid://b8yyfk0fgdqfc" path="res://Scripts/dash.gd" id="1_musxr"]
+
+[node name="Dash" type="Node3D" unique_id=1836159236]
+script = ExtResource("1_musxr")
+
+[node name="Timer" type="Timer" parent="." unique_id=262042743]
+one_shot = true
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1973634283]
