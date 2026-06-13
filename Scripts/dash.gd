@@ -4,11 +4,12 @@ class_name Dash
 @onready var timer: Timer = $Timer
 @onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
 
+#无敌帧时间
 var dath_duration=0.2
 var time_remaining
 
 func enter() -> void:
-	timer.start()
+	timer.start(player.MyStats.GetDashCooldown())
 	gpu_particles_3d.emitting=true
 	time_remaining=dath_duration
 	super.enter()

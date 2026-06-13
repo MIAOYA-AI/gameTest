@@ -37,6 +37,8 @@ public partial class CharacterStats : Resource
         GD.Print(Speed.GetValue());
         GD.Print(Endurance.GetValue());
         GD.Print(Agility.GetValue());
+        GD.Print(GetMaxHp());
+        GD.Print(GetDashCooldown());
 
         EmitSignal(SignalName.LevelUp);
     }
@@ -49,5 +51,10 @@ public partial class CharacterStats : Resource
     public int GetMaxHp()
     {
         return 20 + (int)(Level * Endurance.GetValue());
+    }
+
+    public float GetDashCooldown()
+    {
+        return (float)Mathf.Max(0.5,1.5f-Agility.GetValue());
     }
 }

@@ -14,7 +14,6 @@ var max_health:float
 var cur_health:float:
 	set(value):
 		cur_health=max(0.0,value)
-		print(cur_health)
 		if cur_health==0:
 			defeat.emit()
 		health_change.emit()
