@@ -21,7 +21,7 @@ public partial class Ability : Resource
     [Export(PropertyHint.Range, "0,100")]
     public int AbilityScore = 25;
 
-    public float GetModifier()
+    public float GetValue()
     {
         return Mathf.Lerp(MinModifier, MaxModifier, AbilityScore / 100.0f);
     }
