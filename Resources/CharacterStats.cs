@@ -10,7 +10,7 @@ public partial class CharacterStats : Resource
     [Export] public Ability Strength = new(80.0f,240.0f);//造成的伤害
     [Export] public Ability Speed = new(3.0f,7.0f);//m/s
     [Export] public Ability Endurance = new(50f,100f) ;//血量
-    [Export] public Ability Agility = new(0.00f,0.5f);//暴击机率
+    [Export] public Ability Agility = new(0.00f,1f);//暴击机率
 
     public void IncreaseXp(int value)
     {

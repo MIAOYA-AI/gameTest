@@ -4,14 +4,11 @@ extends StateBase
 @export var player:Player
 @export var hit_box_collision_shap:CollisionShape3D
 @export var attack_animation:AnimationPlayer
-@onready var attack_cast: RayCast3D = %AttackCast
+@onready var attack_cast: attack_cast = %AttackCast
 @onready var dash: Dash = $"../Dash"
 
 var player_speed:float
 var _attack_frame_count:int = 0
-
-func _ready() -> void:
-	randomize()
 
 func enter() -> void:
 	super.enter()
@@ -40,13 +37,7 @@ func physics_process_update(delta: float) -> void:
 		state_machine.change_state("Dash")
 	else:
 		player.IsDash=false
-	# 根据暴击率修正系数 只对普通攻击有效
-	var damage_modifity:=1.0 if randf()>player.myMyStats.Agility.GetValue() else 2.0
-	if player.IsAttacking==true:
-		attack_cast.deal_damage(player.MyStats.Strength.GetValue()*damage_modifity)
-	elif player.IsHeavyAttacking==true:
-		attack_cast.deal_damage(player.MyStats.Strength.GetValue()*2)
-	
+	attack_cast.deal_damage(player.MyStats.Strength.GetValue())
 	
 func hit_box_enable(state:bool) -> void:
 	hit_box_collision_shap.disabled=!state
