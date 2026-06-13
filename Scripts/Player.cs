@@ -6,6 +6,7 @@ using System;
 public partial class Player : CharacterBody3D
 {
     [Export] public float Speed = 5.0f;
+    [Export] public float Damage = 5.0f;
     [Export] public float JumpVelocity = 4.5f;
     [Export] public Camera3D Camera;
     [Export] public Node3D Model;
@@ -15,11 +16,11 @@ public partial class Player : CharacterBody3D
     [Export] public Node health_component;
     public Vector3 CurDirection=Vector3.Zero;
 
-    public bool IsJumping=false;
-    public bool IsAttacking=false;
-    public bool IsHeavyAttacking=false;
-    public bool IsDash=false;
-    public bool IsDefeat = false;
+    [Export] public bool IsJumping=false;
+    [Export] public bool IsAttacking=false;
+    [Export] public bool IsHeavyAttacking=false;
+    [Export] public bool IsDash=false;
+    [Export] public bool IsDefeat = false;
     
     [ExportCategory("RPG Stats")]
     [Export] public CharacterStats MyStats;
@@ -47,10 +48,9 @@ public partial class Player : CharacterBody3D
         
         if(CurDirection == Vector3.Zero)
             CurDirection = Model.GlobalTransform.Basis.Z;
-
-        // Debug: verify HitBox collision settings
-        var hitBox = GetNode<Area3D>("PlayerModel/Rig/Skeleton3D/handslot_r/HitBox_RightHand");
-        GD.Print($"HitBox monitoring={hitBox.Monitoring}, mask={hitBox.CollisionMask}, layer={hitBox.CollisionLayer}");
+        
+        //初始化所有属性值
+        InitAttribute();
     }
 
     public override void _Process(double delta)
@@ -83,9 +83,16 @@ public partial class Player : CharacterBody3D
         Move(delta);
     }
 
+    private void InitAttribute()
+    {
+        Speed = MyStats.Speed.GetValue();
+        Damage=MyStats.Strength.GetValue();
+    }
+
+    // Handle input.
     private void HandInput()
     {
-        // Handle input.
+        
         if (Input.IsActionJustPressed("jump") && IsOnFloor())
         {
             IsJumping = true;
@@ -98,11 +105,14 @@ public partial class Player : CharacterBody3D
         {
             IsHeavyAttacking = true;
         }
-
         if (Input.IsActionJustPressed("dash") && IsOnFloor())
         {
             IsDash = true;
         }
+        
+        //测试按钮
+        if (Input.IsActionJustPressed("test"))
+            MyStats.LevelUp();
     }
 
     private void Move(double delta)

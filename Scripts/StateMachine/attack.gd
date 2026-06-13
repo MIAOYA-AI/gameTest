@@ -37,7 +37,11 @@ func physics_process_update(delta: float) -> void:
 		state_machine.change_state("Dash")
 	else:
 		player.IsDash=false
-	attack_cast.deal_damage()
+	if player.IsAttacking==true:
+		attack_cast.deal_damage(player.MyStats.Strength.GetValue())
+	elif player.IsHeavyAttacking==true:
+		attack_cast.deal_damage(player.MyStats.Strength.GetValue()*2)
+	
 	
 func hit_box_enable(state:bool) -> void:
 	hit_box_collision_shap.disabled=!state
