@@ -1,5 +1,5 @@
 using Godot;
-using System; 
+using System;
 
 [GlobalClass]
 public partial class CharacterStats : Resource
@@ -11,10 +11,21 @@ public partial class CharacterStats : Resource
     [Export] public Ability Speed = new(3.0f,7.0f);//m/s
     [Export] public Ability Endurance = new(50f,100f) ;//血量
     [Export] public Ability Agility = new(0.05f,0.25f);//暴击机率
+
+    public void IncreaseXp(int value)
+    {
+        Xp += value;
+        while (Xp > PercentageLevelUpBoundary())
+        {
+            Xp -= PercentageLevelUpBoundary();
+            LevelUp();
+        }
+    }
     
-    public void LevelUp()
+    private void LevelUp()
     {
         Level++;
+        GD.Print("Level Up:"+Level);
         Strength.Increase(10);
         Speed.Increase(10);
         Endurance.Increase(10);
@@ -23,5 +34,10 @@ public partial class CharacterStats : Resource
         GD.Print(Speed.GetValue());
         GD.Print(Endurance.GetValue());
         GD.Print(Agility.GetValue());
+    }
+
+    public int PercentageLevelUpBoundary()
+    {
+        return (int)(50*Math.Pow(1.2,Level));
     }
 }

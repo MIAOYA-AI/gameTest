@@ -46,7 +46,7 @@ func _on_health_component_defeat() -> void:
 	play_back.travel("Defeat")
 	collision_shape_3d.disabled=true;
 	set_physics_process(false)
-	player.MyStats.LevelUp()
+	player.MyStats.IncreaseXp(100)
 	#queue_free()
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
