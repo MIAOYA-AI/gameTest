@@ -4,8 +4,19 @@ using System;
 [GlobalClass]
 public partial class Ability : Resource
 {
-    [Export] public float MinModifier = 0.0f;
-    [Export] public float MaxModifier = 100.0f;
+    public Ability(float min, float max)
+    {
+        MinModifier = min;
+        MaxModifier = max;
+    }
+
+    public Ability()
+    {
+        
+    }
+    
+    private float MinModifier = 0.0f;
+    private float MaxModifier = 100.0f;
 
     [Export(PropertyHint.Range, "0,100")]
     public int AbilityScore = 25;
