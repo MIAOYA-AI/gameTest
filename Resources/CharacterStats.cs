@@ -18,11 +18,14 @@ public partial class CharacterStats : Resource
         while (Xp > PercentageLevelUpBoundary())
         {
             Xp -= PercentageLevelUpBoundary();
-            LevelUp();
+            _levelUp();
         }
     }
     
-    public void LevelUp()
+    [Signal]
+    public delegate void LevelUpEventHandler();
+    
+    public void _levelUp()
     {
         Level++;
         GD.Print("Level Up:"+Level);
@@ -34,10 +37,17 @@ public partial class CharacterStats : Resource
         GD.Print(Speed.GetValue());
         GD.Print(Endurance.GetValue());
         GD.Print(Agility.GetValue());
+
+        EmitSignal(SignalName.LevelUp);
     }
 
     public int PercentageLevelUpBoundary()
     {
         return (int)(50*Math.Pow(1.2,Level));
+    }
+
+    public int GetMaxHp()
+    {
+        return 20 + (int)(Level * Endurance.GetValue());
     }
 }

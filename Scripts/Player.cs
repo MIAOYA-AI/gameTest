@@ -112,7 +112,7 @@ public partial class Player : CharacterBody3D
         
         //测试按钮
         if (Input.IsActionJustPressed("test"))
-            MyStats.LevelUp();
+            MyStats._levelUp();
     }
 
     private void Move(double delta)

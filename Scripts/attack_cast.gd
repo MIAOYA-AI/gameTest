@@ -19,5 +19,5 @@ func deal_damage(damage:float) -> void:
 			damage*=2
 			VfxManger.spawn_damage_number(damage,Color.RED,get_collision_point())
 		else:
-			VfxManger.spawn_damage_number(damage,Color.BLACK,get_collision_point())
+			VfxManger.spawn_damage_number(damage,Color.WHITE,get_collision_point())
 		collider.health_component.take_damage(damage)
