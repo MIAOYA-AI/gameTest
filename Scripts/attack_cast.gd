@@ -1,6 +1,6 @@
 extends RayCast3D
 
-
+# player
 func deal_damage(damage:float) -> void:
 	if not is_colliding():
 		return
