@@ -11,6 +11,7 @@ class_name Enemy
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var player_detector: ShapeCast3D = $model/PlayerDetector
 @onready var area_attack: ShapeCast3D = $AreaAttack
+@onready var player:Player=get_tree().get_first_node_in_group("Player")
 
 @onready var villager_meshes: Array[MeshInstance3D]=[
 	$model/CharacterRig/GameRig/Skeleton3D/Villager_01,
@@ -45,6 +46,7 @@ func _on_health_component_defeat() -> void:
 	play_back.travel("Defeat")
 	collision_shape_3d.disabled=true;
 	set_physics_process(false)
+	player.MyStats.LevelUp()
 	#queue_free()
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:

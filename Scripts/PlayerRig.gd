@@ -18,7 +18,6 @@ var run_weight_target:=-1.0
 
 func _ready() -> void:
 	health_component.update_max_health(100)
-	print(player.MyStats.Speed.GetModifier())
 
 func _physics_process(delta: float) -> void:
 	# 移动
