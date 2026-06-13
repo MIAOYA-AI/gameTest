@@ -7,7 +7,8 @@ signal defeat()
 signal health_change()
 
 func _ready() -> void:
-	connect("LevelUp",Callable(self,"_on_level_up"))
+	if player is Player and player.MyStats:
+		player.MyStats.connect("LevelUp", Callable(self, "_on_level_up"))
 
 var max_health:float
 var cur_health:float:
