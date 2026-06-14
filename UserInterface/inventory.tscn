@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cs1rhppg3jn0c" path="res://Assets/UIAssets/Window/window_header.png" id="1_hqat6"]
 [ext_resource type="FontFile" uid="uid://ceomqc8eeksiw" path="res://Assets/Fonts/BlackOpsOne-Regular.ttf" id="2_w4h00"]
+[ext_resource type="StyleBox" uid="uid://bqwh7lrw0nm7b" path="res://UserInterface/ui_panel.tres" id="3_w4h00"]
 
 [sub_resource type="Gradient" id="Gradient_h3yq5"]
 offsets = PackedFloat32Array(0, 0.7118902, 0.9)
@@ -14,6 +15,12 @@ fill_to = Vector2(0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_6ivh5"]
 font = ExtResource("2_w4h00")
 font_size = 80
+
+[sub_resource type="LabelSettings" id="LabelSettings_h3yq5"]
+font = ExtResource("2_w4h00")
+font_size = 24
+font_color = Color(0.9561295, 0.3156555, 0, 1)
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="inventory" type="Control" unique_id=867617168]
 layout_mode = 3
@@ -65,3 +72,36 @@ text = "Inventory"
 label_settings = SubResource("LabelSettings_6ivh5")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1455902423]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="HeldItems" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=2002638840]
+custom_minimum_size = Vector2(960, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_w4h00")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=823304240]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=52679359]
+custom_minimum_size = Vector2(384, 0)
+layout_mode = 2
+
+[node name="CharacterSheet" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=272265544]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("3_w4h00")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CharacterSheet" unique_id=370102387]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CharacterSheet/VBoxContainer" unique_id=941505491]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Level 1"
+label_settings = SubResource("LabelSettings_h3yq5")
+horizontal_alignment = 1

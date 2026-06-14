@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dbgmqkhn2hato" path="res://Assets/UIAssets/Unitframe/BlueBar.png" id="4_l8ojb"]
 
 [node name="UserInterface" type="Control" unique_id=1665740541]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
