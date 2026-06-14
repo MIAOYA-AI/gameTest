@@ -7,6 +7,7 @@ class_name user_interface
 @onready var health_bar: TextureProgressBar = %HealthBar
 @onready var xp_bar: TextureProgressBar = %XpBar
 @onready var hp_label: Label = %HpLabel
+@onready var inventory: Control = $inventory
 
 func _ready() -> void:
 	if player is Player and player.MyStats:
@@ -16,6 +17,10 @@ func _ready() -> void:
 		health_bar.value = player.MyStats.CurHealth
 		_updata_health_num()
 		health_component.connect("health_change", Callable(self, "_on_health_change"))
+		
+func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("menu"):
+		inventory.visible=!inventory.visible
 
 func _on_health_change(new_health: float) -> void:
 	health_bar.value = new_health

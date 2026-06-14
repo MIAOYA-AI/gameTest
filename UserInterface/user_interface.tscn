@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bq3gdbeyxjbo6" path="res://UserInterface/user_interface.gd" id="1_cp462"]
 [ext_resource type="Texture2D" uid="uid://c8oign8aehnjc" path="res://Assets/UIAssets/Unitframe/HealthBarUnder.png" id="1_v7due"]
+[ext_resource type="PackedScene" uid="uid://ctyiguv58iwta" path="res://UserInterface/inventory.tscn" id="2_l8ojb"]
 [ext_resource type="Texture2D" uid="uid://b5cel5hi0a3tq" path="res://Assets/UIAssets/Unitframe/HealthBarOver.png" id="2_mm0wo"]
 [ext_resource type="Texture2D" uid="uid://q5she8dni200" path="res://Assets/UIAssets/Unitframe/MainBar.png" id="3_1yg0r"]
 [ext_resource type="FontFile" uid="uid://ceomqc8eeksiw" path="res://Assets/Fonts/BlackOpsOne-Regular.ttf" id="4_3o1tv"]
@@ -16,6 +17,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_cp462")
+
+[node name="inventory" parent="." unique_id=867617168 instance=ExtResource("2_l8ojb")]
+visible = false
+layout_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1875083178]
 layout_mode = 1

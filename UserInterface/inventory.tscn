@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://ctyiguv58iwta"]
+
+[ext_resource type="Texture2D" uid="uid://cs1rhppg3jn0c" path="res://Assets/UIAssets/Window/window_header.png" id="1_hqat6"]
+[ext_resource type="FontFile" uid="uid://ceomqc8eeksiw" path="res://Assets/Fonts/BlackOpsOne-Regular.ttf" id="2_w4h00"]
+
+[sub_resource type="Gradient" id="Gradient_h3yq5"]
+offsets = PackedFloat32Array(0, 0.7118902, 0.9)
+colors = PackedColorArray(0.3153182, 0, 0, 1, 0.4912575, 0.07430857, 0.12676823, 1, 0.6952345, 0.22035101, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c11vl"]
+gradient = SubResource("Gradient_h3yq5")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6ivh5"]
+font = ExtResource("2_w4h00")
+font_size = 80
+
+[node name="inventory" type="Control" unique_id=867617168]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundGradient" type="TextureRect" parent="." unique_id=1730456813]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_c11vl")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=90696712]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=499141062]
+layout_mode = 2
+
+[node name="HeaderTexture" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=599223049]
+layout_mode = 2
+texture = ExtResource("1_hqat6")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HeaderTexture" unique_id=1996242137]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.8039216, 0.42352942, 0.28627452, 1)
+theme_override_font_sizes/font_size = 120
+text = "Inventory"
+label_settings = SubResource("LabelSettings_6ivh5")
+horizontal_alignment = 1
+vertical_alignment = 1
