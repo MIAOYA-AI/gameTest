@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://bq3gdbeyxjbo6" path="res://UserInterface/user_interface.gd" id="1_cp462"]
 [ext_resource type="Texture2D" uid="uid://c8oign8aehnjc" path="res://Assets/UIAssets/Unitframe/HealthBarUnder.png" id="1_v7due"]
 [ext_resource type="Texture2D" uid="uid://b5cel5hi0a3tq" path="res://Assets/UIAssets/Unitframe/HealthBarOver.png" id="2_mm0wo"]
+[ext_resource type="Texture2D" uid="uid://q5she8dni200" path="res://Assets/UIAssets/Unitframe/MainBar.png" id="3_1yg0r"]
 [ext_resource type="FontFile" uid="uid://ceomqc8eeksiw" path="res://Assets/Fonts/BlackOpsOne-Regular.ttf" id="4_3o1tv"]
+[ext_resource type="Texture2D" uid="uid://dbgmqkhn2hato" path="res://Assets/UIAssets/Unitframe/BlueBar.png" id="4_l8ojb"]
 
 [node name="UserInterface" type="Control" unique_id=1665740541]
 layout_mode = 3
@@ -37,6 +39,25 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_v7due")
+
+[node name="HealthBar" type="TextureProgressBar" parent="MarginContainer/InfoBar/HealthBarUnder" unique_id=1177732672]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+texture_progress = ExtResource("3_1yg0r")
+
+[node name="XpBar" type="TextureProgressBar" parent="MarginContainer/InfoBar/HealthBarUnder" unique_id=1821970872]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+value = 50.0
+texture_progress = ExtResource("4_l8ojb")
 
 [node name="XpBarOver" type="TextureRect" parent="MarginContainer/InfoBar" unique_id=1577848532]
 layout_mode = 0
