@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c2ywxy454yhl4"]
 
 [ext_resource type="Script" uid="uid://c4qbme1wf4rv0" path="res://Scripts/damage_number.gd" id="1_n4jia"]
+[ext_resource type="FontFile" uid="uid://ceomqc8eeksiw" path="res://Assets/Fonts/BlackOpsOne-Regular.ttf" id="2_m808r"]
 
 [sub_resource type="Animation" id="Animation_2ojwd"]
 resource_name = "new_animation"
@@ -85,6 +86,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9978872, 0)
 billboard = 1
 no_depth_test = true
 text = "Test"
+font = ExtResource("2_m808r")
 font_size = 48
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1055363788]

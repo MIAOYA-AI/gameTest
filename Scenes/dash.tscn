@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://eybevdefjkis"]
 
-[ext_resource type="Script" uid="uid://b8yyfk0fgdqfc" path="res://Scripts/dash.gd" id="1_musxr"]
+[ext_resource type="Script" uid="uid://b8yyfk0fgdqfc" path="res://Scripts/StateMachine/dash.gd" id="1_musxr"]
 
 [sub_resource type="Curve" id="Curve_mh6kn"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.9058294, 0.0, 0, 0]
