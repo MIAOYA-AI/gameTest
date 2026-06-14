@@ -12,11 +12,12 @@ class_name user_interface
 func _ready() -> void:
 	if player is Player and player.MyStats:
 		player.MyStats.connect("LevelUp", Callable(self, "_on_level_up"))
-		player.MyStats.connect("XplUp", Callable(self, "_on_xp_up"))
+		player.MyStats.connect("XpUp", Callable(self, "_on_xp_up"))
 		health_bar.max_value = player.MyStats.GetMaxHp()
 		health_bar.value = player.MyStats.CurHealth
 		_updata_health_num()
 		health_component.connect("health_change", Callable(self, "_on_health_change"))
+		inventory.updata_attribute(player.MyStats)
 		
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
@@ -38,6 +39,7 @@ func _on_level_up() -> void:
 		level_label.text=str(player.MyStats.Level)
 		xp_bar.max_value=player.MyStats.PercentageLevelUpBoundary()
 		xp_bar.value=player.MyStats.Xp
+		inventory.updata_attribute(player.MyStats)
 
 func _on_xp_up() -> void:
 	if player as Player:
