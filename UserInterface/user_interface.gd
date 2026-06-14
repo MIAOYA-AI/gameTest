@@ -34,5 +34,5 @@ func _on_xp_up() -> void:
 		xp_bar.value=player.MyStats.Xp
 		
 func _updata_health_num() -> void:
-	var label_text=str(player.MyStats.CurHealth)+'/'+str(player.MyStats.GetMaxHp())
+	var label_text:="%s/%s" % [str(player.MyStats.CurHealth),str(player.MyStats.GetMaxHp())]
 	hp_label.text=label_text
