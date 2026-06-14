@@ -51,6 +51,24 @@ grow_vertical = 2
 value = 50.0
 texture_progress = ExtResource("3_1yg0r")
 
+[node name="HpLabel" type="Label" parent="MarginContainer/InfoBar/HealthBarUnder/HealthBar" unique_id=1200400444]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(95, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 101.0
+offset_top = -14.0
+offset_right = 238.0
+offset_bottom = -14.0
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.6901961, 0.49803922, 0.3019608, 1)
+theme_override_fonts/font = ExtResource("4_3o1tv")
+theme_override_font_sizes/font_size = 24
+text = "1000/1000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="XpBar" type="TextureProgressBar" parent="MarginContainer/InfoBar/HealthBarUnder" unique_id=1821970872]
 unique_name_in_owner = true
 layout_mode = 0
