@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://b2j6gng0rxfpc"]
 
+[ext_resource type="Script" uid="uid://bq3gdbeyxjbo6" path="res://UserInterface/user_interface.gd" id="1_cp462"]
 [ext_resource type="Texture2D" uid="uid://c8oign8aehnjc" path="res://Assets/UIAssets/Unitframe/HealthBarUnder.png" id="1_v7due"]
 [ext_resource type="Texture2D" uid="uid://b5cel5hi0a3tq" path="res://Assets/UIAssets/Unitframe/HealthBarOver.png" id="2_mm0wo"]
+[ext_resource type="FontFile" uid="uid://ceomqc8eeksiw" path="res://Assets/Fonts/BlackOpsOne-Regular.ttf" id="4_3o1tv"]
 
 [node name="UserInterface" type="Control" unique_id=1665740541]
 layout_mode = 3
@@ -11,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("1_cp462")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1875083178]
 layout_mode = 1
@@ -40,3 +43,18 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_mm0wo")
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/InfoBar/XpBarOver" unique_id=1145079506]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(95, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.6901961, 0.49803922, 0.3019608, 1)
+theme_override_fonts/font = ExtResource("4_3o1tv")
+theme_override_font_sizes/font_size = 24
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
