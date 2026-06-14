@@ -51,6 +51,12 @@ public partial class Player : CharacterBody3D
         
         //初始化所有属性值
         InitAttribute();
+
+        //连接HealthComponent的health_change信号到CharacterStats 直接在HealthComponent脚本里改变
+        // if (health_component != null && MyStats != null)
+        // {
+        //     health_component.Connect("health_change", Callable.From<float>(MyStats.OnHealthChange));
+        // }
     }
 
     public override void _Process(double delta)

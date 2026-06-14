@@ -3,7 +3,7 @@ extends Node3D
 # 该类主要控制玩家的行为动画与配合动画的位移
 @onready var animation_tree: AnimationTree = $"../BlendAnimationTree"
 @onready var play_back:AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
-@export var player:Player
+@onready var player:Player
 @onready var health_component: HealthComponent = $"../../HealthComponent"
 @onready var collision_shape_3d: CollisionShape3D = $"../../CollisionShape3D"
 @onready var state_machine: StateMachine = $"../../StateMachine"
@@ -17,7 +17,7 @@ var run_weight_target:=-1.0
 
 
 func _ready() -> void:
-	health_component.update_max_health(player.MyStats.GetMaxHp())
+	pass
 
 func _physics_process(delta: float) -> void:
 	# 移动
