@@ -56,7 +56,6 @@ unique_name_in_owner = true
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-value = 50.0
 texture_progress = ExtResource("4_l8ojb")
 
 [node name="XpBarOver" type="TextureRect" parent="MarginContainer/InfoBar" unique_id=1577848532]

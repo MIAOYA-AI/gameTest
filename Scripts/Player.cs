@@ -35,7 +35,7 @@ public partial class Player : CharacterBody3D
         SpawnPosition = Position;
         if (Instance != null)
         {
-            QueueFree(); // 如果已存在实例，销毁当前对象  
+            QueueFree(); // 如果已存在实例，销毁当前对象 
             return;
         }
 
