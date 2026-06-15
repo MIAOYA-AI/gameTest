@@ -3,7 +3,7 @@ extends Node3D
 # 该类主要控制玩家的行为动画与配合动画的位移
 @onready var animation_tree: AnimationTree = $"../BlendAnimationTree"
 @onready var play_back:AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
-@onready var player:Player
+@onready var player: Node = $"../.."
 @onready var health_component: HealthComponent = $"../../HealthComponent"
 @onready var collision_shape_3d: CollisionShape3D = $"../../CollisionShape3D"
 @onready var state_machine: StateMachine = $"../../StateMachine"
@@ -20,24 +20,25 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	if player != null and (player as Player):
 	# 移动
-	update_animation_tree(player.Direction)
-	animation_tree[run_path]=move_toward(
-		animation_tree[run_path],
-		run_weight_target,
-		animation_speed*delta
-	)
+		update_animation_tree(player.Direction)
+		animation_tree[run_path]=move_toward(
+			animation_tree[run_path],
+			run_weight_target,
+			animation_speed*delta
+		)
 	# 攻击
-	if player.IsAttacking==true&&!check_state("Attack"):
-		play_back.travel("Attack")
+		if player.IsAttacking==true&&!check_state("Attack"):
+			play_back.travel("Attack")
 	
-	if player.IsHeavyAttacking==true&&!check_state("HeavyAttack")&&!check_state("HeavyAttackOver"):
-		play_back.travel("HeavyAttack")
+		if player.IsHeavyAttacking==true&&!check_state("HeavyAttack")&&!check_state("HeavyAttackOver"):
+			play_back.travel("HeavyAttack")
 		
-	if player.IsDash==true&&!check_state("Dash")&&dash.is_readly():
-		play_back.travel("Dash")
+		if player.IsDash==true&&!check_state("Dash")&&dash.is_readly():
+			play_back.travel("Dash")
 		
-	handle_slashing_physics_frame(delta)
+		handle_slashing_physics_frame(delta)
 	
 func _on_health_component_defeat() -> void:
 	play_back.travel("Defeat")

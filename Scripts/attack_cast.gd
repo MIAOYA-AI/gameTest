@@ -1,6 +1,6 @@
 extends RayCast3D
 class_name attack_cast
-@onready var player: Player =get_owner()
+@onready var player: Node =get_owner()
 
 func _ready() -> void:
 	randomize()
@@ -11,10 +11,10 @@ func deal_damage(damage:float) -> void:
 		return
 	var collider=get_collider()
 	print(collider)
-	if collider is Enemy:
+	if collider is Enemy and (player as Player):
 		# 不再对击中的物体再次反应
 		add_exception(collider)
-		var critical_hit:=randf()<player.MyStats.Agility.GetValue()
+		var critical_hit:float=randf()<player.MyStats.Agility.GetValue()
 		if (player.IsAttacking and critical_hit) or player.IsHeavyAttacking:
 			damage*=2
 			VfxManger.spawn_damage_number(damage,Color.RED,get_collision_point())
