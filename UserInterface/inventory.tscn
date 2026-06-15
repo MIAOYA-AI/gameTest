@@ -5,6 +5,9 @@
 [ext_resource type="FontFile" uid="uid://ceomqc8eeksiw" path="res://Assets/Fonts/BlackOpsOne-Regular.ttf" id="2_w4h00"]
 [ext_resource type="StyleBox" uid="uid://bqwh7lrw0nm7b" path="res://UserInterface/ui_panel.tres" id="3_w4h00"]
 [ext_resource type="Texture2D" uid="uid://bvd40ercumgf6" path="res://Assets/UIAssets/Icons/spell_slot_empty.png" id="4_h3yq5"]
+[ext_resource type="Texture2D" uid="uid://dgo41j4k40twn" path="res://Assets/UIAssets/Button Small/button_small.png" id="6_1aauh"]
+[ext_resource type="Texture2D" uid="uid://43egq2w3kcgd" path="res://Assets/UIAssets/Button Small/button_small_press.png" id="7_5spcf"]
+[ext_resource type="Texture2D" uid="uid://dsky34lpnah2n" path="res://Assets/UIAssets/Button Small/button_small_hover.png" id="8_qnmx2"]
 
 [sub_resource type="Gradient" id="Gradient_h3yq5"]
 offsets = PackedFloat32Array(0, 0.7118902, 0.9)
@@ -234,3 +237,47 @@ layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_iclm4")
 horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CharacterSheet/VBoxContainer" unique_id=1789527613]
+layout_mode = 2
+alignment = 1
+
+[node name="AttributeName" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CharacterSheet/VBoxContainer/HBoxContainer" unique_id=133616553]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Attack Damage"
+label_settings = SubResource("LabelSettings_c11vl")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="DamageValue" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CharacterSheet/VBoxContainer/HBoxContainer" unique_id=1065627539]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = SubResource("LabelSettings_iclm4")
+horizontal_alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2006732449]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 0
+texture_normal = ExtResource("6_1aauh")
+texture_pressed = ExtResource("7_5spcf")
+texture_hover = ExtResource("8_qnmx2")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/BackButton" unique_id=1822661083]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

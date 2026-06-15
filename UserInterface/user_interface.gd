@@ -21,12 +21,7 @@ func _ready() -> void:
 		
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
-		inventory.visible=!inventory.visible
-		get_tree().paused=inventory.visible
-		if inventory.visible:
-			Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
-		else:
-			Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
+		inventory.controll_visible()
 
 func _on_health_change(new_health: float) -> void:
 	health_bar.value = new_health
