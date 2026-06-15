@@ -1,4 +1,5 @@
 extends Node3D
+# todo:将palyerRig脚本移动到PlayerModel上
 # 与StateMachine功能冲突 用来测试其他的动画控制方式
 # 该类主要控制玩家的行为动画与配合动画的位移
 @onready var animation_tree: AnimationTree = get_node_or_null("../BlendAnimationTree")

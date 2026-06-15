@@ -10,6 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://l4ubb3vfa50e" path="res://Scenes/enemy.tscn" id="8_1o2uf"]
 [ext_resource type="PackedScene" uid="uid://cq231tvimjcie" path="res://Assets/AiAssetTest/错金铜盖.glb" id="10_2iayn"]
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_1nbm7"]
+vertices = PackedVector3Array(-11.75, 0.5, -3.5, -11.25, 0.5, -4.25, -12.75, 0.5, -5.25, -14.5, 0.5, -3.5, -9.5, 0.5, -7.25, -8.75, 0.5, -8.25, -9.75, 0.5, -9.25, -11.5, 0.5, -7.75, -12.75, 0.5, -6.75, -9.75, 0.5, -10.75, -8, 0.5, -19.5, -14.5, 0.5, -19.5, -8, 0.5, -11.75, -6.75, 0.5, -11.5, 6.25, 0.5, -10.75, 7, 0.5, -11.25, 7, 0.5, -19.5, -6.25, 0.5, -10, 6.25, 0.5, -10, 9.75, 0.5, -10, 10.25, 0.5, -10, 10.25, 0.5, -10.75, 9.25, 0.5, -11.5, 11.5, 0.5, -11.75, 13.25, 0.5, -11.5, 14.5, 0.5, -19.5, 13.75, 0.5, -10, 14.5, 0.5, -10, 7.5, 0.5, -11.75, -8.25, 0.5, -3.5, -8.5, 0.5, -1.75, -6.75, 0.5, -1.5, -9.5, 0.5, -4.5, -8.75, 0.5, -4.5, -6.75, 0.5, -8.5, -6.25, 0.5, 0, 6.25, 0.5, 0, 6.25, 0.5, -0.75, 6.25, 0.5, -9.25, 7.75, 0.5, -1.75, 7.75, 0.5, -8.25, 10.25, 0.5, -9.25, 9.25, 0.5, -8.5, 9.25, 0.5, -1.5, 10.25, 0.5, -1.75, 9.75, 0.5, -0.25, 10.25, 0.5, -0.5, 11.25, 0.5, -8.25, 11.5, 0.5, -2.75, 13.25, 0.5, -8.5, 13.25, 0.5, -2.5, 13.75, 0.5, -1, 14.5, 0.5, -1, -9.75, 0.5, -0.75, -8.75, 0.5, -1.5, -10.75, 0.5, -1.25, -9.75, 0.5, 0.75, -11.75, 0.5, -2.25, -7, 0.5, 9.5, -7, 0.5, 1.5, -8.75, 0.5, 1.75, -14.5, 0.5, 9.5, 13.5, 0.5, 0.25, 14.5, 0.5, 9.5, 11.25, 0.5, 0.75, 9.25, 0.5, 1.5, 12.25, 0.5, 0.75, 6.75, 0.5, 9.5, 7.25, 0.5, 1.75, 6.75, 0.5, 1.25, -6.5, 0.5, 1.25)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(7, 8, 9), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(10, 12, 9), PackedInt32Array(9, 6, 7), PackedInt32Array(2, 3, 8), PackedInt32Array(8, 3, 11), PackedInt32Array(13, 12, 10), PackedInt32Array(15, 14, 16), PackedInt32Array(16, 14, 17), PackedInt32Array(16, 17, 13), PackedInt32Array(16, 13, 10), PackedInt32Array(14, 18, 17), PackedInt32Array(20, 19, 21), PackedInt32Array(21, 19, 22), PackedInt32Array(25, 24, 23), PackedInt32Array(26, 24, 27), PackedInt32Array(27, 24, 25), PackedInt32Array(23, 21, 22), PackedInt32Array(22, 28, 23), PackedInt32Array(23, 28, 16), PackedInt32Array(23, 16, 25), PackedInt32Array(28, 15, 16), PackedInt32Array(31, 30, 29), PackedInt32Array(33, 32, 4), PackedInt32Array(5, 34, 4), PackedInt32Array(4, 34, 33), PackedInt32Array(33, 34, 29), PackedInt32Array(29, 34, 31), PackedInt32Array(37, 36, 35), PackedInt32Array(34, 17, 31), PackedInt32Array(31, 17, 35), PackedInt32Array(35, 17, 38), PackedInt32Array(35, 38, 37), PackedInt32Array(17, 18, 38), PackedInt32Array(39, 37, 40), PackedInt32Array(40, 37, 38), PackedInt32Array(20, 41, 19), PackedInt32Array(19, 41, 42), PackedInt32Array(44, 43, 39), PackedInt32Array(45, 43, 46), PackedInt32Array(46, 43, 44), PackedInt32Array(42, 47, 40), PackedInt32Array(40, 47, 48), PackedInt32Array(40, 48, 44), PackedInt32Array(40, 44, 39), PackedInt32Array(26, 27, 49), PackedInt32Array(49, 27, 50), PackedInt32Array(50, 27, 51), PackedInt32Array(51, 27, 52), PackedInt32Array(48, 47, 50), PackedInt32Array(50, 47, 49), PackedInt32Array(42, 41, 47), PackedInt32Array(55, 54, 53), PackedInt32Array(55, 53, 56), PackedInt32Array(3, 0, 57), PackedInt32Array(55, 56, 57), PackedInt32Array(57, 56, 3), PackedInt32Array(60, 59, 58), PackedInt32Array(56, 60, 3), PackedInt32Array(3, 60, 61), PackedInt32Array(61, 60, 58), PackedInt32Array(51, 52, 62), PackedInt32Array(62, 52, 63), PackedInt32Array(46, 64, 45), PackedInt32Array(45, 64, 65), PackedInt32Array(63, 66, 62), PackedInt32Array(64, 66, 65), PackedInt32Array(65, 66, 63), PackedInt32Array(65, 63, 67), PackedInt32Array(68, 67, 69), PackedInt32Array(67, 68, 65), PackedInt32Array(58, 59, 70), PackedInt32Array(70, 35, 58), PackedInt32Array(58, 35, 36), PackedInt32Array(58, 36, 69), PackedInt32Array(58, 69, 67)]
+geometry_parsed_geometry_type = 1
+filter_baking_aabb = AABB(-15, 0, -20, 30, 1, 30)
+
 [node name="TestFight" type="Node3D" unique_id=254098919]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1808996712]
@@ -28,323 +34,6 @@ NameToLabel = {
 1: NodePath("../UI/PanelContainer/VBoxContainer/Coin/Label2"),
 2: NodePath("../UI/PanelContainer/VBoxContainer/Cherry/Label3")
 }
-
-[node name="Environment" type="WorldEnvironment" parent="." unique_id=1915014027]
-
-[node name="floor_dirt2" parent="Environment" unique_id=1514218853 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt3" parent="Environment" unique_id=1023383879 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt4" parent="Environment" unique_id=585119043 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt5" parent="Environment" unique_id=2042588104 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt6" parent="Environment" unique_id=927768109 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt7" parent="Environment" unique_id=379848931 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -10)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt8" parent="Environment" unique_id=841559079 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt9" parent="Environment" unique_id=126778365 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -10)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt10" parent="Environment" unique_id=1421267556 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -6)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt11" parent="Environment" unique_id=272526186 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -10)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt12" parent="Environment" unique_id=2071232837 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -6)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt13" parent="Environment" unique_id=211967155 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -10)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt14" parent="Environment" unique_id=804077071 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 2)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt15" parent="Environment" unique_id=1618764818 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -2)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt16" parent="Environment" unique_id=1615910902 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt17" parent="Environment" unique_id=1604414340 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt18" parent="Environment" unique_id=260601952 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 10)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt19" parent="Environment" unique_id=1426287358 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 6)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt20" parent="Environment" unique_id=548632586 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 10)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt21" parent="Environment" unique_id=1287973598 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 6)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt22" parent="Environment" unique_id=1164916462 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt23" parent="Environment" unique_id=357348832 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt24" parent="Environment" unique_id=1722901697 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 10)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt25" parent="Environment" unique_id=5141263 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt26" parent="Environment" unique_id=275916102 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 10)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt27" parent="Environment" unique_id=795112068 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 6)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt28" parent="Environment" unique_id=758565856 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 10)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt29" parent="Environment" unique_id=1819159472 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 6)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt30" parent="Environment" unique_id=1202202318 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 2)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt31" parent="Environment" unique_id=1851704056 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -2)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt32" parent="Environment" unique_id=125280886 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 2)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt33" parent="Environment" unique_id=1110608376 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -2)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt34" parent="Environment" unique_id=188968984 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -6)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt35" parent="Environment" unique_id=1992824288 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -10)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt36" parent="Environment" unique_id=1425473080 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -6)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt37" parent="Environment" unique_id=739595635 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -10)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt38" parent="Environment" unique_id=1501955537 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -14)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt39" parent="Environment" unique_id=1130989084 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -18)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt40" parent="Environment" unique_id=1366410042 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -14)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt41" parent="Environment" unique_id=253839497 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -18)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt42" parent="Environment" unique_id=1958515502 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -14)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt43" parent="Environment" unique_id=1514280628 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -18)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt44" parent="Environment" unique_id=1123199965 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -14)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt45" parent="Environment" unique_id=707074758 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -18)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt46" parent="Environment" unique_id=95858305 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -14)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt47" parent="Environment" unique_id=1092587448 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -18)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt48" parent="Environment" unique_id=964140391 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -14)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt49" parent="Environment" unique_id=550823990 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -18)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt50" parent="Environment" unique_id=1257362986 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -14)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt51" parent="Environment" unique_id=1630625787 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -18)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt52" parent="Environment" unique_id=120769857 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -14)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt53" parent="Environment" unique_id=855370854 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -18)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt54" parent="Environment" unique_id=370927725 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -6)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt55" parent="Environment" unique_id=1534576480 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt56" parent="Environment" unique_id=307774823 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -6)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt57" parent="Environment" unique_id=690557707 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -10)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt58" parent="Environment" unique_id=2041722193 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 2)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt59" parent="Environment" unique_id=324276348 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -2)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt60" parent="Environment" unique_id=481379777 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 2)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt61" parent="Environment" unique_id=483270141 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -2)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt62" parent="Environment" unique_id=430424937 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 10)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt63" parent="Environment" unique_id=2033055130 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 6)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt64" parent="Environment" unique_id=1072075916 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 10)
-metadata/_edit_group_ = true
-
-[node name="floor_dirt65" parent="Environment" unique_id=558486153 instance=ExtResource("3_nagyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 6)
-metadata/_edit_group_ = true
-
-[node name="crypt2" parent="Environment" unique_id=989813561 instance=ExtResource("4_1o2uf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
-metadata/_edit_group_ = true
-
-[node name="tree_pine_orange_small2" parent="Environment" unique_id=2134773154 instance=ExtResource("5_1nbm7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -10)
-metadata/_edit_group_ = true
-
-[node name="tree_pine_orange_small3" parent="Environment" unique_id=1848600419 instance=ExtResource("5_1nbm7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -6)
-metadata/_edit_group_ = true
-
-[node name="tree_pine_orange_small4" parent="Environment" unique_id=4650064 instance=ExtResource("5_1nbm7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -3)
-metadata/_edit_group_ = true
-
-[node name="tree_pine_orange_small5" parent="Environment" unique_id=240287420 instance=ExtResource("5_1nbm7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
-metadata/_edit_group_ = true
-
-[node name="tree_pine_orange_small6" parent="Environment" unique_id=711989930 instance=ExtResource("5_1nbm7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
-metadata/_edit_group_ = true
-
-[node name="tree_pine_orange_small7" parent="Environment" unique_id=1906569247 instance=ExtResource("5_1nbm7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -10)
-metadata/_edit_group_ = true
-
-[node name="tree_pine_orange_small8" parent="Environment" unique_id=956222408 instance=ExtResource("5_1nbm7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -10)
-metadata/_edit_group_ = true
-
-[node name="tree_pine_orange_small9" parent="Environment" unique_id=1033403844 instance=ExtResource("5_1nbm7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -1)
-metadata/_edit_group_ = true
-
-[node name="path_A2" parent="Environment" unique_id=1827357757 instance=ExtResource("6_g2fty")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
-metadata/_edit_group_ = true
-
-[node name="path_A3" parent="Environment" unique_id=702556591 instance=ExtResource("6_g2fty")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
-metadata/_edit_group_ = true
-
-[node name="path_A4" parent="Environment" unique_id=1112667751 instance=ExtResource("6_g2fty")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
-metadata/_edit_group_ = true
-
-[node name="path_A5" parent="Environment" unique_id=1233430682 instance=ExtResource("6_g2fty")]
-metadata/_edit_group_ = true
-
-[node name="path_A6" parent="Environment" unique_id=1891915725 instance=ExtResource("6_g2fty")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
-metadata/_edit_group_ = true
-
-[node name="path_A7" parent="Environment" unique_id=855018742 instance=ExtResource("6_g2fty")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
-metadata/_edit_group_ = true
 
 [node name="TestAiAsset" parent="." unique_id=1965464620 instance=ExtResource("10_2iayn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.367608, 2.3841858e-07, -2.8192174)
@@ -374,3 +63,315 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.081023, 2.6527046e-05, -2.2
 
 [node name="Enemy8" parent="Enemys" unique_id=1233419478 instance=ExtResource("8_1o2uf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.081023, 2.6527046e-05, -0.29288197)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1139382578]
+navigation_mesh = SubResource("NavigationMesh_1nbm7")
+
+[node name="map" type="Node3D" parent="NavigationRegion3D" unique_id=266866231]
+
+[node name="floor_dirt2" parent="NavigationRegion3D/map" unique_id=1514218853 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt3" parent="NavigationRegion3D/map" unique_id=1023383879 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt4" parent="NavigationRegion3D/map" unique_id=585119043 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt5" parent="NavigationRegion3D/map" unique_id=2042588104 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt6" parent="NavigationRegion3D/map" unique_id=927768109 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt7" parent="NavigationRegion3D/map" unique_id=379848931 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -10)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt8" parent="NavigationRegion3D/map" unique_id=841559079 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt9" parent="NavigationRegion3D/map" unique_id=126778365 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -10)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt10" parent="NavigationRegion3D/map" unique_id=1421267556 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -6)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt11" parent="NavigationRegion3D/map" unique_id=272526186 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -10)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt12" parent="NavigationRegion3D/map" unique_id=2071232837 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -6)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt13" parent="NavigationRegion3D/map" unique_id=211967155 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -10)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt14" parent="NavigationRegion3D/map" unique_id=804077071 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 2)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt15" parent="NavigationRegion3D/map" unique_id=1618764818 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -2)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt16" parent="NavigationRegion3D/map" unique_id=1615910902 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt17" parent="NavigationRegion3D/map" unique_id=1604414340 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt18" parent="NavigationRegion3D/map" unique_id=260601952 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 10)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt19" parent="NavigationRegion3D/map" unique_id=1426287358 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 6)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt20" parent="NavigationRegion3D/map" unique_id=548632586 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 10)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt21" parent="NavigationRegion3D/map" unique_id=1287973598 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 6)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt22" parent="NavigationRegion3D/map" unique_id=1164916462 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt23" parent="NavigationRegion3D/map" unique_id=357348832 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt24" parent="NavigationRegion3D/map" unique_id=1722901697 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 10)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt25" parent="NavigationRegion3D/map" unique_id=5141263 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt26" parent="NavigationRegion3D/map" unique_id=275916102 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 10)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt27" parent="NavigationRegion3D/map" unique_id=795112068 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 6)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt28" parent="NavigationRegion3D/map" unique_id=758565856 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 10)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt29" parent="NavigationRegion3D/map" unique_id=1819159472 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 6)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt30" parent="NavigationRegion3D/map" unique_id=1202202318 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 2)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt31" parent="NavigationRegion3D/map" unique_id=1851704056 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -2)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt32" parent="NavigationRegion3D/map" unique_id=125280886 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 2)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt33" parent="NavigationRegion3D/map" unique_id=1110608376 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -2)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt34" parent="NavigationRegion3D/map" unique_id=188968984 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -6)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt35" parent="NavigationRegion3D/map" unique_id=1992824288 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -10)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt36" parent="NavigationRegion3D/map" unique_id=1425473080 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -6)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt37" parent="NavigationRegion3D/map" unique_id=739595635 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -10)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt38" parent="NavigationRegion3D/map" unique_id=1501955537 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -14)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt39" parent="NavigationRegion3D/map" unique_id=1130989084 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -18)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt40" parent="NavigationRegion3D/map" unique_id=1366410042 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -14)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt41" parent="NavigationRegion3D/map" unique_id=253839497 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -18)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt42" parent="NavigationRegion3D/map" unique_id=1958515502 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -14)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt43" parent="NavigationRegion3D/map" unique_id=1514280628 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -18)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt44" parent="NavigationRegion3D/map" unique_id=1123199965 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -14)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt45" parent="NavigationRegion3D/map" unique_id=707074758 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -18)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt46" parent="NavigationRegion3D/map" unique_id=95858305 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -14)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt47" parent="NavigationRegion3D/map" unique_id=1092587448 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -18)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt48" parent="NavigationRegion3D/map" unique_id=964140391 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -14)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt49" parent="NavigationRegion3D/map" unique_id=550823990 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -18)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt50" parent="NavigationRegion3D/map" unique_id=1257362986 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -14)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt51" parent="NavigationRegion3D/map" unique_id=1630625787 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -18)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt52" parent="NavigationRegion3D/map" unique_id=120769857 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -14)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt53" parent="NavigationRegion3D/map" unique_id=855370854 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -18)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt54" parent="NavigationRegion3D/map" unique_id=370927725 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -6)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt55" parent="NavigationRegion3D/map" unique_id=1534576480 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt56" parent="NavigationRegion3D/map" unique_id=307774823 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -6)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt57" parent="NavigationRegion3D/map" unique_id=690557707 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -10)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt58" parent="NavigationRegion3D/map" unique_id=2041722193 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 2)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt59" parent="NavigationRegion3D/map" unique_id=324276348 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -2)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt60" parent="NavigationRegion3D/map" unique_id=481379777 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 2)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt61" parent="NavigationRegion3D/map" unique_id=483270141 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -2)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt62" parent="NavigationRegion3D/map" unique_id=430424937 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 10)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt63" parent="NavigationRegion3D/map" unique_id=2033055130 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 6)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt64" parent="NavigationRegion3D/map" unique_id=1072075916 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 10)
+metadata/_edit_group_ = true
+
+[node name="floor_dirt65" parent="NavigationRegion3D/map" unique_id=558486153 instance=ExtResource("3_nagyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 6)
+metadata/_edit_group_ = true
+
+[node name="crypt2" parent="NavigationRegion3D/map" unique_id=989813561 instance=ExtResource("4_1o2uf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
+metadata/_edit_group_ = true
+
+[node name="tree_pine_orange_small2" parent="NavigationRegion3D/map" unique_id=132660205 instance=ExtResource("5_1nbm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -10)
+
+[node name="tree_pine_orange_small3" parent="NavigationRegion3D/map" unique_id=1485509428 instance=ExtResource("5_1nbm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -6)
+
+[node name="tree_pine_orange_small4" parent="NavigationRegion3D/map" unique_id=1370282950 instance=ExtResource("5_1nbm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -3)
+
+[node name="tree_pine_orange_small5" parent="NavigationRegion3D/map" unique_id=709613025 instance=ExtResource("5_1nbm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="tree_pine_orange_small6" parent="NavigationRegion3D/map" unique_id=942444523 instance=ExtResource("5_1nbm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="tree_pine_orange_small7" parent="NavigationRegion3D/map" unique_id=901052980 instance=ExtResource("5_1nbm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -10)
+
+[node name="tree_pine_orange_small8" parent="NavigationRegion3D/map" unique_id=1791306710 instance=ExtResource("5_1nbm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -10)
+
+[node name="tree_pine_orange_small9" parent="NavigationRegion3D/map" unique_id=1327997334 instance=ExtResource("5_1nbm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -1)
+
+[node name="path_A2" parent="NavigationRegion3D/map" unique_id=1827357757 instance=ExtResource("6_g2fty")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+metadata/_edit_group_ = true
+
+[node name="path_A3" parent="NavigationRegion3D/map" unique_id=702556591 instance=ExtResource("6_g2fty")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+metadata/_edit_group_ = true
+
+[node name="path_A4" parent="NavigationRegion3D/map" unique_id=1112667751 instance=ExtResource("6_g2fty")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+metadata/_edit_group_ = true
+
+[node name="path_A5" parent="NavigationRegion3D/map" unique_id=1233430682 instance=ExtResource("6_g2fty")]
+metadata/_edit_group_ = true
+
+[node name="path_A6" parent="NavigationRegion3D/map" unique_id=1891915725 instance=ExtResource("6_g2fty")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+metadata/_edit_group_ = true
+
+[node name="path_A7" parent="NavigationRegion3D/map" unique_id=855018742 instance=ExtResource("6_g2fty")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+metadata/_edit_group_ = true

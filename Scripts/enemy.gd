@@ -12,6 +12,7 @@ class_name Enemy
 @onready var player_detector: ShapeCast3D = $model/PlayerDetector
 @onready var area_attack: ShapeCast3D = $AreaAttack
 @onready var player:Player=get_tree().get_first_node_in_group("Player")
+@onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 
 @onready var villager_meshes: Array[MeshInstance3D]=[
 	$model/CharacterRig/GameRig/Skeleton3D/Villager_01,
@@ -24,8 +25,24 @@ func _ready():
 	health_component.update_max_health(max_health)
 
 func _physics_process(_delta: float) -> void:
+	check_for_player(_delta)
 	if check_state("MoveSpace"):
 		check_for_attacks()
+
+func check_for_player(_delta: float) ->void:
+	navigation_agent_3d.target_position = player.global_position
+	# 将目标高度与模型位置齐平
+	navigation_agent_3d.target_position.y = global_position.y
+	# 已接近目标则停止移动
+	if navigation_agent_3d.is_target_reached():
+		return
+
+	var next_point := navigation_agent_3d.get_next_path_position()
+	# 避免原点与目标重合时 look_at() 报错
+	if global_position.is_equal_approx(next_point):
+		return
+
+	look_at(next_point, Vector3.UP, true)
 
 # 检测玩家 并判断是否发起攻击
 func check_for_attacks() -> void:
