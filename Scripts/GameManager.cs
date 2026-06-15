@@ -67,7 +67,6 @@ public partial class GameManager : Node3D
 			}
 				
 		}
-
 	}
 
 	public void CollectItem(Collectible.CollectibleType type)

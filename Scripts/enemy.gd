@@ -2,6 +2,8 @@ extends CharacterBody3D
 
 class_name Enemy
 
+const RUN_VELOCITY_THRESHOLD:=2
+
 @export var max_health:float=100
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 
@@ -18,6 +20,8 @@ class_name Enemy
 	$model/CharacterRig/GameRig/Skeleton3D/Villager_01,
 	$model/CharacterRig/GameRig/Skeleton3D/Villager_02
 ]
+
+var run_path="parameters/MoveSpace/blend_position"
 
 func _ready():
 	# 随机更换敌人外观
@@ -45,6 +49,15 @@ func check_for_player(_delta: float) ->void:
 	# 将路径点高度拉平，避免模型倾斜
 	next_point.y = global_position.y
 	look_at(next_point, Vector3.UP, true)
+	
+	# 获取局部的方向向量
+	var destination =(navigation_agent_3d.get_next_path_position()-global_position).normalized()
+	velocity.x=destination.x
+	velocity.z=destination.z
+	# 給出速度使避障算法进行运算
+	navigation_agent_3d.velocity=velocity
+	# 在避障算法的回调中再最终移动
+	#move_and_slide()
 
 # 检测玩家 并判断是否发起攻击
 func check_for_attacks() -> void:
@@ -71,3 +84,15 @@ func _on_health_component_defeat() -> void:
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if anim_name=="Overhead":
 		area_attack.deal_damage(100)
+
+
+func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
+	if check_state("Defeat"):
+		return
+	velocity=safe_velocity
+	if velocity.length()<RUN_VELOCITY_THRESHOLD:
+		animation_tree[run_path]=0
+	else:
+		animation_tree[run_path]=1
+	if !check_state("Overhead") and !check_state("OverheadRecover"):
+		move_and_slide()
