@@ -42,6 +42,8 @@ func check_for_player(_delta: float) ->void:
 	if global_position.is_equal_approx(next_point):
 		return
 
+	# 将路径点高度拉平，避免模型倾斜
+	next_point.y = global_position.y
 	look_at(next_point, Vector3.UP, true)
 
 # 检测玩家 并判断是否发起攻击
