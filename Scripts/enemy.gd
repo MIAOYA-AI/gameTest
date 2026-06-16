@@ -16,6 +16,12 @@ const RUN_VELOCITY_THRESHOLD:=2
 @onready var player:Player=get_tree().get_first_node_in_group("Player")
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 
+@onready var left_hand_slot: Node3D = %LeftHandSlot
+@onready var right_hand_slot: Node3D = %RightHandSlot
+@export var shields:Array[PackedScene]
+@export var weapoms:Array[PackedScene]
+
+
 @onready var villager_meshes: Array[MeshInstance3D]=[
 	$model/CharacterRig/GameRig/Skeleton3D/Villager_01,
 	$model/CharacterRig/GameRig/Skeleton3D/Villager_02
@@ -26,6 +32,8 @@ var run_path="parameters/MoveSpace/blend_position"
 func _ready():
 	# 随机更换敌人外观
 	random_active_mesh()
+	# 随机装备
+	_random_equipment()
 	health_component.update_max_health(max_health)
 
 func _physics_process(_delta: float) -> void:
@@ -106,3 +114,14 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 		animation_tree[run_path]=1
 	if !check_state("Overhead") and !check_state("OverheadRecover"):
 		move_and_slide()
+		
+
+func _random_equipment() -> void:
+	for child in right_hand_slot.get_children():
+		child.queue_free()
+	right_hand_slot.add_child(shields.pick_random().instantiate())
+	
+	for child in left_hand_slot.get_children():
+		child.queue_free()
+	left_hand_slot.add_child(weapoms.pick_random().instantiate())
+	
