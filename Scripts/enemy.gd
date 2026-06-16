@@ -32,6 +32,15 @@ func _physics_process(_delta: float) -> void:
 	check_for_player(_delta)
 	if check_state("MoveSpace"):
 		check_for_attacks()
+	
+	# 如果在攻击状态关闭躲避掩码
+	if check_state("Overhead") or check_state("OverheadRecover"):
+		navigation_agent_3d.avoidance_mask=0
+	else:
+		navigation_agent_3d.avoidance_mask=1
+		
+	if !is_on_floor():
+		velocity.y+=get_gravity().y*_delta
 
 func check_for_player(_delta: float) ->void:
 	navigation_agent_3d.target_position = player.global_position
@@ -89,7 +98,8 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 	if check_state("Defeat"):
 		return
-	velocity=safe_velocity
+	velocity.x=safe_velocity.x
+	velocity.z=safe_velocity.z
 	if velocity.length()<RUN_VELOCITY_THRESHOLD:
 		animation_tree[run_path]=0
 	else:

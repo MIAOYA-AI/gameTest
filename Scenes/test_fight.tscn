@@ -26,6 +26,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="Player" parent="." unique_id=12328775 instance=ExtResource("2_g4og4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07353449, 7.005087)
 
 [node name="GameManager" type="Node3D" parent="." unique_id=861554794]
 script = ExtResource("4_g4og4")
@@ -41,7 +42,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.367608, 2.3841858e-07, -2.8
 [node name="Enemys" type="Node3D" parent="." unique_id=1539493825]
 
 [node name="Enemy" parent="Enemys" unique_id=1998240172 instance=ExtResource("8_1o2uf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17761612, 2.6527046e-05, -4.292882)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17761612, 10.415293, -4.292882)
 
 [node name="Enemy2" parent="Enemys" unique_id=1848801732 instance=ExtResource("8_1o2uf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.932626, 2.6527046e-05, -4.292882)
@@ -50,7 +51,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.932626, 2.6527046e-05, -4.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.932626, 2.6527046e-05, -2.292882)
 
 [node name="Enemy6" parent="Enemys" unique_id=974819299 instance=ExtResource("8_1o2uf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.932626, 2.6527046e-05, -0.29288197)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0955715, 3.1814585, -0.29288197)
 
 [node name="Enemy3" parent="Enemys" unique_id=1468061288 instance=ExtResource("8_1o2uf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.073607, 2.6527046e-05, -4.292882)
