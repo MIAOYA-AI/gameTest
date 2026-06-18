@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://byhktre63yk7d"]
+
+[ext_resource type="Script" uid="uid://b5svua54dpioo" path="res://Scripts/loot_container.gd" id="1_75ib3"]
+[ext_resource type="StyleBox" uid="uid://bqwh7lrw0nm7b" path="res://UserInterface/ui_panel.tres" id="1_b72b8"]
+[ext_resource type="Texture2D" uid="uid://cs1rhppg3jn0c" path="res://Assets/UIAssets/Window/window_header.png" id="2_75ib3"]
+[ext_resource type="FontFile" uid="uid://ceomqc8eeksiw" path="res://Assets/Fonts/BlackOpsOne-Regular.ttf" id="3_awr2t"]
+[ext_resource type="PackedScene" uid="uid://b1w0sxuu6t752" path="res://Scenes/Item/shield_icon.tscn" id="4_3bwur"]
+[ext_resource type="Texture2D" uid="uid://dgo41j4k40twn" path="res://Assets/UIAssets/Button Small/button_small.png" id="5_sl6j0"]
+[ext_resource type="Texture2D" uid="uid://43egq2w3kcgd" path="res://Assets/UIAssets/Button Small/button_small_press.png" id="6_fwdqy"]
+[ext_resource type="Texture2D" uid="uid://dsky34lpnah2n" path="res://Assets/UIAssets/Button Small/button_small_hover.png" id="7_0kjyu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ymqo"]
+font = ExtResource("3_awr2t")
+font_size = 32
+
+[node name="LootContainer" type="CenterContainer" unique_id=1870540380]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_75ib3")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=725486588]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_b72b8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1585061455]
+layout_mode = 2
+
+[node name="TitleTexture" type="TextureRect" parent="PanelContainer/VBoxContainer" unique_id=151312384]
+layout_mode = 2
+texture = ExtResource("2_75ib3")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TitleTexture" unique_id=1300127196]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "loot box name"
+label_settings = SubResource("LabelSettings_1ymqo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer" unique_id=703055814]
+custom_minimum_size = Vector2(512, 256)
+layout_mode = 2
+columns = 4
+
+[node name="ShieldIcon" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=1658212308 instance=ExtResource("4_3bwur")]
+layout_mode = 2
+
+[node name="ShieldIcon2" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=1926193335 instance=ExtResource("4_3bwur")]
+layout_mode = 2
+
+[node name="ShieldIcon3" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=438722032 instance=ExtResource("4_3bwur")]
+layout_mode = 2
+
+[node name="ShieldIcon4" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=2028301237 instance=ExtResource("4_3bwur")]
+layout_mode = 2
+
+[node name="ShieldIcon5" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=1240937767 instance=ExtResource("4_3bwur")]
+layout_mode = 2
+
+[node name="ShieldIcon6" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=650097655 instance=ExtResource("4_3bwur")]
+layout_mode = 2
+
+[node name="ShieldIcon7" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=1864785651 instance=ExtResource("4_3bwur")]
+layout_mode = 2
+
+[node name="ShieldIcon8" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=393026166 instance=ExtResource("4_3bwur")]
+layout_mode = 2
+
+[node name="BackButton" type="TextureButton" parent="PanelContainer/VBoxContainer" unique_id=1804977101]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+texture_normal = ExtResource("5_sl6j0")
+texture_pressed = ExtResource("6_fwdqy")
+texture_hover = ExtResource("7_0kjyu")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/BackButton" unique_id=713040291]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

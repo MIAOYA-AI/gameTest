@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://n70ej8cgekhk"]
 
-[ext_resource type="PackedScene" uid="uid://ccuu0cogpwnne" path="res://Scripts/item_icon.tscn" id="1_8vpb7"]
+[ext_resource type="PackedScene" uid="uid://ccuu0cogpwnne" path="res://Scenes/Item/item_icon.tscn" id="1_8vpb7"]
 [ext_resource type="Script" uid="uid://le3mls4fagd5" path="res://armor_icon.gd" id="2_0psso"]
 
 [node name="ArmorIcon" unique_id=1658212308 instance=ExtResource("1_8vpb7")]

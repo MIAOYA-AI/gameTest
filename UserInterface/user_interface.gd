@@ -11,6 +11,7 @@ class_name user_interface
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var interact_container: VBoxContainer = $HUD/InteractContainer
 @onready var interactt_text: Label = $HUD/InteractContainer/InteracttText
+@onready var loot_container: CenterContainer = $LootContainer
 
 
 func _ready() -> void:
@@ -53,7 +54,3 @@ func show_interact_text(text:String) -> void:
 	animation_player.stop()
 	animation_player.play("FadeOutInteractText")
 	interactt_text.text=text
-
-func _on_interaction_cast_check_interactions_on(text: Variant) -> void:
-	if (text as String):
-		show_interact_text(text)
