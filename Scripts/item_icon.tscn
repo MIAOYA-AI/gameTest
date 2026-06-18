@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://ccuu0cogpwnne"]
+
+[ext_resource type="Texture2D" uid="uid://bvd40ercumgf6" path="res://Assets/UIAssets/Icons/spell_slot_empty.png" id="1_u02tf"]
+[ext_resource type="Texture2D" uid="uid://llaeg0rtqoc8" path="res://Assets/UIAssets/Icons/ItemPress.png" id="2_s4nqg"]
+[ext_resource type="Texture2D" uid="uid://mtrc3o4bkyil" path="res://Assets/UIAssets/Icons/ItemHover.png" id="3_pn2ue"]
+[ext_resource type="Script" uid="uid://bfrfowwebj7jj" path="res://Scripts/item_icon.gd" id="4_g3r2b"]
+[ext_resource type="Texture2D" uid="uid://b5bbrutfxlerb" path="res://Assets/UIAssets/Icons/armor_icon.png" id="5_rcj7y"]
+[ext_resource type="FontFile" uid="uid://ceomqc8eeksiw" path="res://Assets/Fonts/BlackOpsOne-Regular.ttf" id="6_oaera"]
+
+[node name="ItemIcon" type="TextureButton" unique_id=1658212308]
+custom_minimum_size = Vector2(128, 128)
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("1_u02tf")
+texture_pressed = ExtResource("2_s4nqg")
+texture_hover = ExtResource("3_pn2ue")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("4_g3r2b")
+
+[node name="TypeIcon" type="TextureRect" parent="." unique_id=1508983694]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -45.0
+offset_right = 44.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_rcj7y")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=203365467]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="NumLabel" type="Label" parent="MarginContainer" unique_id=5916441]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.011764706, 0.019607844, 0, 1)
+theme_override_fonts/font = ExtResource("6_oaera")
+theme_override_font_sizes/font_size = 14
+text = "+3"
+horizontal_alignment = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer" unique_id=1140905855]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.9607843, 0.7176471, 0.42352942, 1)
+theme_override_colors/font_outline_color = Color(0.023529412, 0, 0.05882353, 1)
+theme_override_fonts/font = ExtResource("6_oaera")
+theme_override_font_sizes/font_size = 12
+text = "name"
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
