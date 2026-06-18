@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b1arc5v5c84ay"]
+
+[ext_resource type="PackedScene" uid="uid://uoyply4ogwi2" path="res://Assets/3D_Assets/Environment/Chest_Prop.glb" id="1_dxq4w"]
+[ext_resource type="Script" uid="uid://bl23t8csbkquf" path="res://Scripts/chect.gd" id="1_g26lf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_36sl2"]
+size = Vector3(0.91000366, 0.8183594, 1.3249512)
+
+[node name="Chect" type="StaticBody3D" unique_id=627174493]
+collision_layer = 33
+script = ExtResource("1_g26lf")
+
+[node name="Chest_Prop2" parent="." unique_id=994833383 instance=ExtResource("1_dxq4w")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1269718165]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0070648193, 0.4058934, -0.0018310547)
+shape = SubResource("BoxShape3D_36sl2")

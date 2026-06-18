@@ -8,6 +8,10 @@ class_name user_interface
 @onready var xp_bar: TextureProgressBar = %XpBar
 @onready var hp_label: Label = %HpLabel
 @onready var inventory: Control = $inventory
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var interact_container: VBoxContainer = $HUD/InteractContainer
+@onready var interactt_text: Label = $HUD/InteractContainer/InteracttText
+
 
 func _ready() -> void:
 	if player is Player and player.MyStats:
@@ -18,6 +22,7 @@ func _ready() -> void:
 		_updata_health_num()
 		health_component.connect("health_change", Callable(self, "_on_health_change"))
 		inventory.updata_attribute()
+		interact_container.visible=false
 		
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
@@ -43,3 +48,12 @@ func _on_xp_up() -> void:
 func _updata_health_num() -> void:
 	var label_text:="%s/%s" % [str(player.MyStats.CurHealth),str(player.MyStats.GetMaxHp())]
 	hp_label.text=label_text
+	
+func show_interact_text(text:String) -> void:
+	animation_player.stop()
+	animation_player.play("FadeOutInteractText")
+	interactt_text.text=text
+
+func _on_interaction_cast_check_interactions_on(text: Variant) -> void:
+	if (text as String):
+		show_interact_text(text)

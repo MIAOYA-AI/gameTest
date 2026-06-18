@@ -8,6 +8,81 @@
 [ext_resource type="FontFile" uid="uid://ceomqc8eeksiw" path="res://Assets/Fonts/BlackOpsOne-Regular.ttf" id="4_3o1tv"]
 [ext_resource type="Texture2D" uid="uid://dbgmqkhn2hato" path="res://Assets/UIAssets/Unitframe/BlueBar.png" id="4_l8ojb"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_l8ojb"]
+font = ExtResource("4_3o1tv")
+font_size = 24
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_7061l"]
+color = Color(1, 1, 1, 1)
+thickness = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_6v6ea"]
+font = ExtResource("4_3o1tv")
+font_size = 36
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_l8ojb"]
+resource_name = "FadeOutInteractText"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HUD/InteractContainer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HUD/InteractContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.033333335, 0.5),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7061l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HUD/InteractContainer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HUD/InteractContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6v6ea"]
+_data = {
+&"FadeOutInteractText": SubResource("Animation_l8ojb"),
+&"RESET": SubResource("Animation_7061l")
+}
+
 [node name="UserInterface" type="Control" unique_id=1665740541]
 process_mode = 3
 layout_mode = 3
@@ -23,7 +98,7 @@ script = ExtResource("1_cp462")
 visible = false
 layout_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1875083178]
+[node name="HUD" type="MarginContainer" parent="." unique_id=1875083178]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,19 +109,19 @@ mouse_filter = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_bottom = 48
 
-[node name="InfoBar" type="Control" parent="MarginContainer" unique_id=1071085652]
+[node name="InfoBar" type="Control" parent="HUD" unique_id=1071085652]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HealthBarUnder" type="TextureRect" parent="MarginContainer/InfoBar" unique_id=515123119]
+[node name="HealthBarUnder" type="TextureRect" parent="HUD/InfoBar" unique_id=515123119]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_v7due")
 
-[node name="HealthBar" type="TextureProgressBar" parent="MarginContainer/InfoBar/HealthBarUnder" unique_id=1177732672]
+[node name="HealthBar" type="TextureProgressBar" parent="HUD/InfoBar/HealthBarUnder" unique_id=1177732672]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -57,7 +132,7 @@ grow_vertical = 2
 value = 50.0
 texture_progress = ExtResource("3_1yg0r")
 
-[node name="HpLabel" type="Label" parent="MarginContainer/InfoBar/HealthBarUnder/HealthBar" unique_id=1200400444]
+[node name="HpLabel" type="Label" parent="HUD/InfoBar/HealthBarUnder/HealthBar" unique_id=1200400444]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(95, 0)
 layout_mode = 1
@@ -75,20 +150,20 @@ text = "1000/1000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="XpBar" type="TextureProgressBar" parent="MarginContainer/InfoBar/HealthBarUnder" unique_id=1821970872]
+[node name="XpBar" type="TextureProgressBar" parent="HUD/InfoBar/HealthBarUnder" unique_id=1821970872]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture_progress = ExtResource("4_l8ojb")
 
-[node name="XpBarOver" type="TextureRect" parent="MarginContainer/InfoBar" unique_id=1577848532]
+[node name="XpBarOver" type="TextureRect" parent="HUD/InfoBar" unique_id=1577848532]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_mm0wo")
 
-[node name="LevelLabel" type="Label" parent="MarginContainer/InfoBar/XpBarOver" unique_id=1145079506]
+[node name="LevelLabel" type="Label" parent="HUD/InfoBar/XpBarOver" unique_id=1145079506]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(95, 0)
 layout_mode = 1
@@ -102,3 +177,31 @@ theme_override_font_sizes/font_size = 24
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="InteractContainer" type="VBoxContainer" parent="HUD" unique_id=1101967844]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="InteracttButton" type="Label" parent="HUD/InteractContainer" unique_id=1310738230]
+layout_mode = 2
+text = "Push E Key"
+label_settings = SubResource("LabelSettings_l8ojb")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HSeparator" type="HSeparator" parent="HUD/InteractContainer" unique_id=1366566198]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_7061l")
+
+[node name="InteracttText" type="Label" parent="HUD/InteractContainer" unique_id=154355515]
+layout_mode = 2
+text = "Open chest"
+label_settings = SubResource("LabelSettings_6v6ea")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=964036408]
+libraries/ = SubResource("AnimationLibrary_6v6ea")

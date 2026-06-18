@@ -10,6 +10,7 @@ extends Node3D
 @onready var collision_shape_3d: CollisionShape3D = get_node_or_null("../../CollisionShape3D")
 @onready var state_machine: StateMachine = get_node_or_null("../../StateMachine")
 @onready var dash: Dash = get_node_or_null("../../StateMachine/Dash")
+@onready var interaction_cast: interaction_cast = $"../InteractionCast"
 
 @export var animation_speed: float = 10.0
 @export var attack_move_distance: float = 1.5
@@ -45,6 +46,8 @@ func _physics_process(delta: float) -> void:
 				run_weight_target,
 				animation_speed * delta
 			)
+		# 处理与拾取物品的交互
+		interaction_cast.check_interactions()
 		# 攻击
 		if play_back:
 			if player.IsAttacking == true and not check_state("Attack"):
