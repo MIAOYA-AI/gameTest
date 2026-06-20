@@ -1,5 +1,5 @@
 extends Control
-class_name inventory
+class_name Inventory
 @onready var strength_value: Label = %StrengthValue
 @onready var speed_value: Label = %SpeedValue
 @onready var endurance_value: Label = %EnduranceValue
@@ -7,7 +7,7 @@ class_name inventory
 @onready var level_label: Label = %LevelLabel
 @onready var damage_value: Label = %DamageValue
 @onready var player: Player =get_parent().get_owner()
-
+@onready var item_grid: GridContainer = %ItemGrid
 
 func updata_attribute() -> void:
 	level_label.text="Level "+str(player.MyStats.Level)
@@ -27,3 +27,7 @@ func controll_visible()-> void:
 
 func _on_back_button_pressed() -> void:
 	controll_visible()
+
+func add_item(icon:ItemIcon) -> void:
+	icon.get_parent().remove_child(icon)
+	item_grid.add_child(icon)
