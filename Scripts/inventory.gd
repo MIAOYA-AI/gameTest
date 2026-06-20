@@ -1,12 +1,13 @@
 extends Control
 class_name Inventory
+@onready var player: Player =get_parent().get_owner()
 @onready var strength_value: Label = %StrengthValue
 @onready var speed_value: Label = %SpeedValue
 @onready var endurance_value: Label = %EnduranceValue
 @onready var agility_value: Label = %AgilityValue
 @onready var level_label: Label = %LevelLabel
 @onready var damage_value: Label = %DamageValue
-@onready var player: Player =get_parent().get_owner()
+@onready var armor_value: Label = %ArmorValue
 @onready var item_grid: GridContainer = %ItemGrid
 @onready var gold_num_label: Label = %GoldNumLabel
 @onready var weapon_slot: CenterContainer = %WeaponSlot
@@ -17,6 +18,24 @@ var gold_num:=0:
 	set(value):
 		gold_num=value
 		gold_num_label.text=str(value)+'G'
+		
+func get_weapon_value() -> int:
+	if weapon_slot.get_child_count()==0:
+		return 0
+	else:
+		var weapon_item=weapon_slot.get_child(0) as weapon_icon
+		return int(weapon_item.num_label.text)
+		
+func get_armor_value() -> int:
+	var armor:=0
+	if armor_slot.get_child_count()>0:
+		var armor_item=armor_slot.get_child(0) as armor_icon
+		armor+=int(armor_item.num_label.text)
+	if shield_slot.get_child_count()>0:
+		var shield_item=shield_slot.get_child(0) as shield_icon
+		armor+=int(shield_item.num_label.text)
+	
+	return clamp(armor, 0, 80)
 
 func updata_attribute() -> void:
 	level_label.text="Level "+str(player.MyStats.Level)
@@ -24,7 +43,10 @@ func updata_attribute() -> void:
 	speed_value.text="%.2f" % player.MyStats.Speed.GetValue()
 	endurance_value.text="%.2f" % player.MyStats.Endurance.GetValue()
 	agility_value.text="%.2f" % player.MyStats.Agility.GetValue()
-	damage_value.text="%.2f" % player.MyStats.Strength.GetValue()
+	player.MyStats.WeaponDamage=get_weapon_value()
+	damage_value.text="%.2f" % (player.MyStats.Strength.GetValue()+get_weapon_value())
+	player.MyStats.Armor=get_armor_value()
+	armor_value.text="%.2f" % player.MyStats.Armor
 
 func controll_visible()-> void:
 	visible=!visible
@@ -44,34 +66,22 @@ func add_item(icon:ItemIcon) -> void:
 		icon.queue_free()
 	else:
 		item_grid.add_child(icon)
-		icon.item_interact.connect(equipping_item)
+		for connection in icon.item_interact.get_connections():
+			icon.item_interact.disconnect(connection.callable)
+		icon.item_interact.connect(interact)
 		
-func equipping_item(icon: ItemIcon) -> void:
-	# 图标类型 → 对应装备槽的映射表
-	var slot_map := {
-		weapon_icon: weapon_slot,
-		shield_icon: shield_slot,
-		armor_icon: armor_slot,
-	}
-
-	var target_slot: CenterContainer = null
-	for icon_type in slot_map:
-		if is_instance_of(icon, icon_type):
-			target_slot = slot_map[icon_type]
-			break
-
-	if target_slot == null:
-		return
-
-	if icon.get_parent() == item_grid:
-		# 从物品栏装备到槽位
-		item_grid.remove_child(icon)
-		if target_slot.get_child_count() > 0:
-			var replace_icon := target_slot.get_child(0)
-			target_slot.remove_child(replace_icon)
-			item_grid.add_child(replace_icon)
-		target_slot.add_child(icon)
-	else:
-		# 从槽位卸下到物品栏
-		target_slot.remove_child(icon)
-		item_grid.add_child(icon)
+func equipping_item(item: ItemIcon,item_slot:CenterContainer) -> void:
+	for child in item_slot.get_children():
+		add_item(child)
+	item.get_parent().remove_child(item)
+	item_slot.add_child(item)
+	
+func interact(item:ItemIcon) -> void:
+	if item is weapon_icon:
+		equipping_item(item,weapon_slot)
+	elif item is armor_icon:
+		equipping_item(item,armor_slot)
+	elif item is shield_icon:
+		equipping_item(item,shield_slot)
+	updata_attribute()
+	

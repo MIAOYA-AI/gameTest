@@ -106,8 +106,8 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 	if check_state("Defeat"):
 		return
-	velocity.x=safe_velocity.x*0
-	velocity.z=safe_velocity.z*0
+	velocity.x=safe_velocity.x*2
+	velocity.z=safe_velocity.z*2
 	if velocity.length()<RUN_VELOCITY_THRESHOLD:
 		animation_tree[run_path]=0
 	else:

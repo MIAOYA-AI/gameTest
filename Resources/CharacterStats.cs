@@ -8,6 +8,8 @@ public partial class CharacterStats : Resource
     [Export] public int Xp = 0;
     //副本 保存的是healthcomponent中的值
     [Export] public int CurHealth = 0;
+    [Export] public int WeaponDamage = 0;
+    [Export] public int Armor = 0;
 
     [Export] public Ability Strength = new(80.0f,240.0f);//造成的伤害
     [Export] public Ability Speed = new(3.0f,7.0f);//m/s

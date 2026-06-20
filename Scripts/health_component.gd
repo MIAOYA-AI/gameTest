@@ -28,6 +28,8 @@ func update_max_health(value:float) -> void:
 		player.MyStats.CurHealth=cur_health
 	
 func take_damage(damage_in:float) -> void:
+	if player is Player and player.MyStats:
+		damage_in *= (1.0 - player.MyStats.Armor / 100.0)
 	cur_health-=damage_in
 	
 func _on_level_up() -> void:
