@@ -8,6 +8,12 @@ class_name Inventory
 @onready var damage_value: Label = %DamageValue
 @onready var player: Player =get_parent().get_owner()
 @onready var item_grid: GridContainer = %ItemGrid
+@onready var gold_num_label: Label = %GoldNumLabel
+
+var gold_num:=0:
+	set(value):
+		gold_num=value
+		gold_num_label.text=str(value)+'G'
 
 func updata_attribute() -> void:
 	level_label.text="Level "+str(player.MyStats.Level)
@@ -30,4 +36,8 @@ func _on_back_button_pressed() -> void:
 
 func add_item(icon:ItemIcon) -> void:
 	icon.get_parent().remove_child(icon)
-	item_grid.add_child(icon)
+	if (icon as currency_icon):
+		gold_num+=int(icon.num_label.text)
+		icon.queue_free()
+	else:
+		item_grid.add_child(icon)
