@@ -4,7 +4,6 @@
 [ext_resource type="StyleBox" uid="uid://bqwh7lrw0nm7b" path="res://UserInterface/ui_panel.tres" id="1_b72b8"]
 [ext_resource type="Texture2D" uid="uid://cs1rhppg3jn0c" path="res://Assets/UIAssets/Window/window_header.png" id="2_75ib3"]
 [ext_resource type="FontFile" uid="uid://ceomqc8eeksiw" path="res://Assets/Fonts/BlackOpsOne-Regular.ttf" id="3_awr2t"]
-[ext_resource type="PackedScene" uid="uid://b1w0sxuu6t752" path="res://Scenes/Item/shield_icon.tscn" id="4_3bwur"]
 [ext_resource type="Texture2D" uid="uid://dgo41j4k40twn" path="res://Assets/UIAssets/Button Small/button_small.png" id="5_sl6j0"]
 [ext_resource type="Texture2D" uid="uid://43egq2w3kcgd" path="res://Assets/UIAssets/Button Small/button_small_press.png" id="6_fwdqy"]
 [ext_resource type="Texture2D" uid="uid://dsky34lpnah2n" path="res://Assets/UIAssets/Button Small/button_small_hover.png" id="7_0kjyu"]
@@ -34,7 +33,7 @@ texture = ExtResource("2_75ib3")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TitleTexture" unique_id=1300127196]
+[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer/TitleTexture" unique_id=1300127196]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,30 +49,6 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(512, 256)
 layout_mode = 2
 columns = 4
-
-[node name="ShieldIcon" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=1658212308 instance=ExtResource("4_3bwur")]
-layout_mode = 2
-
-[node name="ShieldIcon2" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=1926193335 instance=ExtResource("4_3bwur")]
-layout_mode = 2
-
-[node name="ShieldIcon3" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=438722032 instance=ExtResource("4_3bwur")]
-layout_mode = 2
-
-[node name="ShieldIcon4" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=2028301237 instance=ExtResource("4_3bwur")]
-layout_mode = 2
-
-[node name="ShieldIcon5" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=1240937767 instance=ExtResource("4_3bwur")]
-layout_mode = 2
-
-[node name="ShieldIcon6" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=650097655 instance=ExtResource("4_3bwur")]
-layout_mode = 2
-
-[node name="ShieldIcon7" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=1864785651 instance=ExtResource("4_3bwur")]
-layout_mode = 2
-
-[node name="ShieldIcon8" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=393026166 instance=ExtResource("4_3bwur")]
-layout_mode = 2
 
 [node name="BackButton" type="TextureButton" parent="PanelContainer/VBoxContainer" unique_id=1804977101]
 custom_minimum_size = Vector2(200, 80)

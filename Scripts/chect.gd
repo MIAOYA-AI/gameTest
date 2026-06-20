@@ -1,5 +1,5 @@
 extends StaticBody3D
-class_name chect
+class_name Chect
 
 func get_items() -> Array:
 	return get_children().filter(

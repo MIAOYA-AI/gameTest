@@ -10,7 +10,7 @@ extends Node3D
 @onready var collision_shape_3d: CollisionShape3D = get_node_or_null("../../CollisionShape3D")
 @onready var state_machine: StateMachine = get_node_or_null("../../StateMachine")
 @onready var dash: Dash = get_node_or_null("../../StateMachine/Dash")
-@onready var interaction_cast: interaction_cast = $"../InteractionCast"
+@onready var interaction_cast: interaction_cast = get_node_or_null("../InteractionCast")
 
 @export var animation_speed: float = 10.0
 @export var attack_move_distance: float = 1.5
