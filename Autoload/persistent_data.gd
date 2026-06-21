@@ -11,9 +11,12 @@ var cache_health:=0
 func cache_inventory(player:Player) -> void:
 	for item in (player.UserInterface as user_interface).inventory.item_grid.get_children():
 		cache_item(item,inventory_node)
-	cache_item((player.UserInterface as user_interface).inventory.weapon_slot.get_child(0),weapon_node)
-	cache_item((player.UserInterface as user_interface).inventory.shield_slot.get_child(0),shield_node)
-	cache_item((player.UserInterface as user_interface).inventory.armor_slot.get_child(0),armor_node)
+	if (player.UserInterface as user_interface).inventory.weapon_slot.get_child_count()>0:
+		cache_item((player.UserInterface as user_interface).inventory.weapon_slot.get_child(0),weapon_node)
+	if (player.UserInterface as user_interface).inventory.shield_slot.get_child_count()>0:
+		cache_item((player.UserInterface as user_interface).inventory.shield_slot.get_child(0),shield_node)
+	if (player.UserInterface as user_interface).inventory.armor_slot.get_child_count()>0:
+		cache_item((player.UserInterface as user_interface).inventory.armor_slot.get_child(0),armor_node)
 	
 func cache_player_data(player:Player) -> void:
 	cache_gold=(player.UserInterface as user_interface).inventory.gold_num
