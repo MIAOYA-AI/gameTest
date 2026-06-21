@@ -29,6 +29,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="advance"
 
+[global_group]
+
+Rig=""
+
 [gui]
 
 theme/custom="uid://bajww3yal50be"

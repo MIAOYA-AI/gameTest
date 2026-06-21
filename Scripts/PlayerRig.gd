@@ -11,6 +11,9 @@ extends Node3D
 @onready var state_machine: StateMachine = get_node_or_null("../../StateMachine")
 @onready var dash: Dash = get_node_or_null("../../StateMachine/Dash")
 @onready var interaction_cast: interaction_cast = get_node_or_null("../InteractionCast")
+@onready var right_hand_slot: Node3D = $RightHandAttach/RightHandSlot
+@onready var left_hand_slot: Node3D = $LeftHandAttach/LeftHandSlot
+@onready var rogue_cape: MeshInstance3D = $Skeleton3D/chest/Rogue_Cape
 
 @export var animation_speed: float = 10.0
 @export var attack_move_distance: float = 1.5
@@ -95,3 +98,17 @@ func handle_slashing_physics_frame(delta: float) -> void:
 	if check_state("Dash"):
 		player.velocity.x = player.CurDirection.x * attack_move_distance * 5
 		player.velocity.z = player.CurDirection.z * attack_move_distance * 5
+		
+func replace_hand_item(item_scene:PackedScene,right_side:bool) -> void:
+	var new_item:=item_scene.instantiate()
+	if right_side:
+		for child in right_hand_slot.get_children():
+			child.queue_free()
+		right_hand_slot.add_child(new_item)
+	else:
+		for child in left_hand_slot.get_children():
+			child.queue_free()
+		left_hand_slot.add_child(new_item)
+	
+func use_armor(use_flag:bool) -> void:
+	rogue_cape.visible=use_flag

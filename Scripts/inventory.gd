@@ -79,9 +79,12 @@ func equipping_item(item: ItemIcon,item_slot:CenterContainer) -> void:
 func interact(item:ItemIcon) -> void:
 	if item is weapon_icon:
 		equipping_item(item,weapon_slot)
+		get_tree().call_group("Rig","replace_hand_item",item.item_model,true)
 	elif item is armor_icon:
 		equipping_item(item,armor_slot)
+		get_tree().call_group("Rig","use_armor",true)
 	elif item is shield_icon:
 		equipping_item(item,shield_slot)
+		get_tree().call_group("Rig","replace_hand_item",item.item_model,false)
 	updata_attribute()
 	
