@@ -28,6 +28,7 @@ size = Vector3(5, 4, 1)
 
 [node name="Passage" type="StaticBody3D" unique_id=1059940249]
 script = ExtResource("1_yvai4")
+next_level = "uid://erqoolifyogl"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1062085491]
 mesh = SubResource("BoxMesh_yvai4")

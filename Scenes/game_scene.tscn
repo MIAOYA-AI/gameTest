@@ -176,7 +176,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9748745, 0, 8)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9748745, 0, 12)
 
 [node name="Cube_Prototype_Large_A8" parent="Ground" unique_id=1555211300 instance=ExtResource("2_6h5vk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.981636, 0, 12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.701787, 0, 12)
 
 [node name="Cube_Prototype_Large_A9" parent="Ground" unique_id=15786294 instance=ExtResource("2_6h5vk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.981636, 0, 12)
