@@ -17,7 +17,17 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="EquipmentNode" type="Control" parent="." unique_id=1673819652]
+[node name="WeaponNode" type="Control" parent="." unique_id=1673819652]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ShieldNode" type="Control" parent="." unique_id=1473459788]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ArmorNode" type="Control" parent="." unique_id=2128788621]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

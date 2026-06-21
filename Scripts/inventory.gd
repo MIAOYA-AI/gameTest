@@ -105,3 +105,7 @@ func interact(item:ItemIcon) -> void:
 func load_items_from_persistant_data() -> void:
 	for item in PersistentData.get_inventory():
 		add_item(item)
+	for item in PersistentData.get_equipped_items():
+		add_item(item)
+		interact(item)
+	gold_num+=PersistentData.cache_gold

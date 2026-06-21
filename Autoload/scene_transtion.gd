@@ -17,6 +17,7 @@ func change_scene(next_level:String,player:Player) -> void:
 	tween.tween_callback(
 		func():
 			PersistentData.cache_inventory(player)
+			PersistentData.cache_player_data(player)
 			get_tree().change_scene_to_file(next_level)
 			fade_in()
 	)

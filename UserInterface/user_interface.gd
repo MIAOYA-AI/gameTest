@@ -24,6 +24,7 @@ func _ready() -> void:
 		health_component.connect("health_change", Callable(self, "_on_health_change"))
 		inventory.updata_attribute()
 		interact_container.visible=false
+		_on_level_up()
 		
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
@@ -40,7 +41,8 @@ func _on_level_up() -> void:
 		level_label.text=str(player.MyStats.Level)
 		xp_bar.max_value=player.MyStats.PercentageLevelUpBoundary()
 		xp_bar.value=player.MyStats.Xp
-		inventory.updata_attribute()
+		if int(inventory.level_label.text.substr(6))!=player.MyStats.Level:
+			inventory.updata_attribute()
 
 func _on_xp_up() -> void:
 	if player as Player:

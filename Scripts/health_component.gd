@@ -6,11 +6,6 @@ class_name HealthComponent
 signal defeat()
 signal health_change(new_health: float)
 
-func _ready() -> void:
-	if player is Player and player.MyStats:
-		player.MyStats.connect("LevelUp", Callable(self, "_on_level_up"))
-		update_max_health(player.MyStats.GetMaxHp())
-
 var max_health:float
 var cur_health:float:
 	set(value):
@@ -20,6 +15,16 @@ var cur_health:float:
 		if player is Player and player.MyStats:
 			player.MyStats.CurHealth=cur_health
 		health_change.emit(cur_health)
+
+func _ready() -> void:
+	if player is Player and player.MyStats:
+		player.MyStats.connect("LevelUp", Callable(self, "_on_level_up"))
+		update_max_health(player.MyStats.GetMaxHp())
+		load_health_from_persistant_data()
+		
+func load_health_from_persistant_data() -> void:
+	if PersistentData.cache_health!=0:
+		cur_health=PersistentData.cache_health
 
 func update_max_health(value:float) -> void:
 	max_health=value
