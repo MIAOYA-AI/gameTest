@@ -14,6 +14,7 @@ public partial class Player : CharacterBody3D
     [Export] public Vector3 Direction;
     //为了方便与enemy的gbscript脚本使用通用组件，这里采用gbscript的命名方式
     [Export] public Node health_component;
+    [Export] public Control UserInterface;
     public Vector3 CurDirection=Vector3.Zero;
 
     [Export] public bool IsJumping=false;
@@ -48,7 +49,10 @@ public partial class Player : CharacterBody3D
         
         if(CurDirection == Vector3.Zero)
             CurDirection = Model.GlobalTransform.Basis.Z;
-        
+
+        //获取UserInterface节点
+        //UserInterface = GetNode("UserInterface");
+
         //初始化所有属性值
         InitAttribute();
 

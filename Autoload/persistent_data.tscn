@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://fofimfvsf885"]
+
+[ext_resource type="Script" uid="uid://co7xq347jakxv" path="res://Autoload/persistent_data.gd" id="1_6bo2c"]
+
+[node name="PersistentData" type="Control" unique_id=304714393]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_6bo2c")
+
+[node name="InventoryNode" type="Control" parent="." unique_id=1057023391]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EquipmentNode" type="Control" parent="." unique_id=1673819652]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

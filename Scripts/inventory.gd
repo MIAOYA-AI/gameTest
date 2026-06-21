@@ -14,6 +14,10 @@ class_name Inventory
 @onready var shield_slot: CenterContainer = %ShieldSlot
 @onready var armor_slot: CenterContainer = %ArmorSlot
 
+func _ready() -> void:
+	load_items_from_persistant_data()
+	updata_attribute()
+
 var gold_num:=0:
 	set(value):
 		gold_num=value
@@ -98,3 +102,6 @@ func interact(item:ItemIcon) -> void:
 			get_tree().call_group("Rig","replace_hand_item",null,false)
 	updata_attribute()
 	
+func load_items_from_persistant_data() -> void:
+	for item in PersistentData.get_inventory():
+		add_item(item)
