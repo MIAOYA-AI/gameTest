@@ -100,15 +100,18 @@ func handle_slashing_physics_frame(delta: float) -> void:
 		player.velocity.z = player.CurDirection.z * attack_move_distance * 5
 		
 func replace_hand_item(item_scene:PackedScene,right_side:bool) -> void:
-	var new_item:=item_scene.instantiate()
 	if right_side:
 		for child in right_hand_slot.get_children():
 			child.queue_free()
-		right_hand_slot.add_child(new_item)
+		if item_scene!=null:
+			var new_item:=item_scene.instantiate()
+			right_hand_slot.add_child(new_item)
 	else:
 		for child in left_hand_slot.get_children():
 			child.queue_free()
-		left_hand_slot.add_child(new_item)
+		if item_scene!=null:
+			var new_item:=item_scene.instantiate()
+			left_hand_slot.add_child(new_item)
 	
 func use_armor(use_flag:bool) -> void:
 	rogue_cape.visible=use_flag

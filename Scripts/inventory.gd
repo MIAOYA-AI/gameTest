@@ -77,14 +77,24 @@ func equipping_item(item: ItemIcon,item_slot:CenterContainer) -> void:
 	item_slot.add_child(item)
 	
 func interact(item:ItemIcon) -> void:
-	if item is weapon_icon:
-		equipping_item(item,weapon_slot)
-		get_tree().call_group("Rig","replace_hand_item",item.item_model,true)
-	elif item is armor_icon:
-		equipping_item(item,armor_slot)
-		get_tree().call_group("Rig","use_armor",true)
-	elif item is shield_icon:
-		equipping_item(item,shield_slot)
-		get_tree().call_group("Rig","replace_hand_item",item.item_model,false)
+	if item.get_parent()==item_grid:
+		if item is weapon_icon:
+			equipping_item(item,weapon_slot)
+			get_tree().call_group("Rig","replace_hand_item",item.item_model,true)
+		elif item is armor_icon:
+			equipping_item(item,armor_slot)
+			get_tree().call_group("Rig","use_armor",true)
+		elif item is shield_icon:
+			equipping_item(item,shield_slot)
+			get_tree().call_group("Rig","replace_hand_item",item.item_model,false)
+	else:
+		item.get_parent().remove_child(item)
+		item_grid.add_child(item)
+		if item is weapon_icon:
+			get_tree().call_group("Rig","replace_hand_item",null,true)
+		elif item is armor_icon:
+			get_tree().call_group("Rig","use_armor",false)
+		elif item is shield_icon:
+			get_tree().call_group("Rig","replace_hand_item",null,false)
 	updata_attribute()
 	
