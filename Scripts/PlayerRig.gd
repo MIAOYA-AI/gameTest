@@ -53,12 +53,6 @@ func _physics_process(delta: float) -> void:
 		interaction_cast.check_interactions()
 		# 攻击
 		if play_back:
-			if player.IsAttacking == true and not check_state("Attack"):
-				play_back.travel("Attack")
-
-			if player.IsHeavyAttacking == true and not check_state("HeavyAttack") and not check_state("HeavyAttackOver"):
-				play_back.travel("HeavyAttack")
-
 			if player.IsDash == true and not check_state("Dash") and dash and dash.is_readly():
 				play_back.travel("Dash")
 

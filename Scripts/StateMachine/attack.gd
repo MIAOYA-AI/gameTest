@@ -6,6 +6,8 @@ extends StateBase
 @export var attack_animation:AnimationPlayer
 @onready var attack_cast: attack_cast = %AttackCast
 @onready var dash: Dash = $"../Dash"
+@onready var animation_tree: AnimationTree = $"../../PlayerModel/BlendAnimationTree"
+@onready var play_back: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") if animation_tree else null
 
 var player_speed:float
 var _attack_frame_count:int = 0
@@ -20,11 +22,17 @@ func enter() -> void:
 	# 攻击动画 旧动画树
 	#player.PlayAttackOneShot()
 	# 单独的动画过程控制包围盒的开关与武器攻击特效 暂时屏蔽 使用RayCast3D方案
-	if player.IsAttacking:
+	if player.IsAttacking and not check_state("Attack") and play_back:
 		attack_animation.play("attack")
-	elif player.IsHeavyAttacking:
+		play_back.travel("Attack")
+	elif player.IsHeavyAttacking and not check_state("HeavyAttack") and not check_state("HeavyAttackOver") and play_back:
 		attack_animation.play("HeavyAttack")
+		play_back.travel("HeavyAttack")
 	
+func check_state(state_name: String) -> bool:
+	if play_back == null:
+		return false
+	return play_back.get_current_node() == state_name
 
 func exit() -> void:
 	super.exit()
