@@ -14,9 +14,12 @@ extends Node3D
 @onready var right_hand_slot: Node3D = $RightHandAttach/RightHandSlot
 @onready var left_hand_slot: Node3D = $LeftHandAttach/LeftHandSlot
 @onready var rogue_cape: MeshInstance3D = $Skeleton3D/chest/Rogue_Cape
+@onready var attack_time: AnimationPlayer = $Skeleton3D/handslot_r/HitBox_RightHand/AttackTime
 
 @export var animation_speed: float = 10.0
 @export var attack_move_distance: float = 1.5
+@export var attack_slow_speed: float = 0.15
+@export var attack_burst_speed: float = 1.5
 
 var run_path: String = "parameters/MoveSpace/blend_position"
 var run_weight_target := -1.0
@@ -81,17 +84,34 @@ func check_state(state_name: String) -> bool:
 		return false
 	return play_back.get_current_node() == state_name
 
+## 根据攻击动画播放进度计算突进速度倍率（慢→快→停曲线）
+func _get_attack_speed_multiplier(anim_pos: float, anim_length: float) -> float:
+	var t := anim_pos / anim_length if anim_length > 0.0 else 0.0
+
+	if t < 0.15:
+		return lerpf(attack_slow_speed, attack_burst_speed, t / 0.15)
+	elif t < 0.7:
+		return attack_burst_speed
+	else:
+		return 0
+
 func handle_slashing_physics_frame(delta: float) -> void:
 	if _is_preview_mode or player == null or not (player is Player):
 		return
 	if not (check_state("Attack") or check_state("Dash")):
 		return
 	if check_state("Attack"):
-		player.velocity.x = player.CurDirection.x * attack_move_distance
-		player.velocity.z = player.CurDirection.z * attack_move_distance
+		var mult := 0.0
+		if attack_time.is_playing():
+			mult = _get_attack_speed_multiplier(
+				attack_time.current_animation_position,
+				attack_time.current_animation_length
+			)
+		player.velocity.x = player.CurDirection.x * attack_move_distance * mult
+		player.velocity.z = player.CurDirection.z * attack_move_distance * mult
 	if check_state("Dash"):
-		player.velocity.x = player.CurDirection.x * attack_move_distance * 5
-		player.velocity.z = player.CurDirection.z * attack_move_distance * 5
+		player.velocity.x = player.CurDirection.x * attack_move_distance * 6
+		player.velocity.z = player.CurDirection.z * attack_move_distance * 6
 		
 func replace_hand_item(item_scene:PackedScene,right_side:bool) -> void:
 	if right_side:
