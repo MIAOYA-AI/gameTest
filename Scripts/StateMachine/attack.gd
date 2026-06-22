@@ -20,7 +20,10 @@ func enter() -> void:
 	# 攻击动画 旧动画树
 	#player.PlayAttackOneShot()
 	# 单独的动画过程控制包围盒的开关与武器攻击特效 暂时屏蔽 使用RayCast3D方案
-	attack_animation.play("attack")
+	if player.IsAttacking:
+		attack_animation.play("attack")
+	elif player.IsHeavyAttacking:
+		attack_animation.play("HeavyAttack")
 	
 
 func exit() -> void:
