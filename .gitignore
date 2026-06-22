@@ -3,3 +3,8 @@
 /android/
 
 Assets/AiAssetTest/
+
+# Claude Code
+.agents/
+.claude/
+skills-lock.json

@@ -51,5 +51,5 @@ func to_idle() -> void:
 
 # 重击通过动画结束信号检测
 func _on_blend_animation_tree_animation_finished(anim_name: StringName) -> void:
-	if anim_name=="2H_Melee_Attack_Stab":
+	if anim_name=="1H_Melee_Attack_Stab" or anim_name=="2H_Melee_Attack_Stab":
 		state_machine.change_state("Idle")
