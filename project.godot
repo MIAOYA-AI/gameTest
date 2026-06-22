@@ -31,6 +31,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="advance"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/github_copilot/plugin.cfg")
+
 [global_group]
 
 Rig=""

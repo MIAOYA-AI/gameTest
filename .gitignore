@@ -1,6 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+addons/
 
 Assets/AiAssetTest/
 
@@ -8,3 +9,6 @@ Assets/AiAssetTest/
 .agents/
 .claude/
 skills-lock.json
+
+# Other
+LICENSE
