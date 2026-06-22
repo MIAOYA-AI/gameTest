@@ -16,6 +16,8 @@ func physics_process_update(delta: float) -> void:
 			state_machine.change_state("Jump")
 		else:
 			state_machine.change_state("Fall")
+	elif player.IsAttacking or player.IsHeavyAttacking:
+		state_machine.change_state("Attack")
 	elif player.IsDash:
 		if dash.is_readly():
 			state_machine.change_state("Dash")

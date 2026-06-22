@@ -17,8 +17,8 @@ func enter() -> void:
 	## 攻击状态减慢玩家速度
 	player_speed=player.Speed
 	player.Speed*=0.005
-	# 攻击动画
-	player.PlayAttackOneShot()
+	# 攻击动画 旧动画树
+	#player.PlayAttackOneShot()
 	# 单独的动画过程控制包围盒的开关与武器攻击特效 暂时屏蔽 使用RayCast3D方案
 	attack_animation.play("attack")
 	
