@@ -85,7 +85,10 @@ func _stop_and_idle() -> void:
 	animation_player.play("Idle")
 	
 func _walk_to(next_position:Vector3 , speed:float) -> void:
-	animation_player.play("Walking_A")
+	if speed==speed_walk:
+		animation_player.play("Walking_A")
+	elif speed==speed_run:
+		animation_player.play("Running_A")
 	_move_towards(next_position,speed)
 	
 # 更新导航目标
@@ -135,6 +138,11 @@ func _enter_state(new_state:State) -> void:
 		State.PATROL:
 			patrol_timer=0
 			_go_to_next_patrol_point()
+		State.INVESTIGATE:
+			investigate_timer=0.0
+			navigation_agent_3d.target_position=investigate_position
+		State.CHASE,State.INVESTIGATE:
+			return_position=global_transform.origin
 			
 func _state_idle() -> void:
 	if _can_see_player():
@@ -157,6 +165,7 @@ func _state_patrol(delta:float) -> void:
 		_enter_state(State.CHASE)
 	
 func _state_chace(delta:float) -> void:
+	print("enemy chace")
 	if not target:
 		_enter_state(State.RETURN)
 		return
@@ -171,11 +180,12 @@ func _state_chace(delta:float) -> void:
 		
 func _state_attack() -> void:
 	velocity=Vector3.ZERO
-	animation_player.play("1H_Melee_Attack_Chop")
+	animation_player.play("1H_Melee_Attack_Slice_Diagonal")
 	await  animation_player.animation_finished
 	_enter_state(State.CHASE)
 	
 func _state_investigate(delta:float) -> void:
+	print("enemy investigate")
 	if navigation_agent_3d.is_navigation_finished():
 		if investigate_timer<=0.0:
 			investigate_timer=investigate_wait_time
@@ -192,6 +202,7 @@ func _state_investigate(delta:float) -> void:
 		_enter_state(State.CHASE)
 		
 func _state_return(delta:float) -> void:
+	print("enemy return")
 	if navigation_agent_3d.is_navigation_finished():
 		_enter_state(State.PATROL)
 	else:
@@ -199,3 +210,9 @@ func _state_return(delta:float) -> void:
 		
 	if _can_see_player():
 		_enter_state(State.CHASE)
+		
+# 通过检查音源在外部让敌人进入调查状态
+func hear_noise(pos:Vector3) -> void:
+	if state not in [State.CHASE,State.ATTACK]:
+		investigate_position=pos
+		_enter_state(State.INVESTIGATE)

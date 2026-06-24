@@ -32,6 +32,9 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Arr
 geometry_parsed_geometry_type = 1
 filter_baking_aabb = AABB(-15, 0, -40, 30, 1, 50)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_yyp1y"]
+size = Vector3(5.874756, 5.3378906, 8.074844)
+
 [node name="TestFight" type="Node3D" unique_id=254098919]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1808996712]
@@ -528,9 +531,6 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 6)
 metadata/_edit_group_ = true
 
-[node name="crypt2" parent="NavigationRegion3D/map" unique_id=1246772544 instance=ExtResource("4_1o2uf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.58983)
-
 [node name="tree_pine_orange_small2" parent="NavigationRegion3D/map" unique_id=132660205 instance=ExtResource("5_1nbm7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -18.28072)
 
@@ -611,6 +611,15 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -12.
 
 [node name="Vine_Vege_013" parent="NavigationRegion3D/map" unique_id=437551722 instance=ExtResource("11_qbdr2")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0.4589132, 0.8884811, 2.0059733e-08, -0.8884811, 0.4589132, -3.8836742e-08, 11.360293, -1.2173028, -14.764481)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/map" unique_id=549936724]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.157848)
+
+[node name="crypt2" parent="NavigationRegion3D/map/StaticBody3D" unique_id=1246772544 instance=ExtResource("4_1o2uf")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/map/StaticBody3D" unique_id=1859609178]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.096069336, 2.1689453, 0.10890961)
+shape = SubResource("BoxShape3D_yyp1y")
 
 [node name="Castle" type="Node3D" parent="NavigationRegion3D" unique_id=2127770010]
 
