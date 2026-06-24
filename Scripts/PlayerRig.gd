@@ -10,7 +10,7 @@ extends Node3D
 @onready var collision_shape_3d: CollisionShape3D = get_node_or_null("../../CollisionShape3D")
 @onready var state_machine: StateMachine = get_node_or_null("../../StateMachine")
 @onready var dash: Dash = get_node_or_null("../../StateMachine/Dash")
-@onready var interaction_cast: interaction_cast = get_node_or_null("../InteractionCast")
+@onready var interaction_cast: InteractionCast = get_node_or_null("../InteractionCast")
 @onready var right_hand_slot: Node3D = $RightHandAttach/RightHandSlot
 @onready var left_hand_slot: Node3D = $LeftHandAttach/LeftHandSlot
 @onready var rogue_cape: MeshInstance3D = $Skeleton3D/chest/Rogue_Cape
@@ -95,7 +95,7 @@ func _get_attack_speed_multiplier(anim_pos: float, anim_length: float) -> float:
 	else:
 		return 0
 
-func handle_slashing_physics_frame(delta: float) -> void:
+func handle_slashing_physics_frame(_delta: float) -> void:
 	if _is_preview_mode or player == null or not (player is Player):
 		return
 	if not (check_state("Attack") or check_state("Dash")):

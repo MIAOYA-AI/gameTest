@@ -1,5 +1,5 @@
 extends ShapeCast3D
-class_name  interaction_cast
+class_name  InteractionCast
 
 @export var ui:user_interface
 @export var player:Player

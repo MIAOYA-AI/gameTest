@@ -11,7 +11,6 @@ class_name user_interface
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var interact_container: VBoxContainer = $HUD/InteractContainer
 @onready var interactt_text: Label = $HUD/InteractContainer/InteracttText
-@onready var loot_container: CenterContainer = $LootContainer
 
 
 func _ready() -> void:
@@ -26,7 +25,7 @@ func _ready() -> void:
 		interact_container.visible=false
 		_on_level_up()
 		
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
 		inventory.controll_visible()
 

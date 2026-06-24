@@ -59,12 +59,11 @@ func check_for_player(_delta: float) ->void:
 		return
 
 	var next_point := navigation_agent_3d.get_next_path_position()
-	# 避免原点与目标重合时 look_at() 报错
-	if global_position.is_equal_approx(next_point):
-		return
-
 	# 将路径点高度拉平，避免模型倾斜
 	next_point.y = global_position.y
+	# 避免原点与目标重合时 look_at() 报错（必须在拉平 Y 之后检查）
+	if global_position.is_equal_approx(next_point):
+		return
 	look_at(next_point, Vector3.UP, true)
 	
 	# 获取局部的方向向量

@@ -4,7 +4,7 @@ extends StateBase
 @export var player:Player
 @export var hit_box_collision_shap:CollisionShape3D
 @export var attack_animation:AnimationPlayer
-@onready var attack_cast: attack_cast = %AttackCast
+@onready var attack_cast: AttackCast = %AttackCast
 @onready var dash: Dash = $"../Dash"
 @onready var animation_tree: AnimationTree = $"../../PlayerModel/BlendAnimationTree"
 @onready var play_back: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") if animation_tree else null

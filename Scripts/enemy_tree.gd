@@ -58,6 +58,7 @@ func _move_towards(next_position:Vector3, speed:float) -> void:
 	var current_facing=-global_transform.basis.z
 	var new_dir=current_facing.slerp(dir,SMOOTHING_FACTOR).normalized()
 	look_at(global_transform.origin + new_dir,Vector3.UP)
+	DebugDraw3D.draw_line(global_transform.origin,global_transform.origin+new_dir*5.0,Color.RED,0.1)
 	
 	velocity.x=dir.x*speed
 	velocity.z=dir.z*speed
@@ -75,17 +76,18 @@ func _update_agent_target() -> void:
 	match state:
 		State.PATROL:
 			if patrol_points.size() > 0:
-				navigation_agent_3d.set_target_location(patrol_points[patrol_index].global_transform.origin)
+				if !navigation_agent_3d.target_position.is_equal_approx(patrol_points[patrol_index].global_transform.origin):	
+					navigation_agent_3d.target_position=patrol_points[patrol_index].global_transform.origin
 		State.INVESTIGATE:
-			navigation_agent_3d.set_target_location(investigate_position)
+			navigation_agent_3d.set_target_position(investigate_position)
 		State.CHASE:
 			if target:
-				navigation_agent_3d.set_target_location(target.global_transform.origin)
+				navigation_agent_3d.set_target_position(target.global_transform.origin)
 		State.RETURN:
-			navigation_agent_3d.set_target_location(return_position)
+			navigation_agent_3d.set_target_position(return_position)
 			
 func _update_path(delate):
-	update_timer=delate
+	update_timer-=delate
 	if update_timer<=0.0:
 		_update_agent_target()
 		update_timer=update_interval

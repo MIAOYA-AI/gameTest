@@ -21,6 +21,10 @@ VfxManger="*uid://dafrfle4goutq"
 SceneTranstion="*uid://clxg43ky6qrnm"
 PersistentData="*uid://fofimfvsf885"
 
+[debug_draw_3d]
+
+settings/addon_root_folder="res://addons/debug_draw_3d"
+
 [display]
 
 window/size/viewport_width=1920
@@ -30,10 +34,6 @@ window/stretch/mode="canvas_items"
 [dotnet]
 
 project/assembly_name="advance"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/github_copilot/plugin.cfg")
 
 [global_group]
 
