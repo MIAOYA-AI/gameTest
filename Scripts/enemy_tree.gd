@@ -10,7 +10,7 @@ extends CharacterBody3D
 @export var speed_run:float=3.0
 @export var attack_range:float=2.0
 @export var investigate_wait_time:float=4.0
-@export var patrol_wait_time:float=3.0
+@export var patrol_wait_time:float=1.0
 @export var update_interval:float=0.2
 
 const UPDATE_TIME=0.2
@@ -30,7 +30,18 @@ var return_position:Vector3 #原始位置
 var gravity:float=ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready() -> void:
+	# 导入的动画默认不循环，手动设置为循环播放
+	_init_animation_loop()
 	_enter_state(State.IDLE if patrol_points.is_empty() else State.PATROL)
+	
+func _init_animation_loop() -> void:
+	_set_animation_loop("Idle")
+	_set_animation_loop("Walking_A")
+
+func _set_animation_loop(anim_name: String) -> void:
+	var anim := animation_player.get_animation(anim_name)
+	if anim:
+		anim.loop_mode = Animation.LOOP_LINEAR
 
 func _physics_process(delta: float) -> void:
 	_update_path(delta)
@@ -43,8 +54,8 @@ func _physics_process(delta: float) -> void:
 
 # 确定下一个巡查点 可随机选取
 func _go_to_next_patrol_point() -> void:
-	patrol_index = (patrol_index + 1) % patrol_points.size()
 	navigation_agent_3d.set_target_position(patrol_points[patrol_index].global_transform.origin)
+	patrol_index = (patrol_index + 1) % patrol_points.size()
 	
 func _move_towards(next_position:Vector3, speed:float) -> void:
 	var dir = (next_position - global_transform.origin)
@@ -58,7 +69,7 @@ func _move_towards(next_position:Vector3, speed:float) -> void:
 	var current_facing=-global_transform.basis.z
 	var new_dir=current_facing.slerp(dir,SMOOTHING_FACTOR).normalized()
 	look_at(global_transform.origin + new_dir,Vector3.UP)
-	DebugDraw3D.draw_line(global_transform.origin,global_transform.origin+new_dir*5.0,Color.RED,0.1)
+	#DebugDraw3D.draw_line(global_transform.origin,global_transform.origin+new_dir*5.0,Color.RED,0.1)
 	
 	velocity.x=dir.x*speed
 	velocity.z=dir.z*speed
@@ -75,9 +86,7 @@ func _walk_to(next_position:Vector3 , speed:float) -> void:
 func _update_agent_target() -> void:
 	match state:
 		State.PATROL:
-			if patrol_points.size() > 0:
-				if !navigation_agent_3d.target_position.is_equal_approx(patrol_points[patrol_index].global_transform.origin):	
-					navigation_agent_3d.target_position=patrol_points[patrol_index].global_transform.origin
+			pass  # 巡逻目标只在 _go_to_next_patrol_point() 中设置，无需定时更新
 		State.INVESTIGATE:
 			navigation_agent_3d.set_target_position(investigate_position)
 		State.CHASE:
@@ -106,6 +115,7 @@ func _enter_state(new_state:State) -> void:
 			_go_to_next_patrol_point()
 			
 func _state_patrol(delta:float) -> void:
+	#在一次导航结束后 先让敌人停止等待一个patrol_wait_time的周期结束再前往下一个目标点
 	if navigation_agent_3d.is_navigation_finished():
 		if patrol_timer<=0.0:
 			patrol_timer=patrol_wait_time
