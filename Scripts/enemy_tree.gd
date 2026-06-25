@@ -3,6 +3,8 @@ extends CharacterBody3D
 @onready var vision_ray: RayCast3D = $VisionRay
 @onready var animation_player: AnimationPlayer = $model/Barbarian/AnimationPlayer
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
+@onready var animation_tree: AnimationTree = $model/Barbarian/AnimationTree
+@onready var play_back: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") if animation_tree else null
 
 @export var target:Player
 @export var patrol_points: Array[Node3D] = []#巡逻点
@@ -21,6 +23,9 @@ const UPDATE_TIME=0.2
 const SPEED=150
 const SMOOTHING_FACTOR=0.1
 const VIEW_ANGLE:float=150.0
+const MOVESPACE_BLEND_PATH="parameters/MoveSpace/blend_position"
+const STRAFE_BLEND_PATH="parameters/StrafeSpace/blend_position"
+const DODGESPACE_BLEND_PATH="parameters/DodgeSpace/blend_position"
 
 enum State {IDLE,PATROL,INVESTIGATE,CHASE,PREPARE_ATTACK,ATTACK,RETURN}
 var state:State=State.IDLE
@@ -46,6 +51,7 @@ func _ready() -> void:
 func _init_animation_loop() -> void:
 	_set_animation_loop("Idle")
 	_set_animation_loop("Walking_A")
+	_set_animation_loop("Running_A")
 
 func _set_animation_loop(anim_name: String) -> void:
 	var anim := animation_player.get_animation(anim_name)
@@ -92,13 +98,19 @@ func _move_towards(next_position:Vector3, speed:float) -> void:
 	
 func _stop_and_idle() -> void:
 	velocity=Vector3.ZERO
-	animation_player.play("Idle")
+	#animation_player.play("Idle")
+	play_back.travel("MoveSpace")
+	animation_tree[MOVESPACE_BLEND_PATH]=-1
 	
 func _walk_to(next_position:Vector3 , speed:float) -> void:
 	if speed==speed_walk:
-		animation_player.play("Walking_A")
+		#animation_player.play("Walking_A")
+		play_back.travel("MoveSpace")
+		animation_tree[MOVESPACE_BLEND_PATH]=0
 	elif speed==speed_run:
-		animation_player.play("Running_A")
+		#animation_player.play("Running_A")
+		play_back.travel("MoveSpace")
+		animation_tree[MOVESPACE_BLEND_PATH]=1
 	_move_towards(next_position,speed)
 	
 # 更新导航目标
@@ -237,7 +249,8 @@ func _state_prepare_attack(delta:float) -> void:
 	match prepare_attack_phase:
 		0: # 后撤阶段 — 面朝玩家、向后快速移动，播放Dodge_Backward
 			# 如果后撤的冷却时间没有结束 且后撤动画已经播放完成 则进入保持距离的状态
-			if dash_wait_timer>0 and not (animation_player.is_playing() and animation_player.current_animation=="Dodge_Backward"):
+			#if dash_wait_timer>0 and not (animation_player.is_playing() and animation_player.current_animation=="Dodge_Backward"):
+			if dash_wait_timer>0 and not check_state("DodgeSpace"):
 				prepare_attack_phase=1
 				return
 			var to_player:=(target.global_transform.origin-global_transform.origin)
@@ -249,7 +262,9 @@ func _state_prepare_attack(delta:float) -> void:
 				# 朝玩家反方向移动
 				velocity.x=-to_player.x*speed_retreat
 				velocity.z=-to_player.z*speed_retreat
-				animation_player.play("Dodge_Backward")
+				#animation_player.play("Dodge_Backward")
+				play_back.travel("DodgeSpace")
+				animation_tree[DODGESPACE_BLEND_PATH]=-1
 				dash_wait_timer=dash_wait_time
 			
 			if dist>=attack_range*2:
@@ -268,7 +283,9 @@ func _state_prepare_attack(delta:float) -> void:
 					look_at(global_transform.origin+to_player,Vector3.UP)
 					velocity.x=to_player.x*speed_walk
 					velocity.z=to_player.z*speed_walk
-				animation_player.play("Walking_A")
+				#animation_player.play("Walking_A")
+				play_back.travel("MoveSpace")
+				animation_tree[MOVESPACE_BLEND_PATH]=0
 			# 如果玩家拉近距离并且后撤冷却结束则后撤
 			elif dist<attack_range and dash_wait_timer<=0:
 				prepare_attack_phase=0
@@ -281,7 +298,8 @@ func _state_prepare_attack(delta:float) -> void:
 					look_at(global_transform.origin+to_player,Vector3.UP)
 					velocity.x=-to_player.x*speed_walk
 					velocity.z=-to_player.z*speed_walk
-				animation_player.play("Walking_Backwards")
+				#animation_player.play("Walking_Backwards")
+				play_back.travel("Walking_Backwards")
 			else:
 				# 距离合适，左右踱步（方向在进入阶段1时已随机确定，一个冷却周期内不变）
 				var to_player:=(target.global_transform.origin-global_transform.origin)
@@ -294,10 +312,12 @@ func _state_prepare_attack(delta:float) -> void:
 					var move_dir:=right_dir*strafe_dir_sign
 					velocity.x=move_dir.x*speed_run
 					velocity.z=move_dir.z*speed_run
-					if strafe_dir_sign>0:
-						animation_player.play("Running_Strafe_Right")
-					else:
-						animation_player.play("Running_Strafe_Left")
+					#if strafe_dir_sign>0:
+						#animation_player.play("Running_Strafe_Right")
+					#else:
+						#animation_player.play("Running_Strafe_Left")
+					play_back.travel("StrafeSpace")
+					animation_tree[STRAFE_BLEND_PATH]=strafe_dir_sign
 
 			if attack_wait_timer<=0:
 				prepare_attack_phase=2
@@ -310,7 +330,10 @@ func _state_prepare_attack(delta:float) -> void:
 				look_at(global_transform.origin+to_player,Vector3.UP)
 				velocity.x=to_player.x*speed_rush
 				velocity.z=to_player.z*speed_rush
-			animation_player.play("Dodge_Forward")
+			#animation_player.play("Dodge_Forward")
+			play_back.travel("DodgeSpace")
+			animation_tree[DODGESPACE_BLEND_PATH]=1
+			dash_wait_timer=dash_wait_time
 			if dist<=attack_range:
 				_enter_state(State.ATTACK)
 
@@ -340,6 +363,9 @@ func _state_return(delta:float) -> void:
 		
 	if _can_see_player():
 		_enter_state(State.CHASE)
+		
+func check_state(state_name:String) -> bool:
+	return play_back.get_current_node()==state_name
 		
 # 通过检查音源在外部让敌人进入调查状态
 func hear_noise(pos:Vector3) -> void:
