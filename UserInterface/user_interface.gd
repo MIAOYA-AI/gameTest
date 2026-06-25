@@ -11,7 +11,7 @@ class_name user_interface
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var interact_container: VBoxContainer = $HUD/InteractContainer
 @onready var interactt_text: Label = $HUD/InteractContainer/InteracttText
-
+@onready var loot_container: loot_container = $LootContainer
 
 func _ready() -> void:
 	if player is Player and player.MyStats:

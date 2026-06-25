@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://duowxbvwrb5uv" path="res://Scripts/enemy_tree.gd" id="1_1n6lp"]
 [ext_resource type="PackedScene" uid="uid://bvlo8i8gt5p6s" path="res://Assets/Enemy/Barbarian.glb" id="1_s06e0"]
+[ext_resource type="PackedScene" uid="uid://bxkiv6xodxnff" path="res://Scenes/health_component.tscn" id="3_k6d7s"]
+[ext_resource type="PackedScene" uid="uid://by62vbxj5g8pl" path="res://Scenes/attack_cast.tscn" id="3_vq5qg"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_atk0"]
 animation = &"1H_Melee_Attack_Slice_Diagonal"
@@ -34,6 +36,10 @@ blend_point_4/node = SubResource("AnimationNodeAnimation_atk4")
 blend_point_4/pos = 4.0
 blend_point_5/node = SubResource("AnimationNodeAnimation_atk5")
 blend_point_5/pos = 5.0
+max_space = 6.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_banhq"]
+animation = &"Death_B"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q14i3"]
 animation = &"Dodge_Backward"
@@ -125,8 +131,11 @@ xfade_time = 0.05
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1n6lp"]
 states/AttackSpace/node = SubResource("AnimationNodeBlendSpace1D_atk")
 states/AttackSpace/position = Vector2(605.2, 314.4)
+states/Death/node = SubResource("AnimationNodeAnimation_banhq")
+states/Death/position = Vector2(946.8, 221.6)
 states/DodgeSpace/node = SubResource("AnimationNodeBlendSpace1D_1n6lp")
 states/DodgeSpace/position = Vector2(763.6, 183.95161)
+states/End/position = Vector2(926.4, 96)
 states/MoveSpace/node = SubResource("AnimationNodeBlendSpace1D_ap6bl")
 states/MoveSpace/position = Vector2(441.19998, 184.13953)
 states/Start/position = Vector2(205.6, 154.4)
@@ -139,6 +148,7 @@ radius = 0.6435547
 height = 2.4326782
 
 [node name="enemy_tree" type="CharacterBody3D" unique_id=468094801]
+collision_layer = 4
 script = ExtResource("1_1n6lp")
 
 [node name="model" type="Node3D" parent="." unique_id=1101532176]
@@ -204,6 +214,7 @@ transform = Transform3D(3.7522932e-07, 0.26286274, 0.96483254, 0.99999917, -2.91
 
 [node name="1H_Axe" parent="model/Barbarian/Rig/Skeleton3D" index="2" unique_id=1411469389]
 transform = Transform3D(-4.8468974e-07, -0.14989422, 0.98870134, 0.99999905, -1.9073966e-07, 1.9249991e-07, 4.997944e-07, 0.9887014, 0.14989434, -0.4960537, 0.6410296, 0.1395284)
+visible = false
 
 [node name="2H_Axe" parent="model/Barbarian/Rig/Skeleton3D" index="3" unique_id=1293389980]
 transform = Transform3D(-4.8468974e-07, -0.14989422, 0.98870134, 0.99999905, -1.9073966e-07, 1.9249991e-07, 4.997944e-07, 0.9887014, 0.14989434, -0.4960537, 0.6410296, 0.1395284)
@@ -216,6 +227,17 @@ transform = Transform3D(0.9997204, -1.4014349e-09, 0.023646597, 1.3934147e-09, 0
 
 [node name="Barbarian_Cape" parent="model/Barbarian/Rig/Skeleton3D" index="6" unique_id=681292629]
 transform = Transform3D(0.9962748, -5.1496167e-09, 0.08623532, 5.1304343e-09, 0.99999994, 4.4407705e-10, -0.08623532, 1.8800716e-15, 0.9962748, -1.916411e-06, 1.2022741, 2.590028e-08)
+
+[node name="AttackAttachment" type="BoneAttachment3D" parent="model/Barbarian/Rig" parent_id_path=PackedInt32Array(93017236, 1313899774) index="1" unique_id=187021966]
+transform = Transform3D(-4.8468974e-07, -0.14989422, 0.98870134, 0.99999905, -1.9073966e-07, 1.9249991e-07, 4.997944e-07, 0.9887014, 0.14989434, -0.4960537, 0.6410296, 0.1395284)
+bone_name = "2H_Axe"
+bone_idx = 17
+use_external_skeleton = true
+external_skeleton = NodePath("../Skeleton3D")
+
+[node name="AttackCast" parent="model/Barbarian/Rig/AttackAttachment" unique_id=217298264 instance=ExtResource("3_vq5qg")]
+target_position = Vector3(0, -1.5, 0)
+collision_mask = 2
 
 [node name="AnimationPlayer" parent="model/Barbarian" index="1" unique_id=1781388382]
 autoplay = &"Idle"
@@ -241,5 +263,9 @@ collision_mask = 3
 debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0.07123137, 0.07123139, 0.07123137, 1)
+
+[node name="HealthComponent" parent="." unique_id=2081030793 instance=ExtResource("3_k6d7s")]
+
+[connection signal="defeat" from="HealthComponent" to="." method="_on_health_component_defeat"]
 
 [editable path="model/Barbarian"]

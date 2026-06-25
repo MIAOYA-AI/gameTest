@@ -1,10 +1,14 @@
 extends CharacterBody3D
+class_name EnemyTree
 
 @onready var vision_ray: RayCast3D = $VisionRay
 @onready var animation_player: AnimationPlayer = $model/Barbarian/AnimationPlayer
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 @onready var animation_tree: AnimationTree = $model/Barbarian/AnimationTree
 @onready var play_back: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback") if animation_tree else null
+@onready var health_component: HealthComponent = $HealthComponent
+@onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
+@onready var attack_cast: AttackCast = $model/Barbarian/Rig/AttackAttachment/AttackCast
 
 @export var target:Player
 @export var patrol_points: Array[Node3D] = []#巡逻点
@@ -13,11 +17,13 @@ extends CharacterBody3D
 @export var speed_retreat:float=5.0
 @export var speed_rush:float=6.0
 @export var attack_range:float=2.0
-@export var attack_wait_time:float=5.0
+@export var attack_wait_time:float=2.0
 @export var dash_wait_time:float=1.0
 @export var investigate_wait_time:float=4.0
 @export var patrol_wait_time:float=1.0
 @export var update_interval:float=0.2
+@export var max_health:=1000
+@export var damage:=100
 
 const UPDATE_TIME=0.2
 const SPEED=150
@@ -44,6 +50,7 @@ var return_position:Vector3 #原始位置
 var gravity:float=ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready() -> void:
+	health_component.update_max_health(max_health)
 	# GLB 导入的动画默认不循环，给需要循环的动画设置循环模式
 	for anim_name in ["Idle","Walking_A","Running_A","Walking_Backwards","Running_Strafe_Left","Running_Strafe_Right"]:
 		var anim:=animation_player.get_animation(anim_name)
@@ -198,6 +205,7 @@ func _state_chace(delta:float) -> void:
 		_enter_state(State.INVESTIGATE)
 		
 func _state_attack(_delta:float) -> void:
+	attack_cast.deal_damage(damage)
 	velocity=Vector3.ZERO
 
 	# 当前正在播放攻击动画，等待动画结束信号
@@ -207,6 +215,7 @@ func _state_attack(_delta:float) -> void:
 	# 攻击冷却中，进入准备攻击状态
 	attack_wait_timer-=_delta
 	if attack_wait_timer>0:
+		strafe_dir_sign=1.0 if randf()>0.5 else -1.0
 		_enter_state(State.PREPARE_ATTACK)
 		return
 
@@ -254,7 +263,6 @@ func _state_prepare_attack(delta:float) -> void:
 			
 			if dist>=attack_range*2:
 				prepare_attack_phase=1
-				strafe_dir_sign=1.0 if randf()>0.5 else -1.0
 			elif dist<attack_range:
 				_enter_state(State.ATTACK)
 
@@ -362,3 +370,9 @@ func hear_noise(pos:Vector3) -> void:
 	if state not in [State.CHASE,State.PREPARE_ATTACK,State.ATTACK]:
 		investigate_position=pos
 		_enter_state(State.INVESTIGATE)
+
+
+func _on_health_component_defeat() -> void:
+	collision_shape_3d.disabled=true;
+	set_physics_process(false)
+	play_back.travel("Death")
