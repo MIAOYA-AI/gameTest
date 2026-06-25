@@ -702,6 +702,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.526146, -15.003824, -166.0
 
 [node name="Chect" parent="NavigationRegion3D/Interactible" unique_id=627174493 instance=ExtResource("18_dqs57")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.4134636, 0.1366747, -28.782335)
+collision_layer = 32
 
 [node name="ShieldIcon" parent="NavigationRegion3D/Interactible/Chect" unique_id=1658212308 instance=ExtResource("19_5efmf")]
 visible = false
@@ -726,6 +727,7 @@ item_model = ExtResource("23_1p6or")
 
 [node name="Chect2" parent="NavigationRegion3D/Interactible" unique_id=478757418 instance=ExtResource("18_dqs57")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.044507265, 0.1366747, 0)
+collision_layer = 32
 
 [node name="WeaponIcon" parent="NavigationRegion3D/Interactible/Chect2" unique_id=547739586 instance=ExtResource("22_33l43")]
 visible = false

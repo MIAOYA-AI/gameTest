@@ -12,6 +12,7 @@ extends CharacterBody3D
 @export var speed_rush:float=6.0
 @export var attack_range:float=2.0
 @export var attack_wait_time:float=5.0
+@export var dash_wait_time:float=1.0
 @export var investigate_wait_time:float=4.0
 @export var patrol_wait_time:float=1.0
 @export var update_interval:float=0.2
@@ -19,7 +20,7 @@ extends CharacterBody3D
 const UPDATE_TIME=0.2
 const SPEED=150
 const SMOOTHING_FACTOR=0.1
-const VIEW_ANGLE:float=120.0
+const VIEW_ANGLE:float=150.0
 
 enum State {IDLE,PATROL,INVESTIGATE,CHASE,PREPARE_ATTACK,ATTACK,RETURN}
 var state:State=State.IDLE
@@ -29,6 +30,7 @@ var patrol_index:=0
 var patrol_timer:=0.0
 var investigate_timer:=0.0
 var attack_wait_timer:=0.0
+var dash_wait_timer:=0.0
 var prepare_attack_phase:=0 ## 0=后撤, 1=保持距离, 2=突击
 var strafe_dir_sign:=1.0 ## 左右踱步方向 1=右 -1=左
 var update_timer:=0.0
@@ -230,9 +232,14 @@ func _state_prepare_attack(delta:float) -> void:
 		return
 
 	attack_wait_timer-=delta
+	dash_wait_timer-=delta
 
 	match prepare_attack_phase:
 		0: # 后撤阶段 — 面朝玩家、向后快速移动，播放Dodge_Backward
+			# 如果后撤的冷却时间没有结束 且后撤动画已经播放完成 则进入保持距离的状态
+			if dash_wait_timer>0 and not (animation_player.is_playing() and animation_player.current_animation=="Dodge_Backward"):
+				prepare_attack_phase=1
+				return
 			var to_player:=(target.global_transform.origin-global_transform.origin)
 			to_player.y=0.0
 			if not is_zero_approx(to_player.length()):
@@ -242,10 +249,14 @@ func _state_prepare_attack(delta:float) -> void:
 				# 朝玩家反方向移动
 				velocity.x=-to_player.x*speed_retreat
 				velocity.z=-to_player.z*speed_retreat
-			animation_player.play("Dodge_Backward")
+				animation_player.play("Dodge_Backward")
+				dash_wait_timer=dash_wait_time
+			
 			if dist>=attack_range*2:
 				prepare_attack_phase=1
 				strafe_dir_sign=1.0 if randf()>0.5 else -1.0
+			elif dist<attack_range:
+				_enter_state(State.ATTACK)
 
 		1: # 保持距离阶段 — 与玩家维持attack_range*2距离，等待冷却结束
 			if dist>attack_range*2+0.5:
@@ -258,6 +269,9 @@ func _state_prepare_attack(delta:float) -> void:
 					velocity.x=to_player.x*speed_walk
 					velocity.z=to_player.z*speed_walk
 				animation_player.play("Walking_A")
+			# 如果玩家拉近距离并且后撤冷却结束则后撤
+			elif dist<attack_range and dash_wait_timer<=0:
+				prepare_attack_phase=0
 			elif dist<attack_range*2-0.5:
 				# 太近，面朝玩家向后移动
 				var to_player:=(target.global_transform.origin-global_transform.origin)
