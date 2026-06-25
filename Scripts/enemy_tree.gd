@@ -9,6 +9,7 @@ extends CharacterBody3D
 @export var speed_walk:float=1.7
 @export var speed_run:float=3.0
 @export var attack_range:float=2.0
+@export var attack_wait_time:float=1.0
 @export var investigate_wait_time:float=4.0
 @export var patrol_wait_time:float=1.0
 @export var update_interval:float=0.2
@@ -21,9 +22,11 @@ const VIEW_ANGLE:float=120.0
 enum State {IDLE,PATROL,INVESTIGATE,CHASE,ATTACK,RETURN}
 var state:State=State.IDLE
 
+var attack_anim_name:String
 var patrol_index:=0
 var patrol_timer:=0.0
 var investigate_timer:=0.0
+var attack_wait_timer:=0.0
 var update_timer:=0.0
 var investigate_position:Vector3
 var return_position:Vector3 #原始位置
@@ -51,7 +54,7 @@ func _physics_process(delta: float) -> void:
 		State.PATROL: _state_patrol(delta)
 		State.INVESTIGATE: _state_investigate(delta)
 		State.CHASE: _state_chace(delta)
-		State.ATTACK: _state_attack()
+		State.ATTACK: _state_attack(delta)
 		State.RETURN: _state_return(delta)
 	
 	_looking()
@@ -178,10 +181,28 @@ func _state_chace(delta:float) -> void:
 		investigate_position=target.global_transform.origin
 		_enter_state(State.INVESTIGATE)
 		
-func _state_attack() -> void:
+func _state_attack(delta:float) -> void:
 	velocity=Vector3.ZERO
-	animation_player.play("1H_Melee_Attack_Slice_Diagonal")
+	# 随机攻击方式
+	if attack_anim_name=="":
+		var attack_anim:=[
+		"1H_Melee_Attack_Slice_Diagonal",
+		"1H_Melee_Attack_Chop",
+		"1H_Melee_Attack_Slice_Horizontal",
+		"2H_Melee_Attack_Chop",
+		"2H_Melee_Attack_Slice",
+		"2H_Melee_Attack_Spin"]
+		attack_anim_name=attack_anim.pick_random()
+	attack_wait_timer-=delta
+	if attack_wait_timer>0:
+		print("wait attack cold")
+		# 添加一个状态使敌人后退到安全距离观察玩家
+		return
+	print("enemy atttack")
+	attack_wait_timer=attack_wait_time
+	animation_player.play(attack_anim_name)
 	await  animation_player.animation_finished
+	attack_anim_name=""
 	_enter_state(State.CHASE)
 	
 func _state_investigate(delta:float) -> void:
