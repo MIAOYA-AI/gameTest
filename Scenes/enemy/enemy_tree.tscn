@@ -3,6 +3,38 @@
 [ext_resource type="Script" uid="uid://duowxbvwrb5uv" path="res://Scripts/enemy_tree.gd" id="1_1n6lp"]
 [ext_resource type="PackedScene" uid="uid://bvlo8i8gt5p6s" path="res://Assets/Enemy/Barbarian.glb" id="1_s06e0"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_atk0"]
+animation = &"1H_Melee_Attack_Slice_Diagonal"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_atk1"]
+animation = &"1H_Melee_Attack_Chop"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_atk2"]
+animation = &"1H_Melee_Attack_Slice_Horizontal"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_atk3"]
+animation = &"2H_Melee_Attack_Chop"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_atk4"]
+animation = &"2H_Melee_Attack_Slice"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_atk5"]
+animation = &"2H_Melee_Attack_Spin"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_atk"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_atk0")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_atk1")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_atk2")
+blend_point_2/pos = 2.0
+blend_point_3/node = SubResource("AnimationNodeAnimation_atk3")
+blend_point_3/pos = 3.0
+blend_point_4/node = SubResource("AnimationNodeAnimation_atk4")
+blend_point_4/pos = 4.0
+blend_point_5/node = SubResource("AnimationNodeAnimation_atk5")
+blend_point_5/pos = 5.0
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q14i3"]
 animation = &"Dodge_Backward"
 
@@ -15,6 +47,9 @@ blend_point_0/pos = -1.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_y8vcf")
 blend_point_1/pos = 1.0
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ap6bl"]
+animation = &"Walking_Backwards"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1n6lp"]
 animation = &"Idle"
 
@@ -25,12 +60,14 @@ animation = &"Walking_A"
 animation = &"Running_A"
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ap6bl"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_1n6lp")
-blend_point_0/pos = -1.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_k6d7s")
-blend_point_1/pos = 0.0
-blend_point_2/node = SubResource("AnimationNodeAnimation_vq5qg")
-blend_point_2/pos = 1.0
+blend_point_0/node = SubResource("AnimationNodeAnimation_ap6bl")
+blend_point_0/pos = -2.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_1n6lp")
+blend_point_1/pos = -1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_k6d7s")
+blend_point_2/pos = 0.0
+blend_point_3/node = SubResource("AnimationNodeAnimation_vq5qg")
+blend_point_3/pos = 1.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fh2s3"]
 animation = &"Running_Strafe_Right"
@@ -44,23 +81,8 @@ blend_point_0/pos = 1.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_7px2y")
 blend_point_1/pos = -1.0
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ap6bl"]
-animation = &"Walking_Backwards"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1n6lp"]
 advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fh2s3"]
-xfade_time = 0.05
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7px2y"]
-xfade_time = 0.05
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k6d7s"]
-xfade_time = 0.05
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vq5qg"]
-xfade_time = 0.05
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ap6bl"]
 xfade_time = 0.05
@@ -82,23 +104,35 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fq1dc"]
 xfade_time = 0.05
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tvccm"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_atk0"]
 xfade_time = 0.05
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tqr2d"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_atk1"]
+xfade_time = 0.05
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_atk4"]
+xfade_time = 0.05
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_atk5"]
+xfade_time = 0.05
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_atk6"]
+xfade_time = 0.05
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_atk7"]
 xfade_time = 0.05
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1n6lp"]
+states/AttackSpace/node = SubResource("AnimationNodeBlendSpace1D_atk")
+states/AttackSpace/position = Vector2(605.2, 314.4)
 states/DodgeSpace/node = SubResource("AnimationNodeBlendSpace1D_1n6lp")
 states/DodgeSpace/position = Vector2(763.6, 183.95161)
 states/MoveSpace/node = SubResource("AnimationNodeBlendSpace1D_ap6bl")
 states/MoveSpace/position = Vector2(441.19998, 184.13953)
 states/Start/position = Vector2(205.6, 154.4)
 states/StrafeSpace/node = SubResource("AnimationNodeBlendSpace1D_q14i3")
-states/StrafeSpace/position = Vector2(754, 56.16)
-states/Walking_Backwards/node = SubResource("AnimationNodeAnimation_ap6bl")
-states/Walking_Backwards/position = Vector2(440.688, 57.087997)
-transitions = ["Start", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_1n6lp"), "MoveSpace", "Walking_Backwards", SubResource("AnimationNodeStateMachineTransition_fh2s3"), "Walking_Backwards", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_7px2y"), "Walking_Backwards", "StrafeSpace", SubResource("AnimationNodeStateMachineTransition_k6d7s"), "StrafeSpace", "Walking_Backwards", SubResource("AnimationNodeStateMachineTransition_vq5qg"), "MoveSpace", "StrafeSpace", SubResource("AnimationNodeStateMachineTransition_ap6bl"), "StrafeSpace", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_q14i3"), "DodgeSpace", "StrafeSpace", SubResource("AnimationNodeStateMachineTransition_banhq"), "StrafeSpace", "DodgeSpace", SubResource("AnimationNodeStateMachineTransition_bvf5s"), "DodgeSpace", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_gcslx"), "MoveSpace", "DodgeSpace", SubResource("AnimationNodeStateMachineTransition_fq1dc"), "DodgeSpace", "Walking_Backwards", SubResource("AnimationNodeStateMachineTransition_tvccm"), "Walking_Backwards", "DodgeSpace", SubResource("AnimationNodeStateMachineTransition_tqr2d")]
+states/StrafeSpace/position = Vector2(605.04, 45.760002)
+transitions = ["Start", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_1n6lp"), "MoveSpace", "StrafeSpace", SubResource("AnimationNodeStateMachineTransition_ap6bl"), "StrafeSpace", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_q14i3"), "DodgeSpace", "StrafeSpace", SubResource("AnimationNodeStateMachineTransition_banhq"), "StrafeSpace", "DodgeSpace", SubResource("AnimationNodeStateMachineTransition_bvf5s"), "DodgeSpace", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_gcslx"), "MoveSpace", "DodgeSpace", SubResource("AnimationNodeStateMachineTransition_fq1dc"), "AttackSpace", "MoveSpace", SubResource("AnimationNodeStateMachineTransition_atk0"), "MoveSpace", "AttackSpace", SubResource("AnimationNodeStateMachineTransition_atk1"), "AttackSpace", "StrafeSpace", SubResource("AnimationNodeStateMachineTransition_atk4"), "StrafeSpace", "AttackSpace", SubResource("AnimationNodeStateMachineTransition_atk5"), "AttackSpace", "DodgeSpace", SubResource("AnimationNodeStateMachineTransition_atk6"), "DodgeSpace", "AttackSpace", SubResource("AnimationNodeStateMachineTransition_atk7")]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1n6lp"]
 radius = 0.6435547
@@ -189,6 +223,7 @@ autoplay = &"Idle"
 [node name="AnimationTree" type="AnimationTree" parent="model/Barbarian" unique_id=1181476020]
 tree_root = SubResource("AnimationNodeStateMachine_1n6lp")
 anim_player = NodePath("../AnimationPlayer")
+parameters/AttackSpace/blend_position = 0.0
 parameters/DodgeSpace/blend_position = 0.0
 parameters/MoveSpace/blend_position = -1.0
 parameters/StrafeSpace/blend_position = 0.99936545

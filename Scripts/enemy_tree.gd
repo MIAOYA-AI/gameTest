@@ -26,11 +26,11 @@ const VIEW_ANGLE:float=150.0
 const MOVESPACE_BLEND_PATH="parameters/MoveSpace/blend_position"
 const STRAFE_BLEND_PATH="parameters/StrafeSpace/blend_position"
 const DODGESPACE_BLEND_PATH="parameters/DodgeSpace/blend_position"
+const ATTACKSPACE_BLEND_PATH="parameters/AttackSpace/blend_position"
 
 enum State {IDLE,PATROL,INVESTIGATE,CHASE,PREPARE_ATTACK,ATTACK,RETURN}
 var state:State=State.IDLE
 
-var attack_anim_name:String
 var patrol_index:=0
 var patrol_timer:=0.0
 var investigate_timer:=0.0
@@ -44,19 +44,14 @@ var return_position:Vector3 #原始位置
 var gravity:float=ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready() -> void:
-	# 导入的动画默认不循环，手动设置为循环播放
-	_init_animation_loop()
+	# GLB 导入的动画默认不循环，给需要循环的动画设置循环模式
+	for anim_name in ["Idle","Walking_A","Running_A","Walking_Backwards","Running_Strafe_Left","Running_Strafe_Right"]:
+		var anim:=animation_player.get_animation(anim_name)
+		if anim:
+			anim.loop_mode=Animation.LOOP_LINEAR
+	if animation_tree:
+		animation_tree.animation_finished.connect(_on_animation_tree_animation_finished)
 	_enter_state(State.IDLE if patrol_points.is_empty() else State.PATROL)
-	
-func _init_animation_loop() -> void:
-	_set_animation_loop("Idle")
-	_set_animation_loop("Walking_A")
-	_set_animation_loop("Running_A")
-
-func _set_animation_loop(anim_name: String) -> void:
-	var anim := animation_player.get_animation(anim_name)
-	if anim:
-		anim.loop_mode = Animation.LOOP_LINEAR
 
 func _physics_process(delta: float) -> void:
 	_update_path(delta)
@@ -205,11 +200,8 @@ func _state_chace(delta:float) -> void:
 func _state_attack(_delta:float) -> void:
 	velocity=Vector3.ZERO
 
-	# 当前正在播放攻击动画，等待动画结束
-	if attack_anim_name!="":
-		if not animation_player.is_playing():
-			attack_anim_name=""
-			_enter_state(State.CHASE)
+	# 当前正在播放攻击动画，等待动画结束信号
+	if check_state("AttackSpace"):
 		return
 
 	# 攻击冷却中，进入准备攻击状态
@@ -218,18 +210,11 @@ func _state_attack(_delta:float) -> void:
 		_enter_state(State.PREPARE_ATTACK)
 		return
 
-	# 发起攻击
+	# 发起攻击 — 随机选择 AttackSpace blend_position (0~5)
 	print("enemy attack")
-	var attack_anim:=[
-		"1H_Melee_Attack_Slice_Diagonal",
-		"1H_Melee_Attack_Chop",
-		"1H_Melee_Attack_Slice_Horizontal",
-		"2H_Melee_Attack_Chop",
-		"2H_Melee_Attack_Slice",
-		"2H_Melee_Attack_Spin"]
-	attack_anim_name=attack_anim.pick_random()
+	animation_tree[ATTACKSPACE_BLEND_PATH]=randi_range(0,5)
+	play_back.travel("AttackSpace")
 	attack_wait_timer=attack_wait_time
-	animation_player.play(attack_anim_name)
 	
 func _state_prepare_attack(delta:float) -> void:
 	if not target:
@@ -298,8 +283,8 @@ func _state_prepare_attack(delta:float) -> void:
 					look_at(global_transform.origin+to_player,Vector3.UP)
 					velocity.x=-to_player.x*speed_walk
 					velocity.z=-to_player.z*speed_walk
-				#animation_player.play("Walking_Backwards")
-				play_back.travel("Walking_Backwards")
+				play_back.travel("MoveSpace")
+				animation_tree[MOVESPACE_BLEND_PATH]=-2
 			else:
 				# 距离合适，左右踱步（方向在进入阶段1时已随机确定，一个冷却周期内不变）
 				var to_player:=(target.global_transform.origin-global_transform.origin)
@@ -367,6 +352,11 @@ func _state_return(delta:float) -> void:
 func check_state(state_name:String) -> bool:
 	return play_back.get_current_node()==state_name
 		
+# 攻击动画播放完毕，回到追击状态
+func _on_animation_tree_animation_finished(_anim_name:StringName) -> void:
+	if check_state("AttackSpace"):
+		_enter_state(State.CHASE)
+
 # 通过检查音源在外部让敌人进入调查状态
 func hear_noise(pos:Vector3) -> void:
 	if state not in [State.CHASE,State.PREPARE_ATTACK,State.ATTACK]:
