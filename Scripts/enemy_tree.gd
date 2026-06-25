@@ -8,8 +8,10 @@ extends CharacterBody3D
 @export var patrol_points: Array[Node3D] = []#巡逻点
 @export var speed_walk:float=1.7
 @export var speed_run:float=3.0
+@export var speed_retreat:float=5.0
+@export var speed_rush:float=6.0
 @export var attack_range:float=2.0
-@export var attack_wait_time:float=1.0
+@export var attack_wait_time:float=5.0
 @export var investigate_wait_time:float=4.0
 @export var patrol_wait_time:float=1.0
 @export var update_interval:float=0.2
@@ -19,7 +21,7 @@ const SPEED=150
 const SMOOTHING_FACTOR=0.1
 const VIEW_ANGLE:float=120.0
 
-enum State {IDLE,PATROL,INVESTIGATE,CHASE,ATTACK,RETURN}
+enum State {IDLE,PATROL,INVESTIGATE,CHASE,PREPARE_ATTACK,ATTACK,RETURN}
 var state:State=State.IDLE
 
 var attack_anim_name:String
@@ -27,6 +29,8 @@ var patrol_index:=0
 var patrol_timer:=0.0
 var investigate_timer:=0.0
 var attack_wait_timer:=0.0
+var prepare_attack_phase:=0 ## 0=后撤, 1=保持距离, 2=突击
+var strafe_dir_sign:=1.0 ## 左右踱步方向 1=右 -1=左
 var update_timer:=0.0
 var investigate_position:Vector3
 var return_position:Vector3 #原始位置
@@ -54,6 +58,7 @@ func _physics_process(delta: float) -> void:
 		State.PATROL: _state_patrol(delta)
 		State.INVESTIGATE: _state_investigate(delta)
 		State.CHASE: _state_chace(delta)
+		State.PREPARE_ATTACK: _state_prepare_attack(delta)
 		State.ATTACK: _state_attack(delta)
 		State.RETURN: _state_return(delta)
 	
@@ -146,6 +151,8 @@ func _enter_state(new_state:State) -> void:
 			navigation_agent_3d.target_position=investigate_position
 		State.CHASE,State.INVESTIGATE:
 			return_position=global_transform.origin
+		State.PREPARE_ATTACK:
+			prepare_attack_phase=0
 			
 func _state_idle() -> void:
 	if _can_see_player():
@@ -181,30 +188,118 @@ func _state_chace(delta:float) -> void:
 		investigate_position=target.global_transform.origin
 		_enter_state(State.INVESTIGATE)
 		
-func _state_attack(delta:float) -> void:
+func _state_attack(_delta:float) -> void:
 	velocity=Vector3.ZERO
-	# 随机攻击方式
-	if attack_anim_name=="":
-		var attack_anim:=[
+
+	# 当前正在播放攻击动画，等待动画结束
+	if attack_anim_name!="":
+		if not animation_player.is_playing():
+			attack_anim_name=""
+			_enter_state(State.CHASE)
+		return
+
+	# 攻击冷却中，进入准备攻击状态
+	attack_wait_timer-=_delta
+	if attack_wait_timer>0:
+		_enter_state(State.PREPARE_ATTACK)
+		return
+
+	# 发起攻击
+	print("enemy attack")
+	var attack_anim:=[
 		"1H_Melee_Attack_Slice_Diagonal",
 		"1H_Melee_Attack_Chop",
 		"1H_Melee_Attack_Slice_Horizontal",
 		"2H_Melee_Attack_Chop",
 		"2H_Melee_Attack_Slice",
 		"2H_Melee_Attack_Spin"]
-		attack_anim_name=attack_anim.pick_random()
-	attack_wait_timer-=delta
-	if attack_wait_timer>0:
-		print("wait attack cold")
-		# 添加一个状态使敌人后退到安全距离观察玩家
-		return
-	print("enemy atttack")
+	attack_anim_name=attack_anim.pick_random()
 	attack_wait_timer=attack_wait_time
 	animation_player.play(attack_anim_name)
-	await  animation_player.animation_finished
-	attack_anim_name=""
-	_enter_state(State.CHASE)
 	
+func _state_prepare_attack(delta:float) -> void:
+	if not target:
+		_enter_state(State.RETURN)
+		return
+
+	var dist:=global_transform.origin.distance_to(target.global_transform.origin)
+
+	# 玩家超出攻击范围3倍，切换追击
+	if dist>attack_range*3:
+		_enter_state(State.CHASE)
+		return
+
+	attack_wait_timer-=delta
+
+	match prepare_attack_phase:
+		0: # 后撤阶段 — 面朝玩家、向后快速移动，播放Dodge_Backward
+			var to_player:=(target.global_transform.origin-global_transform.origin)
+			to_player.y=0.0
+			if not is_zero_approx(to_player.length()):
+				to_player=to_player.normalized()
+				# 面朝玩家
+				look_at(global_transform.origin+to_player,Vector3.UP)
+				# 朝玩家反方向移动
+				velocity.x=-to_player.x*speed_retreat
+				velocity.z=-to_player.z*speed_retreat
+			animation_player.play("Dodge_Backward")
+			if dist>=attack_range*2:
+				prepare_attack_phase=1
+				strafe_dir_sign=1.0 if randf()>0.5 else -1.0
+
+		1: # 保持距离阶段 — 与玩家维持attack_range*2距离，等待冷却结束
+			if dist>attack_range*2+0.5:
+				# 太远，靠近玩家
+				var to_player:=(target.global_transform.origin-global_transform.origin)
+				to_player.y=0.0
+				if not is_zero_approx(to_player.length()):
+					to_player=to_player.normalized()
+					look_at(global_transform.origin+to_player,Vector3.UP)
+					velocity.x=to_player.x*speed_walk
+					velocity.z=to_player.z*speed_walk
+				animation_player.play("Walking_A")
+			elif dist<attack_range*2-0.5:
+				# 太近，面朝玩家向后移动
+				var to_player:=(target.global_transform.origin-global_transform.origin)
+				to_player.y=0.0
+				if not is_zero_approx(to_player.length()):
+					to_player=to_player.normalized()
+					look_at(global_transform.origin+to_player,Vector3.UP)
+					velocity.x=-to_player.x*speed_walk
+					velocity.z=-to_player.z*speed_walk
+				animation_player.play("Walking_Backwards")
+			else:
+				# 距离合适，左右踱步（方向在进入阶段1时已随机确定，一个冷却周期内不变）
+				var to_player:=(target.global_transform.origin-global_transform.origin)
+				to_player.y=0.0
+				if not is_zero_approx(to_player.length()):
+					to_player=to_player.normalized()
+					look_at(global_transform.origin+to_player,Vector3.UP)
+					# 计算右方向向量
+					var right_dir:=to_player.cross(Vector3.UP).normalized()
+					var move_dir:=right_dir*strafe_dir_sign
+					velocity.x=move_dir.x*speed_run
+					velocity.z=move_dir.z*speed_run
+					if strafe_dir_sign>0:
+						animation_player.play("Running_Strafe_Right")
+					else:
+						animation_player.play("Running_Strafe_Left")
+
+			if attack_wait_timer<=0:
+				prepare_attack_phase=2
+
+		2: # 突击阶段 — 快速冲向玩家，播放Dodge_Forward
+			var to_player:=(target.global_transform.origin-global_transform.origin)
+			to_player.y=0.0
+			if not is_zero_approx(to_player.length()):
+				to_player=to_player.normalized()
+				look_at(global_transform.origin+to_player,Vector3.UP)
+				velocity.x=to_player.x*speed_rush
+				velocity.z=to_player.z*speed_rush
+			animation_player.play("Dodge_Forward")
+			if dist<=attack_range:
+				_enter_state(State.ATTACK)
+
 func _state_investigate(delta:float) -> void:
 	print("enemy investigate")
 	if navigation_agent_3d.is_navigation_finished():
@@ -234,6 +329,6 @@ func _state_return(delta:float) -> void:
 		
 # 通过检查音源在外部让敌人进入调查状态
 func hear_noise(pos:Vector3) -> void:
-	if state not in [State.CHASE,State.ATTACK]:
+	if state not in [State.CHASE,State.PREPARE_ATTACK,State.ATTACK]:
 		investigate_position=pos
 		_enter_state(State.INVESTIGATE)
