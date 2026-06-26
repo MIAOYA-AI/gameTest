@@ -376,3 +376,4 @@ func _on_health_component_defeat() -> void:
 	collision_shape_3d.disabled=true;
 	set_physics_process(false)
 	play_back.travel("Death")
+	health_component.visible=false

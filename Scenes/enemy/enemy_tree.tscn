@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://duowxbvwrb5uv" path="res://Scripts/enemy_tree.gd" id="1_1n6lp"]
 [ext_resource type="PackedScene" uid="uid://bvlo8i8gt5p6s" path="res://Assets/Enemy/Barbarian.glb" id="1_s06e0"]
-[ext_resource type="PackedScene" uid="uid://bxkiv6xodxnff" path="res://Scenes/health_component.tscn" id="3_k6d7s"]
-[ext_resource type="PackedScene" uid="uid://by62vbxj5g8pl" path="res://Scenes/attack_cast.tscn" id="3_vq5qg"]
+[ext_resource type="PackedScene" uid="uid://bxkiv6xodxnff" path="res://Scenes/Component/health_component.tscn" id="3_k6d7s"]
+[ext_resource type="PackedScene" uid="uid://by62vbxj5g8pl" path="res://Scenes/Component/attack_cast.tscn" id="3_vq5qg"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_atk0"]
 animation = &"1H_Melee_Attack_Slice_Diagonal"
@@ -147,6 +147,9 @@ transitions = ["Start", "MoveSpace", SubResource("AnimationNodeStateMachineTrans
 radius = 0.6435547
 height = 2.4326782
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_vq5qg"]
+viewport_path = NodePath("SubViewport")
+
 [node name="enemy_tree" type="CharacterBody3D" unique_id=468094801]
 collision_layer = 4
 script = ExtResource("1_1n6lp")
@@ -265,6 +268,7 @@ debug_use_custom = true
 debug_path_custom_color = Color(0.07123137, 0.07123139, 0.07123137, 1)
 
 [node name="HealthComponent" parent="." unique_id=2081030793 instance=ExtResource("3_k6d7s")]
+texture = SubResource("ViewportTexture_vq5qg")
 
 [connection signal="defeat" from="HealthComponent" to="." method="_on_health_component_defeat"]
 

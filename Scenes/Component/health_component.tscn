@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bxkiv6xodxnff"]
+
+[ext_resource type="Script" uid="uid://dpi87ia0gj220" path="res://Scripts/health_component.gd" id="1_yf5fb"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jm5ge"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jm5ge"]
+bg_color = Color(0.27314222, 0.27314225, 0.27314213, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ldfds"]
+bg_color = Color(0.8569272, 0.8569273, 0.85692716, 1)
+
+[node name="HealthComponent" type="Sprite3D" unique_id=1611769576]
+texture = SubResource("ViewportTexture_jm5ge")
+script = ExtResource("1_yf5fb")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=967192342]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport" unique_id=782912247]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_jm5ge")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ldfds")
+value = 50.0
+fill_mode = 1
+show_percentage = false
