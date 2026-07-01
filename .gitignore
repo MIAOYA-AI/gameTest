@@ -4,6 +4,7 @@
 addons/
 
 Assets/AiAssetTest/
+Assets/Character/fbx/
 
 # Claude Code
 .agents/

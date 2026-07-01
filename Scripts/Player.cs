@@ -1,7 +1,6 @@
 using Godot;
 using System;
 
-//TODO：解决玩家攻击过程中按移动键会反复攻击的问题
 [GlobalClass]
 public partial class Player : CharacterBody3D
 {
@@ -49,7 +48,6 @@ public partial class Player : CharacterBody3D
         
         if(CurDirection == Vector3.Zero)
             CurDirection = Model.GlobalTransform.Basis.Z;
-
         //获取UserInterface节点
         //UserInterface = GetNode("UserInterface");
 
